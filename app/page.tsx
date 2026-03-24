@@ -104,7 +104,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold mb-3">
-              The <span className="gradient-text">The Levi Five</span> Framework
+              The <span className="gradient-text">Levi Five</span> Framework
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Five steps from financial stress to financial freedom. No complexity, no BS.
