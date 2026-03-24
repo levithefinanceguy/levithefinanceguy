@@ -8,6 +8,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/heatmap", label: "Markets" },
+  { href: "/freedom-five", label: "Freedom Five" },
   { href: "/calculators", label: "Calculators" },
   { href: "/blog", label: "Blog" },
   { href: "/resources", label: "Resources" },
