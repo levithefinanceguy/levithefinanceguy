@@ -37,7 +37,7 @@ export default function InvestmentGrowthCalculator() {
   const maxBalance = Math.max(...yearlyData.map((d) => d.balance), 1);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -56,6 +56,9 @@ export default function InvestmentGrowthCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Investment Growth <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -133,7 +136,12 @@ export default function InvestmentGrowthCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about investment growth</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">How Investment Growth Works</h2>
         <p>
           Investment growth is driven by two forces: your contributions and compound returns.
@@ -158,7 +166,36 @@ export default function InvestmentGrowthCalculator() {
           $50-100. Small increases in consistent investing have an outsized impact over decades.
           The best time to start was yesterday. The second best time is today.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">How Investment Growth Works</h2>
+        <p>
+          Investment growth is driven by two forces: your contributions and compound returns.
+          When you invest consistently and reinvest your gains, your money begins earning returns
+          on returns. This compounding effect accelerates over time, which is why starting early
+          matters so much more than starting big.
+        </p>
+        <p>
+          This calculator models monthly compounding with regular contributions. The growth
+          multiplier shows how many times over your total contributions have grown. A 2x
+          multiplier means your investments doubled your money. Over 20-30 years with reasonable
+          returns, multipliers of 3-5x are common and achievable.
+        </p>
+        <p>
+          Historical stock market returns have averaged about 10% annually before inflation
+          (roughly 7% after inflation). These are long-term averages and individual years vary
+          significantly. The key is staying invested through market cycles rather than trying
+          to time entries and exits.
+        </p>
+        <p>
+          Use this calculator to see the impact of changing your monthly contribution by even
+          $50-100. Small increases in consistent investing have an outsized impact over decades.
+          The best time to start was yesterday. The second best time is today.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

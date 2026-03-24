@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Free Financial & Health Calculators",
   description:
-    "19 free interactive calculators: compound interest, investment growth, mortgage, FIRE, net worth, retirement, debt payoff, tax brackets, BMI, TDEE, and more.",
+    "18 free interactive calculators: compound interest, investment growth, mortgage, FIRE, net worth, retirement, debt payoff, tax brackets, BMI, TDEE, and more.",
   openGraph: {
     title: "Free Financial & Health Calculators | Levi The Finance Guy",
     description:
@@ -106,13 +106,7 @@ const healthCalculators = [
     icon: "T",
     description: "Find your Total Daily Energy Expenditure and recommended macro breakdown.",
   },
-  {
-    name: "Macro Estimator",
-    href: "/calculators/macros",
-    icon: "M",
-    description: "Get personalized protein, carb, and fat targets based on your goals.",
-  },
-  {
+{
     name: "Body Fat Estimator",
     href: "/calculators/body-fat",
     icon: "BF",
@@ -160,7 +154,7 @@ export default function CalculatorsPage() {
             "@type": "CollectionPage",
             name: "Free Financial & Health Calculators",
             description:
-              "A collection of 19 free interactive financial and health calculators.",
+              "A collection of 18 free interactive financial and health calculators.",
             author: { "@type": "Person", name: "Levi" },
           }),
         }}

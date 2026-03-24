@@ -38,7 +38,7 @@ export default function BMICalculator() {
   const markerPct = ((clampedBmi - scaleMin) / (scaleMax - scaleMin)) * 100;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -57,6 +57,9 @@ export default function BMICalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         BMI <span className="text-accent-green">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -149,7 +152,12 @@ export default function BMICalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about BMI</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Understanding BMI</h2>
         <p>
           Body Mass Index (BMI) is a simple screening tool that uses your height and weight to
@@ -174,7 +182,36 @@ export default function BMICalculator() {
           Expenditure). Use the TDEE calculator on this site for a more detailed look at your
           caloric needs based on activity level.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Understanding BMI</h2>
+        <p>
+          Body Mass Index (BMI) is a simple screening tool that uses your height and weight to
+          estimate body fat. It was developed in the 1800s by Belgian mathematician Adolphe
+          Quetelet and has been used as a quick health assessment ever since. The formula divides
+          your weight by the square of your height.
+        </p>
+        <p>
+          While BMI is widely used and easy to calculate, it has important limitations. It does
+          not distinguish between muscle and fat, so athletes and people with high muscle mass
+          may show an elevated BMI despite being healthy. It also does not account for bone
+          density, age, gender, or where fat is distributed on the body.
+        </p>
+        <p>
+          BMI categories are defined by the World Health Organization: underweight is below 18.5,
+          normal weight is 18.5 to 24.9, overweight is 25 to 29.9, and obese is 30 and above.
+          These ranges are general guidelines and may not apply equally to all populations.
+        </p>
+        <p>
+          For a more complete picture of your health, consider BMI alongside other metrics like
+          waist circumference, body fat percentage, and your TDEE (Total Daily Energy
+          Expenditure). Use the TDEE calculator on this site for a more detailed look at your
+          caloric needs based on activity level.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not medical advice. Results are estimates based on general formulas and may not reflect your individual needs. Consult a healthcare professional before making changes to your diet or exercise routine.

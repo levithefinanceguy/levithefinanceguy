@@ -36,7 +36,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Health Calculators
     { url: `${baseUrl}/calculators/bmi`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/calculators/tdee`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/calculators/macros`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/calculators/body-fat`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/calculators/ideal-weight`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/calculators/heart-rate-zones`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },

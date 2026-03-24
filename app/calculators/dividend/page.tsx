@@ -38,7 +38,7 @@ export default function DividendCalculator() {
   const monthlyDividend = finalAnnualDividend / 12;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -57,6 +57,9 @@ export default function DividendCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Dividend <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -147,7 +150,12 @@ export default function DividendCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about dividend investing</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Understanding Dividend Investing</h2>
         <p>
           Dividend investing is a strategy focused on buying stocks or funds that pay regular
@@ -172,7 +180,36 @@ export default function DividendCalculator() {
           strategy. A well-built dividend portfolio can provide reliable, growing income that
           keeps pace with or exceeds inflation, reducing dependence on selling assets in retirement.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Understanding Dividend Investing</h2>
+        <p>
+          Dividend investing is a strategy focused on buying stocks or funds that pay regular
+          cash distributions to shareholders. These payments, called dividends, provide passive
+          income that can either supplement your earnings or be reinvested to accelerate growth.
+        </p>
+        <p>
+          DRIP (Dividend Reinvestment Plan) automatically reinvests your dividends back into
+          more shares. Over long periods, this reinvestment creates a powerful compounding effect.
+          The difference between DRIP on and off over 20-30 years can be substantial, often
+          doubling or tripling your total return.
+        </p>
+        <p>
+          Dividend yield represents the annual dividend payment as a percentage of the stock
+          price. A 3% yield on a $100 stock means $3 per share annually. Yields vary widely:
+          growth companies often pay little or nothing, while established companies and REITs
+          may yield 3-6% or more. Be cautious of extremely high yields, as they can signal
+          financial trouble.
+        </p>
+        <p>
+          Many successful investors use dividend stocks as a cornerstone of their retirement
+          strategy. A well-built dividend portfolio can provide reliable, growing income that
+          keeps pace with or exceeds inflation, reducing dependence on selling assets in retirement.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

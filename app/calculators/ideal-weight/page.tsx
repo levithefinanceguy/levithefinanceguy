@@ -48,7 +48,7 @@ export default function IdealWeightCalculator() {
   const inputClass = "w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none";
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -67,6 +67,9 @@ export default function IdealWeightCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Ideal Weight <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -134,7 +137,12 @@ export default function IdealWeightCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about ideal weight</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">What Is Your Ideal Weight?</h2>
         <p>
           Ideal weight formulas estimate a healthy body weight based on your height, gender, and
@@ -158,7 +166,35 @@ export default function IdealWeightCalculator() {
           body fat percentage, and waist-to-height ratio. How you feel, your energy levels, and
           your fitness performance often matter more than any single number on a scale or formula.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">What Is Your Ideal Weight?</h2>
+        <p>
+          Ideal weight formulas estimate a healthy body weight based on your height, gender, and
+          frame size. This calculator uses four widely-referenced medical formulas: Devine (1974),
+          Robinson (1983), Miller (1983), and Hamwi (1964). Each approaches the calculation slightly
+          differently, which is why a range is more useful than a single number.
+        </p>
+        <p>
+          Frame size matters because people with larger bone structures naturally weigh more than
+          those with smaller frames, even at the same height and body fat percentage. A simple
+          wrist test gives you a rough idea of your frame size, though it is not perfectly precise.
+        </p>
+        <p>
+          These formulas were developed for clinical use and have limitations. They do not account
+          for muscle mass, body composition, or individual variation. A muscular athlete may weigh
+          well above their calculated ideal weight while being perfectly healthy. Use these numbers
+          as general guidelines rather than absolute targets.
+        </p>
+        <p>
+          For a more complete health picture, combine ideal weight with other metrics like BMI,
+          body fat percentage, and waist-to-height ratio. How you feel, your energy levels, and
+          your fitness performance often matter more than any single number on a scale or formula.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not medical advice. Results are estimates based on general formulas and may not reflect your individual needs. Consult a healthcare professional before making changes to your diet or exercise routine.

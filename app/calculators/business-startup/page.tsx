@@ -77,7 +77,7 @@ export default function BusinessStartupCalculator() {
   const breakEvenMonths = monthlyProfit > 0 ? Math.ceil(avgStartup / monthlyProfit) : Infinity;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -96,6 +96,9 @@ export default function BusinessStartupCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Business Startup <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -169,7 +172,12 @@ export default function BusinessStartupCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about business startup costs</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Planning Your Business Startup</h2>
         <p>
           Starting a business requires careful financial planning. Many new businesses fail not
@@ -194,7 +202,36 @@ export default function BusinessStartupCalculator() {
           create a minimum viable product, and test demand. The cheapest businesses to start are
           often the smartest — they let you prove the concept before scaling up investment.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Planning Your Business Startup</h2>
+        <p>
+          Starting a business requires careful financial planning. Many new businesses fail not
+          because of a bad idea, but because they run out of cash. Understanding your startup costs
+          and ongoing monthly expenses before you launch gives you a realistic picture of how much
+          capital you need and how long until profitability.
+        </p>
+        <p>
+          Startup costs vary dramatically by industry. An online business can launch for a few
+          thousand dollars, while a restaurant might require six figures in upfront capital. This
+          calculator provides industry-based estimates to give you a ballpark. Always add a 20-30%
+          buffer for unexpected expenses — they will happen.
+        </p>
+        <p>
+          The break-even timeline tells you how long it will take for your business to recoup its
+          startup investment from monthly profits. Most small businesses take 12-24 months to break
+          even. Plan to have enough personal savings or alternative income to cover your living
+          expenses during this period.
+        </p>
+        <p>
+          Before spending money on a business, validate your idea. Talk to potential customers,
+          create a minimum viable product, and test demand. The cheapest businesses to start are
+          often the smartest — they let you prove the concept before scaling up investment.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

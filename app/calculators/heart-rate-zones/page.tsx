@@ -63,7 +63,7 @@ export default function HeartRateZonesCalculator() {
   const inputClass = "w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none";
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -82,6 +82,9 @@ export default function HeartRateZonesCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Heart Rate Zones <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -142,7 +145,12 @@ export default function HeartRateZonesCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about heart rate zones</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Training With Heart Rate Zones</h2>
         <p>
           Heart rate zone training is one of the most effective ways to structure your workouts.
@@ -167,7 +175,36 @@ export default function HeartRateZonesCalculator() {
           Track it over several days and use the average. A declining resting heart rate over time
           is one of the best indicators that your fitness is improving.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Training With Heart Rate Zones</h2>
+        <p>
+          Heart rate zone training is one of the most effective ways to structure your workouts.
+          By training at specific intensities, you target different physiological adaptations —
+          from fat burning and endurance building to speed development and peak performance.
+        </p>
+        <p>
+          This calculator uses the Karvonen method, which factors in your resting heart rate
+          for more personalized zones compared to simple percentage-of-max calculations. A lower
+          resting heart rate generally indicates better cardiovascular fitness, which shifts your
+          training zones accordingly.
+        </p>
+        <p>
+          Most people make the mistake of training too hard on easy days and not hard enough on
+          hard days. The 80/20 rule suggests spending about 80% of your training time in Zones 1
+          and 2 (low intensity) and only 20% in Zones 3-5 (moderate to high intensity). This
+          polarized approach has been shown to produce the best endurance gains.
+        </p>
+        <p>
+          To measure your resting heart rate accurately, check your pulse first thing in the
+          morning before getting out of bed. Count beats for 60 seconds or use a fitness watch.
+          Track it over several days and use the average. A declining resting heart rate over time
+          is one of the best indicators that your fitness is improving.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not medical advice. Results are estimates based on general formulas and may not reflect your individual needs. Consult a healthcare professional before making changes to your diet or exercise routine.

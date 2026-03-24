@@ -31,7 +31,7 @@ export default function RetirementCalculator() {
   const totalGrowth = retirementSavings - totalContributions;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -50,6 +50,9 @@ export default function RetirementCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Retirement <span className="text-accent-green">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -133,7 +136,12 @@ export default function RetirementCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about retirement planning</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Planning for Retirement</h2>
         <p>
           Retirement planning is one of the most important financial exercises you can do.
@@ -160,7 +168,38 @@ export default function RetirementCalculator() {
           stock market average minus inflation) gives you results in today&apos;s dollars, making
           it easier to understand what your future savings will actually be worth.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Planning for Retirement</h2>
+        <p>
+          Retirement planning is one of the most important financial exercises you can do.
+          The earlier you start, the less you need to save each month thanks to compound
+          interest. This calculator shows you how your current savings plan will grow over
+          time and what kind of income you can expect in retirement.
+        </p>
+        <p>
+          The monthly income estimate uses the 4% safe withdrawal rate, which is based on
+          the Trinity Study. This research found that withdrawing 4% of your portfolio in
+          the first year of retirement (and adjusting for inflation each subsequent year)
+          gives you a very high probability of your money lasting at least 30 years.
+        </p>
+        <p>
+          Key factors that affect your retirement outcome include when you start saving, how
+          much you contribute, and your investment returns. Increasing your monthly contribution
+          by even a small amount can make a significant difference over decades. For example,
+          an extra $200 per month over 35 years at 7% returns adds over $400,000 to your
+          retirement fund.
+        </p>
+        <p>
+          Do not forget to account for inflation. While investments grow, the purchasing power
+          of money decreases over time. Using a return rate of 7% (roughly the historical
+          stock market average minus inflation) gives you results in today&apos;s dollars, making
+          it easier to understand what your future savings will actually be worth.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

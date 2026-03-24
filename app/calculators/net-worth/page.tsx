@@ -40,7 +40,7 @@ export default function NetWorthCalculator() {
     "w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none";
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -59,6 +59,9 @@ export default function NetWorthCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Net Worth <span className="text-accent-green">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       {/* Result Banner */}
       <div className="mb-8 p-6 bg-card-bg border border-card-border rounded-xl text-center">
@@ -174,7 +177,12 @@ export default function NetWorthCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about net worth</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Why Track Your Net Worth?</h2>
         <p>
           Your net worth is the single best snapshot of your overall financial health. It is
@@ -200,7 +208,37 @@ export default function NetWorthCalculator() {
           Use this calculator as your starting point. Record today&apos;s number, then come
           back in three months and recalculate. The trend matters more than the number itself.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Why Track Your Net Worth?</h2>
+        <p>
+          Your net worth is the single best snapshot of your overall financial health. It is
+          simply the total value of everything you own minus everything you owe. Unlike income
+          alone, net worth captures the full picture of your financial position, including
+          savings, investments, property, and all outstanding debts.
+        </p>
+        <p>
+          Tracking net worth over time is more valuable than any single calculation. By
+          monitoring it monthly or quarterly, you can see whether your financial decisions are
+          actually moving you forward. A growing net worth means your wealth-building strategies
+          are working. A declining net worth is an early warning sign to reassess spending and
+          debt management.
+        </p>
+        <p>
+          Many people are surprised when they first calculate their net worth. High income does
+          not always mean high net worth if spending and debt are equally high. Conversely, people
+          with modest incomes can build substantial net worth through consistent saving and
+          investing. The book The Millionaire Next Door found that most millionaires are not
+          flashy spenders but disciplined savers.
+        </p>
+        <p>
+          Use this calculator as your starting point. Record today&apos;s number, then come
+          back in three months and recalculate. The trend matters more than the number itself.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

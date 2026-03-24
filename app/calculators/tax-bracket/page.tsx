@@ -83,7 +83,7 @@ export default function TaxBracketCalculator() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -102,6 +102,9 @@ export default function TaxBracketCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Tax Bracket <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -194,7 +197,12 @@ export default function TaxBracketCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about tax brackets</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Understanding Tax Brackets</h2>
         <p>
           The US uses a progressive tax system, meaning different portions of your income are
@@ -220,7 +228,37 @@ export default function TaxBracketCalculator() {
           Medicare at 7.65%), and potentially local taxes. Use this as a starting point for
           understanding your federal tax situation.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Understanding Tax Brackets</h2>
+        <p>
+          The US uses a progressive tax system, meaning different portions of your income are
+          taxed at different rates. A common misconception is that moving into a higher tax bracket
+          means all your income is taxed at the higher rate. In reality, only the income within
+          each bracket is taxed at that bracket&apos;s rate.
+        </p>
+        <p>
+          Your marginal tax rate is the rate on your last dollar of income. Your effective tax rate
+          is the actual percentage of your total income that goes to federal taxes. The effective
+          rate is always lower than the marginal rate because of how progressive taxation works.
+          Understanding this distinction prevents irrational fear of earning more money.
+        </p>
+        <p>
+          The standard deduction reduces your taxable income before bracket calculations begin.
+          For 2024, the standard deduction is $14,600 for single filers, $29,200 for married
+          filing jointly, and $21,900 for head of household. Most taxpayers benefit from taking
+          the standard deduction unless their itemized deductions exceed these amounts.
+        </p>
+        <p>
+          Remember that this calculator shows federal income tax only. Your total tax burden
+          also includes state income tax (varies by state), FICA taxes (Social Security and
+          Medicare at 7.65%), and potentially local taxes. Use this as a starting point for
+          understanding your federal tax situation.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

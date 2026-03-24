@@ -27,7 +27,7 @@ export default function EmergencyFundCalculator() {
   const inputClass = "w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none";
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -46,6 +46,9 @@ export default function EmergencyFundCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Emergency Fund <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-4">
@@ -132,7 +135,12 @@ export default function EmergencyFundCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about emergency funds</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Why You Need an Emergency Fund</h2>
         <p>
           An emergency fund is your financial safety net. It protects you from going into debt
@@ -157,7 +165,36 @@ export default function EmergencyFundCalculator() {
           that everything else builds on. Even saving one month of expenses gives you breathing room
           that most people do not have. Start there and build up over time.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Why You Need an Emergency Fund</h2>
+        <p>
+          An emergency fund is your financial safety net. It protects you from going into debt
+          when unexpected expenses hit — car repairs, medical bills, job loss, or home emergencies.
+          Without one, a single financial surprise can snowball into credit card debt that takes
+          months or years to pay off.
+        </p>
+        <p>
+          Most financial experts recommend saving 3-6 months of essential expenses. Three months
+          is reasonable if you have stable dual income and low debt. Six months is better if you
+          are self-employed, single-income, or in an industry with less job security. Some people
+          aim for even more if they have dependents.
+        </p>
+        <p>
+          Keep your emergency fund in a high-yield savings account, separate from your checking
+          account. This provides easy access when you need it while earning some interest. Do not
+          invest your emergency fund in the stock market — the whole point is that it is safe and
+          liquid when you need it most.
+        </p>
+        <p>
+          Building an emergency fund is Step 1 of the Freedom Five framework. It is the foundation
+          that everything else builds on. Even saving one month of expenses gives you breathing room
+          that most people do not have. Start there and build up over time.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

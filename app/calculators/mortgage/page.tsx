@@ -56,7 +56,7 @@ export default function MortgageCalculator() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -75,6 +75,9 @@ export default function MortgageCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Mortgage <span className="text-accent-green">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -181,7 +184,12 @@ export default function MortgageCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about mortgages</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Understanding Your Mortgage</h2>
         <p>
           A mortgage is likely the largest financial commitment you will ever make. Understanding
@@ -207,7 +215,37 @@ export default function MortgageCalculator() {
           total interest paid over the loan term, as a shorter loan at a slightly higher rate can
           sometimes cost less overall than a longer loan at a lower rate.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Understanding Your Mortgage</h2>
+        <p>
+          A mortgage is likely the largest financial commitment you will ever make. Understanding
+          the true cost of your home loan is crucial for making informed decisions. This calculator
+          breaks down your monthly payment and shows you how much of each payment goes toward
+          principal versus interest over the life of the loan.
+        </p>
+        <p>
+          The amortization schedule above reveals an important truth: in the early years of your
+          mortgage, the majority of your payment goes toward interest, not principal. Over time,
+          this ratio shifts. Making extra principal payments early on can save you tens of
+          thousands of dollars in interest and shave years off your mortgage.
+        </p>
+        <p>
+          Your down payment percentage affects more than just the loan amount. Putting down less
+          than 20% typically requires private mortgage insurance (PMI), which adds to your monthly
+          cost. A larger down payment also means lower monthly payments and less total interest
+          paid over the life of the loan.
+        </p>
+        <p>
+          When comparing mortgage offers, do not just look at the interest rate. Consider the
+          Annual Percentage Rate (APR), which includes fees and other costs. Also compare the
+          total interest paid over the loan term, as a shorter loan at a slightly higher rate can
+          sometimes cost less overall than a longer loan at a lower rate.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

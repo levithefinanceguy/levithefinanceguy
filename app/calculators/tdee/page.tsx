@@ -45,7 +45,7 @@ export default function TDEECalculator() {
   const carbGrams = carbCals / 4;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -64,6 +64,9 @@ export default function TDEECalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         TDEE <span className="text-accent-green">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -166,7 +169,12 @@ export default function TDEECalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about TDEE</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">What Is TDEE?</h2>
         <p>
           Total Daily Energy Expenditure (TDEE) is the total number of calories your body burns
@@ -186,7 +194,31 @@ export default function TDEECalculator() {
           calorie deficit or surplus, which theoretically results in about one pound of change per
           week.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">What Is TDEE?</h2>
+        <p>
+          Total Daily Energy Expenditure (TDEE) is the total number of calories your body burns
+          in a day. It accounts for your Basal Metabolic Rate (BMR), which is the energy your body
+          needs just to stay alive at rest, plus the additional calories burned through physical
+          activity, digestion, and daily movement.
+        </p>
+        <p>
+          This calculator uses the Mifflin-St Jeor equation, which is considered the most accurate
+          BMR formula for most people. It takes into account your age, gender, height, and weight.
+          Your activity level then multiplies the BMR to estimate your total daily caloric needs.
+        </p>
+        <p>
+          Understanding your TDEE is essential for any body composition goal. To lose weight, you
+          need to eat fewer calories than your TDEE (a caloric deficit). To gain weight or build
+          muscle, you need to eat more (a caloric surplus). A common recommendation is a 500
+          calorie deficit or surplus, which theoretically results in about one pound of change per
+          week.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not medical advice. Results are estimates based on general formulas and may not reflect your individual needs. Consult a healthcare professional before making changes to your diet or exercise routine.

@@ -38,7 +38,7 @@ export default function SavingsGoalCalculator() {
   const inputClass = "w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none";
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -57,6 +57,9 @@ export default function SavingsGoalCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Savings Goal <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -118,7 +121,12 @@ export default function SavingsGoalCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about savings goals</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Reaching Your Savings Goals</h2>
         <p>
           Whether you are saving for a vacation, a down payment, a new car, or any other goal,
@@ -142,7 +150,35 @@ export default function SavingsGoalCalculator() {
           savings goals are not the ones with the most willpower — they are the ones who removed the
           need for willpower through automation.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Reaching Your Savings Goals</h2>
+        <p>
+          Whether you are saving for a vacation, a down payment, a new car, or any other goal,
+          the key is breaking it down into manageable pieces. A $20,000 goal sounds daunting. But
+          $833 per month for two years? That is actionable. This calculator does that math for you.
+        </p>
+        <p>
+          The savings account APY matters more than you might think. At 4.5% APY, your savings
+          earn interest that compounds monthly, reducing how much you actually need to contribute
+          yourself. High-yield savings accounts are currently offering 4-5% or more, compared to
+          the near-zero rates at traditional banks.
+        </p>
+        <p>
+          The daily savings breakdown is intentionally included. Sometimes seeing that you need to
+          set aside $28 per day is more motivating than thinking about $850 per month. It reframes
+          the goal as something you can influence with daily decisions about spending.
+        </p>
+        <p>
+          Automate your savings. Set up automatic transfers to happen right after payday. Treat your
+          savings contribution like a bill you have to pay. The people who successfully reach their
+          savings goals are not the ones with the most willpower — they are the ones who removed the
+          need for willpower through automation.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

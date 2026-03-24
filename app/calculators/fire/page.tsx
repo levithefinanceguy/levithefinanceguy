@@ -34,7 +34,7 @@ export default function FIRECalculator() {
   const yearsToFire = years >= 100 ? Infinity : years;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -53,6 +53,9 @@ export default function FIRECalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         FIRE <span className="text-accent-green">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -149,7 +152,12 @@ export default function FIRECalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about FIRE</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">What Is FIRE?</h2>
         <p>
           FIRE stands for Financial Independence, Retire Early. It is a movement focused on
@@ -175,7 +183,37 @@ export default function FIRECalculator() {
           means reaching a point where you only need a small part-time income to cover the gap.
           This calculator helps you find your number based on your current lifestyle.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">What Is FIRE?</h2>
+        <p>
+          FIRE stands for Financial Independence, Retire Early. It is a movement focused on
+          aggressive saving and investing so you can stop working for money much earlier than
+          the traditional retirement age of 65. The core idea is simple: save a large percentage
+          of your income, invest it wisely, and live off the returns.
+        </p>
+        <p>
+          The FIRE number is calculated using the 4% rule, which comes from the Trinity Study.
+          It states that if you withdraw 4% of your portfolio in the first year of retirement
+          and adjust for inflation each year after, your money has a very high probability of
+          lasting 30 or more years. To find your FIRE number, multiply your annual expenses by 25.
+        </p>
+        <p>
+          Your savings rate is the single most important factor in determining how quickly you
+          reach financial independence. Someone saving 50% of their income will reach FIRE
+          dramatically faster than someone saving 10%, regardless of income level. This is why
+          the FIRE community emphasizes reducing expenses alongside increasing income.
+        </p>
+        <p>
+          There are different flavors of FIRE. Lean FIRE means retiring with minimal expenses.
+          Fat FIRE means accumulating enough to maintain a more luxurious lifestyle. Barista FIRE
+          means reaching a point where you only need a small part-time income to cover the gap.
+          This calculator helps you find your number based on your current lifestyle.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

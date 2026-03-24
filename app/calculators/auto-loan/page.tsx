@@ -29,7 +29,7 @@ export default function AutoLoanCalculator() {
   const totalOutOfPocket = totalCost + downPayment + tradeIn;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -48,6 +48,9 @@ export default function AutoLoanCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Auto Loan <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -111,7 +114,12 @@ export default function AutoLoanCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about auto loans</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">The True Cost of Car Financing</h2>
         <p>
           Cars are depreciating assets. The moment you drive off the lot, your vehicle loses value.
@@ -137,7 +145,37 @@ export default function AutoLoanCalculator() {
           get pre-approved from your bank or credit union before visiting the dealership. Dealer
           financing often carries higher rates than what you can find on your own.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">The True Cost of Car Financing</h2>
+        <p>
+          Cars are depreciating assets. The moment you drive off the lot, your vehicle loses value.
+          When you finance a depreciating asset, you are paying interest on something that is
+          worth less every month. Understanding the true cost of auto financing helps you make
+          smarter decisions about how much car you can actually afford.
+        </p>
+        <p>
+          Longer loan terms reduce your monthly payment but dramatically increase total interest
+          paid. A 72-month loan might seem attractive because of the lower payment, but you could
+          end up owing more than the car is worth for years — a situation called being underwater.
+          Shorter terms cost more monthly but save significantly on interest.
+        </p>
+        <p>
+          A good rule of thumb is the 20/4/10 rule: put at least 20% down, finance for no more
+          than 4 years, and keep total transportation costs under 10% of your gross income. This
+          includes the payment, insurance, gas, and maintenance. Following this guideline prevents
+          you from becoming car poor.
+        </p>
+        <p>
+          The best auto loan is no auto loan. If you can save up and pay cash for a reliable used
+          car, you avoid interest entirely and maintain flexibility. But if financing is necessary,
+          get pre-approved from your bank or credit union before visiting the dealership. Dealer
+          financing often carries higher rates than what you can find on your own.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

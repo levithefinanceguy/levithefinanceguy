@@ -85,7 +85,7 @@ export default function DebtPayoffCalculator() {
   const inputClass = "w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none";
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -104,6 +104,9 @@ export default function DebtPayoffCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Debt Payoff <span className="gradient-text">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       {/* Total Debt Banner */}
       <div className="mb-8 p-6 bg-card-bg border border-card-border rounded-xl text-center">
@@ -178,7 +181,12 @@ export default function DebtPayoffCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about debt payoff strategies</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">Debt Payoff Strategies</h2>
         <p>
           The two most popular debt elimination strategies are the avalanche and snowball methods.
@@ -203,7 +211,36 @@ export default function DebtPayoffCalculator() {
           crossing debts off your list. Either way, the important thing is to have a plan and follow
           it consistently.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">Debt Payoff Strategies</h2>
+        <p>
+          The two most popular debt elimination strategies are the avalanche and snowball methods.
+          The avalanche method targets the highest interest rate debt first, saving you the most
+          money over time. The snowball method targets the smallest balance first, giving you quick
+          psychological wins.
+        </p>
+        <p>
+          Mathematically, the avalanche method always wins. By eliminating high-interest debt first,
+          you reduce the total interest charges across all debts. However, the snowball method has
+          its own advantage: the motivation of quickly paying off entire debts can keep you engaged
+          and committed to the plan.
+        </p>
+        <p>
+          The extra payment amount is the key accelerator. Even an additional $100-200 per month
+          applied to your target debt can dramatically reduce your payoff timeline and total interest
+          paid. Consider redirecting any raises, bonuses, or tax refunds directly to debt payoff.
+        </p>
+        <p>
+          The best debt payoff method is the one you actually stick with. Choose avalanche if you
+          are motivated by math and efficiency. Choose snowball if you need the dopamine hit of
+          crossing debts off your list. Either way, the important thing is to have a plan and follow
+          it consistently.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.

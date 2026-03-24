@@ -39,7 +39,7 @@ export default function CompoundInterestCalculator() {
   const maxBalance = Math.max(...yearlyData.map((d) => d.balance), 1);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -58,6 +58,9 @@ export default function CompoundInterestCalculator() {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
         Compound Interest <span className="text-accent-green">Calculator</span>
       </h1>
+
+      <div className="flex flex-col md:flex-row md:gap-8">
+      <div className="w-full md:w-3/5">
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="space-y-5">
@@ -168,8 +171,12 @@ export default function CompoundInterestCalculator() {
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
-      {/* SEO Content */}
-      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+      </div>
+
+      <div className="w-full md:w-2/5 md:sticky md:top-24 md:self-start">
+        <details className="md:hidden mt-8">
+          <summary className="cursor-pointer text-accent-green font-semibold py-3">Learn more about compound interest</summary>
+          <div className="space-y-4 text-gray-400 leading-relaxed mt-2">
         <h2 className="text-xl font-bold text-white">What Is Compound Interest?</h2>
         <p>
           Compound interest is the process of earning interest on both your original
@@ -197,7 +204,39 @@ export default function CompoundInterestCalculator() {
           does not guarantee future results, and actual returns vary year to year. But using
           historical averages gives you a reasonable baseline for planning purposes.
         </p>
-      </section>
+      </div>
+        </details>
+        <div className="hidden md:block space-y-4 text-gray-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-white">What Is Compound Interest?</h2>
+        <p>
+          Compound interest is the process of earning interest on both your original
+          investment and the interest that has already accumulated. Unlike simple interest,
+          which only calculates returns on the principal, compound interest accelerates
+          wealth building by reinvesting earnings over time.
+        </p>
+        <p>
+          Albert Einstein supposedly called compound interest the eighth wonder of the world.
+          Whether or not the quote is real, the math is undeniable. A modest monthly
+          contribution invested consistently over decades can grow into a substantial nest egg.
+          The key variables are your starting amount, how much you add regularly, the rate of
+          return, and most importantly, time.
+        </p>
+        <p>
+          The earlier you start investing, the more time compound interest has to work in
+          your favor. Even small amounts invested in your twenties can outperform much larger
+          contributions started in your forties. This is why financial advisors consistently
+          emphasize starting early. The calculator above lets you experiment with different
+          scenarios to see how changing each variable affects your long-term wealth.
+        </p>
+        <p>
+          A common benchmark is the S&P 500 historical average return of roughly 10% per
+          year before inflation, or about 7% after inflation. Of course, past performance
+          does not guarantee future results, and actual returns vary year to year. But using
+          historical averages gives you a reasonable baseline for planning purposes.
+        </p>
+      </div>
+      </div>
+      </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
         This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.
