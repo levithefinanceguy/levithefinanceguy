@@ -167,7 +167,7 @@ export default function FreedomFivePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            name: "The Freedom Five Framework",
+            name: "The Levi Five Framework",
             description:
               "A five-step framework for building financial independence. From one month of savings to wealth optimization.",
             author: { "@type": "Person", name: "Levi" },
@@ -184,7 +184,7 @@ export default function FreedomFivePage() {
         {/* Hero */}
         <div className="text-center mb-16 animate-fade-in-up">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-            The <span className="gradient-text">Freedom Five</span>
+            The <span className="gradient-text">The Levi Five</span>
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-2">
             Five steps. No fluff. A clear path from financial stress to financial freedom.
@@ -274,7 +274,7 @@ export default function FreedomFivePage() {
         {/* Disclaimer */}
         <div className="mt-12 p-6 rounded-xl border border-card-border bg-card-bg/50 text-center">
           <p className="text-sm text-gray-500 leading-relaxed">
-            The Freedom Five is a general guide, not financial advice. Everyone&apos;s situation is
+            The Levi Five is a general guide, not financial advice. Everyone&apos;s situation is
             different — only you know what&apos;s best for your finances.
           </p>
         </div>

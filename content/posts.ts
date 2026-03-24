@@ -146,19 +146,19 @@ If you only read one, go with The Psychology of Money. If you need motivation, g
 I actually "read" most of my books by listening to them. Audiobooks during a commute or workout changed the game for me. If you are not a sit-down-and-read type, [try audiobooks](https://amzn.to/4lMl9w1) — it is the easiest way to get through a book without finding extra time in your day.`,
   },
   {
-    slug: "the-freedom-five-my-simple-plan",
-    title: "The Freedom Five: My Simple Plan for Financial Independence",
+    slug: "the-levi-five-my-simple-plan",
+    title: "The Levi Five: My Simple Plan for Financial Independence",
     date: "2026-03-21",
     description:
       "Five steps. No complexity. Here is the exact plan I follow to build financial freedom, and where I honestly am in the process.",
     category: "finance",
     author: "Levi",
     readingTime: "4 min read",
-    content: `I created the Freedom Five because I was tired of financial advice that was either too complicated or too vague. "Just save more and spend less." Thanks. Very helpful. I needed a real plan with real steps, so I built one. And I follow it myself.
+    content: `I created the The Levi Five because I was tired of financial advice that was either too complicated or too vague. "Just save more and spend less." Thanks. Very helpful. I needed a real plan with real steps, so I built one. And I follow it myself.
 
 ## What It Is
 
-The Freedom Five is a five-step framework that takes you from wherever you are financially to building real wealth. The steps are sequential. You do not skip ahead. You do not try to do everything at once. You focus on one step at a time.
+The Levi Five is a five-step framework that takes you from wherever you are financially to building real wealth. The steps are sequential. You do not skip ahead. You do not try to do everything at once. You focus on one step at a time.
 
 Here is the quick version.
 
@@ -190,11 +190,11 @@ That is real. A lot of finance creators act like they have it all figured out. I
 
 ## Why It Works
 
-Most people fail financially because they try to do everything at once. They invest while carrying credit card debt. They buy a house before they have an emergency fund. The Freedom Five forces you to build the foundation before adding floors.
+Most people fail financially because they try to do everything at once. They invest while carrying credit card debt. They buy a house before they have an emergency fund. The Levi Five forces you to build the foundation before adding floors.
 
 It is not exciting. It is not fast. But it works every time if you follow the steps.
 
-If you want the full deep dive on each step, check out the [Freedom Five page](/freedom-five). Figure out which step you are on and focus there. One step at a time.`,
+If you want the full deep dive on each step, check out the [The Levi Five page](/the-levi-five). Figure out which step you are on and focus there. One step at a time.`,
   },
   {
     slug: "why-i-track-every-dollar",
@@ -283,19 +283,19 @@ My goal is not to impress anyone with my returns. My goal is to show that buildi
 If sharing my portfolio helps even one person start investing or improve their strategy, it is worth every uncomfortable moment of putting my numbers out there. That is what this whole thing is about.`,
   },
   {
-    slug: "the-freedom-five-framework",
-    title: "The Freedom Five: A Simple Framework for Financial Independence",
+    slug: "the-levi-five-framework",
+    title: "The Levi Five: A Simple Framework for Financial Independence",
     date: "2026-03-15",
     description:
       "A five-step framework to get your finances in order and build lasting wealth. No complexity, no BS.",
     category: "finance",
     author: "Levi",
     readingTime: "5 min read",
-    content: `I created The Freedom Five because most financial advice is either too complicated or too vague. People need a clear path, not a textbook. Here is the framework I use and recommend to everyone who asks me where to start.
+    content: `I created The Levi Five because most financial advice is either too complicated or too vague. People need a clear path, not a textbook. Here is the framework I use and recommend to everyone who asks me where to start.
 
-## What Is The Freedom Five?
+## What Is The Levi Five?
 
-The Freedom Five is a five-step financial framework that takes you from zero to wealth-building. Each step builds on the last. You do not skip ahead. You do not try to do everything at once. You focus on one step until it is done, then move to the next.
+The Levi Five is a five-step financial framework that takes you from zero to wealth-building. Each step builds on the last. You do not skip ahead. You do not try to do everything at once. You focus on one step until it is done, then move to the next.
 
 ## Step 1: One Month Security
 
@@ -319,11 +319,11 @@ This is where wealth actually grows. Increase your income through side hustles o
 
 ## Why This Works
 
-The Freedom Five works because it is sequential. Most people fail financially because they try to invest while carrying credit card debt, or they buy a house before they have an emergency fund. This framework forces you to build the foundation before adding floors.
+The Levi Five works because it is sequential. Most people fail financially because they try to invest while carrying credit card debt, or they buy a house before they have an emergency fund. This framework forces you to build the foundation before adding floors.
 
 It is not sexy. It is not fast. But it works every single time if you follow the steps. I have seen it transform people is financial lives, and I am living proof that the framework delivers results.
 
-The full breakdown of each step is on the Freedom Five page. Go check it out and figure out which step you are on.`,
+The full breakdown of each step is on the The Levi Five page. Go check it out and figure out which step you are on.`,
   },
   {
     slug: "how-to-start-investing-with-100",

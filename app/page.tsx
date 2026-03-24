@@ -89,22 +89,22 @@ export default function Home() {
                 View My Portfolio
               </Link>
               <Link
-                href="/freedom-five"
+                href="/the-levi-five"
                 className="px-8 py-3.5 border border-card-border text-white font-semibold rounded-lg hover:bg-card-bg hover:border-accent-green/30 transition-all duration-200"
               >
-                The Freedom Five
+                The Levi Five
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Freedom Five Quick Links */}
+      {/* The Levi Five Quick Links */}
       <section className="bg-card-bg/50 border-y border-card-border">
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold mb-3">
-              The <span className="gradient-text">Freedom Five</span> Framework
+              The <span className="gradient-text">The Levi Five</span> Framework
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Five steps from financial stress to financial freedom. No complexity, no BS.
@@ -114,7 +114,7 @@ export default function Home() {
             {freedomSteps.map((step) => (
               <Link
                 key={step.number}
-                href="/freedom-five"
+                href="/the-levi-five"
                 className="glass-card p-5 rounded-xl text-center group transition-all duration-300 hover:scale-[1.02]"
               >
                 <div
@@ -129,7 +129,7 @@ export default function Home() {
           </div>
           <div className="text-center mt-8">
             <Link
-              href="/freedom-five"
+              href="/the-levi-five"
               className="text-sm text-accent-green hover:underline font-medium"
             >
               Learn the full framework &rarr;

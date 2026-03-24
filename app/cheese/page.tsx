@@ -20,7 +20,7 @@ export default function CheesePage() {
         { title: "Investment Portfolio", description: "Track your stocks, ETFs, and crypto. See real-time performance and allocation." },
         { title: "Dividend Tracking", description: "Monitor dividend income, track payout dates, and see your passive income grow." },
         { title: "Net Worth", description: "Assets minus liabilities. One number that tells you where you stand financially." },
-        { title: "The Freedom Five", description: "A step-by-step framework to go from zero to financially independent." },
+        { title: "The Levi Five", description: "A step-by-step framework to go from zero to financially independent." },
         { title: "Finance Calculators", description: "Compound interest, mortgage, FIRE, retirement, debt payoff, and more." },
       ],
     },

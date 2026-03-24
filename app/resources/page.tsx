@@ -149,10 +149,10 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Freedom Five Resources */}
+      {/* The Levi Five Resources */}
       <section className="mb-14">
-        <h2 className="text-xl font-bold mb-2">Freedom Five Resources</h2>
-        <p className="text-gray-400 text-sm mb-6">Tools that tie directly into each step of <a href="/freedom-five" className="text-accent-green hover:underline">The Freedom Five</a>.</p>
+        <h2 className="text-xl font-bold mb-2">The Levi Five Resources</h2>
+        <p className="text-gray-400 text-sm mb-6">Tools that tie directly into each step of <a href="/the-levi-five" className="text-accent-green hover:underline">The Levi Five</a>.</p>
         <div className="space-y-4">
           <div className="p-5 rounded-xl border border-card-border bg-card-bg">
             <h3 className="font-semibold text-white mb-1">Step 1: One Month Security</h3>
