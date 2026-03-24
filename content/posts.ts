@@ -154,7 +154,7 @@ I actually "read" most of my books by listening to them. Audiobooks during a com
     category: "finance",
     author: "Levi",
     readingTime: "4 min read",
-    content: `I created the The Levi Five because I was tired of financial advice that was either too complicated or too vague. "Just save more and spend less." Thanks. Very helpful. I needed a real plan with real steps, so I built one. And I follow it myself.
+    content: `I created The Levi Five because I was tired of financial advice that was either too complicated or too vague. "Just save more and spend less." Thanks. Very helpful. I needed a real plan with real steps, so I built one. And I follow it myself.
 
 ## What It Is
 
@@ -323,7 +323,7 @@ The Levi Five works because it is sequential. Most people fail financially becau
 
 It is not sexy. It is not fast. But it works every single time if you follow the steps. I have seen it transform people is financial lives, and I am living proof that the framework delivers results.
 
-The full breakdown of each step is on the The Levi Five page. Go check it out and figure out which step you are on.`,
+The full breakdown of each step is on The Levi Five page. Go check it out and figure out which step you are on.`,
   },
   {
     slug: "how-to-start-investing-with-100",

@@ -161,7 +161,7 @@ export default function EmergencyFundCalculator() {
           liquid when you need it most.
         </p>
         <p>
-          Building an emergency fund is Step 1 of the The Levi Five framework. It is the foundation
+          Building an emergency fund is Step 1 of The Levi Five framework. It is the foundation
           that everything else builds on. Even saving one month of expenses gives you breathing room
           that most people do not have. Start there and build up over time.
         </p>
@@ -188,7 +188,7 @@ export default function EmergencyFundCalculator() {
           liquid when you need it most.
         </p>
         <p>
-          Building an emergency fund is Step 1 of the The Levi Five framework. It is the foundation
+          Building an emergency fund is Step 1 of The Levi Five framework. It is the foundation
           that everything else builds on. Even saving one month of expenses gives you breathing room
           that most people do not have. Start there and build up over time.
         </p>
