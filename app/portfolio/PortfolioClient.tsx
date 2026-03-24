@@ -171,15 +171,44 @@ export default function PortfolioClient() {
   const totalGain = totalValue - totalCost;
   const totalGainPct = (totalGain / totalCost) * 100;
 
+  const goal = 1000000;
+  const progressPct = Math.min((totalValue / goal) * 100, 100);
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
-      <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
+      {/* $1 to $1,000,000 Journey */}
+      <div className="mb-16 p-8 rounded-xl bg-card-bg border border-card-border text-center">
+        <p className="text-sm text-gray-500 uppercase tracking-widest mb-2">The Journey</p>
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-3">
+          <span className="text-white">$1</span>
+          <span className="text-gray-600 mx-3">→</span>
+          <span className="gradient-text">$1,000,000</span>
+        </h1>
+        <p className="text-gray-400 max-w-xl mx-auto mb-8">
+          I started with a single dollar. No trust fund, no windfall, no shortcuts. Just
+          consistency, time, and a plan. Follow along as I build to seven figures in public.
+        </p>
+        <div className="max-w-lg mx-auto">
+          <div className="flex justify-between text-sm mb-2">
+            <span className="text-gray-400">${fmt(totalValue)}</span>
+            <span className="text-gray-500">$1,000,000</span>
+          </div>
+          <div className="w-full bg-gray-800 rounded-full h-4 overflow-hidden">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-accent-green to-accent-teal transition-all duration-1000"
+              style={{ width: `${Math.max(progressPct, 1)}%` }}
+            />
+          </div>
+          <p className="text-sm text-gray-500 mt-2">{progressPct.toFixed(2)}% there</p>
+        </div>
+      </div>
+
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
         My Public <span className="text-accent-green">Portfolio</span>
-      </h1>
+      </h2>
       <p className="text-gray-400 max-w-3xl mb-12 leading-relaxed">
-        Full transparency. Below is every stock and ETF I own, what I paid, and how each
-        position is performing. I update these numbers regularly. The goal is to show that
-        building wealth is a long game with real ups and downs. No cherry-picked winners here.
+        Full transparency. Every stock and ETF I own, what I paid, and how it is performing.
+        Real numbers, real ups and downs. No cherry-picked winners.
       </p>
 
       {/* Summary */}

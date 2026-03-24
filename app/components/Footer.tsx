@@ -34,6 +34,7 @@ export default function Footer() {
               <li><Link href="/calculators/fire" className="hover:text-accent-green transition-colors">FIRE</Link></li>
               <li><Link href="/calculators/retirement" className="hover:text-accent-green transition-colors">Retirement</Link></li>
               <li><Link href="/calculators/mortgage" className="hover:text-accent-green transition-colors">Mortgage</Link></li>
+              <li><Link href="/calculators" className="hover:text-accent-green transition-colors text-accent-green">View All →</Link></li>
             </ul>
           </div>
           <div>
