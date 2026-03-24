@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import AdBanner from "./components/AdBanner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -31,6 +33,8 @@ export const metadata: Metadata = {
     "FIRE",
     "retirement planning",
     "transparent investing",
+    "Freedom Five",
+    "financial independence",
   ],
   authors: [{ name: "Levi The Finance Guy" }],
   openGraph: {
@@ -71,12 +75,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
-      {/*
-        Google AdSense — Add your script tag here:
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossOrigin="anonymous"></script>
-      */}
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Navigation />
         <AdBanner slot="top" size="responsive" />

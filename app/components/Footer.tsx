@@ -4,9 +4,12 @@ export default function Footer() {
   return (
     <footer className="border-t border-card-border bg-[#0a0a0a] mt-auto">
       <div className="max-w-6xl mx-auto px-4 py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-accent-green font-bold text-lg mb-3">LeviTheFinanceGuy</h3>
+            <h3 className="font-bold text-lg mb-3">
+              <span className="gradient-text">Levi</span>
+              <span className="text-gray-300">TheFinanceGuy</span>
+            </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               Transparent personal finance education. Real portfolio, real numbers, real talk.
             </p>
@@ -16,8 +19,20 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-gray-400">
               <li><Link href="/" className="hover:text-accent-green transition-colors">Home</Link></li>
               <li><Link href="/portfolio" className="hover:text-accent-green transition-colors">Portfolio</Link></li>
+              <li><Link href="/freedom-five" className="hover:text-accent-green transition-colors">Freedom Five</Link></li>
               <li><Link href="/calculators" className="hover:text-accent-green transition-colors">Calculators</Link></li>
+              <li><Link href="/blog" className="hover:text-accent-green transition-colors">Blog</Link></li>
               <li><Link href="/about" className="hover:text-accent-green transition-colors">About</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold text-white mb-3">Calculators</h4>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li><Link href="/calculators/compound-interest" className="hover:text-accent-green transition-colors">Compound Interest</Link></li>
+              <li><Link href="/calculators/investment-growth" className="hover:text-accent-green transition-colors">Investment Growth</Link></li>
+              <li><Link href="/calculators/fire" className="hover:text-accent-green transition-colors">FIRE</Link></li>
+              <li><Link href="/calculators/retirement" className="hover:text-accent-green transition-colors">Retirement</Link></li>
+              <li><Link href="/calculators/mortgage" className="hover:text-accent-green transition-colors">Mortgage</Link></li>
             </ul>
           </div>
           <div>

@@ -1,0 +1,178 @@
+"use client";
+
+import { useState } from "react";
+import AdBanner from "../../components/AdBanner";
+
+function fmt(n: number) {
+  return n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+export default function DividendCalculator() {
+  const [investment, setInvestment] = useState(50000);
+  const [dividendYield, setDividendYield] = useState(3.5);
+  const [drip, setDrip] = useState(true);
+  const [years, setYears] = useState(20);
+  const [monthlyAdd, setMonthlyAdd] = useState(500);
+
+  const yearlyData: { year: number; portfolio: number; annualDividend: number; totalDividends: number }[] = [];
+  let portfolio = investment;
+  let totalDividends = 0;
+
+  for (let y = 1; y <= years; y++) {
+    portfolio += monthlyAdd * 12;
+    const annualDiv = portfolio * (dividendYield / 100);
+    totalDividends += annualDiv;
+    if (drip) {
+      portfolio += annualDiv;
+    }
+    yearlyData.push({
+      year: y,
+      portfolio,
+      annualDividend: annualDiv,
+      totalDividends,
+    });
+  }
+
+  const finalPortfolio = portfolio;
+  const finalAnnualDividend = finalPortfolio * (dividendYield / 100);
+  const monthlyDividend = finalAnnualDividend / 12;
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            name: "Dividend Calculator",
+            description: "Calculate projected dividend income with optional DRIP reinvestment over time.",
+            applicationCategory: "FinanceApplication",
+            operatingSystem: "Web",
+            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          }),
+        }}
+      />
+
+      <h1 className="text-3xl md:text-4xl font-extrabold mb-4">
+        Dividend <span className="gradient-text">Calculator</span>
+      </h1>
+
+      <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="space-y-5">
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Initial Investment ($)</label>
+            <input type="number" value={investment} onChange={(e) => setInvestment(Number(e.target.value))} className="w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none" />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Monthly Addition ($)</label>
+            <input type="number" value={monthlyAdd} onChange={(e) => setMonthlyAdd(Number(e.target.value))} className="w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none" />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Dividend Yield (%)</label>
+            <input type="number" value={dividendYield} onChange={(e) => setDividendYield(Number(e.target.value))} className="w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none" step="0.1" />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Years</label>
+            <input type="number" value={years} onChange={(e) => setYears(Number(e.target.value))} className="w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none" />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Reinvest Dividends (DRIP)</label>
+            <div className="flex gap-3">
+              {[true, false].map((val) => (
+                <button
+                  key={String(val)}
+                  onClick={() => setDrip(val)}
+                  className={`flex-1 py-3 rounded-lg border text-sm font-semibold transition-all ${
+                    drip === val
+                      ? "bg-accent-green text-black border-accent-green"
+                      : "bg-card-bg border-card-border text-gray-400 hover:border-accent-green/50"
+                  }`}
+                >
+                  {val ? "DRIP On" : "DRIP Off"}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="p-6 bg-card-bg border border-card-border rounded-xl space-y-4">
+          <h2 className="text-lg font-semibold mb-2">Results</h2>
+          <div className="flex justify-between">
+            <span className="text-gray-400">Portfolio Value</span>
+            <span className="text-accent-green font-bold text-xl">${fmt(finalPortfolio)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-400">Annual Dividend Income</span>
+            <span className="text-accent-green font-mono">${fmt(finalAnnualDividend)}/yr</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-400">Monthly Dividend Income</span>
+            <span className="font-mono">${fmt(monthlyDividend)}/mo</span>
+          </div>
+          <div className="h-px bg-card-border my-2" />
+          <div className="flex justify-between">
+            <span className="text-gray-400">Total Dividends Earned</span>
+            <span className="text-accent-green font-mono">${fmt(totalDividends)}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Yearly Table */}
+      {yearlyData.length > 0 && (
+        <div className="mb-12 overflow-x-auto rounded-xl border border-card-border">
+          <h2 className="text-lg font-semibold p-4 bg-card-bg">Dividend Growth Schedule</h2>
+          <table className="w-full text-sm">
+            <thead className="bg-card-bg text-gray-400 text-xs uppercase tracking-wider">
+              <tr>
+                <th className="text-left p-3">Year</th>
+                <th className="text-right p-3">Portfolio</th>
+                <th className="text-right p-3">Annual Dividend</th>
+                <th className="text-right p-3">Total Dividends</th>
+              </tr>
+            </thead>
+            <tbody>
+              {yearlyData.filter((_, i) => i % Math.max(1, Math.floor(years / 10)) === 0 || i === yearlyData.length - 1).map((row) => (
+                <tr key={row.year} className="border-t border-card-border hover:bg-card-bg/50">
+                  <td className="p-3">{row.year}</td>
+                  <td className="p-3 text-right font-mono">${fmt(row.portfolio)}</td>
+                  <td className="p-3 text-right font-mono text-accent-green">${fmt(row.annualDividend)}</td>
+                  <td className="p-3 text-right font-mono">${fmt(row.totalDividends)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      <AdBanner slot="in-content" size="medium-rectangle" />
+
+      <section className="mt-12 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+        <h2 className="text-xl font-bold text-white">Understanding Dividend Investing</h2>
+        <p>
+          Dividend investing is a strategy focused on buying stocks or funds that pay regular
+          cash distributions to shareholders. These payments, called dividends, provide passive
+          income that can either supplement your earnings or be reinvested to accelerate growth.
+        </p>
+        <p>
+          DRIP (Dividend Reinvestment Plan) automatically reinvests your dividends back into
+          more shares. Over long periods, this reinvestment creates a powerful compounding effect.
+          The difference between DRIP on and off over 20-30 years can be substantial, often
+          doubling or tripling your total return.
+        </p>
+        <p>
+          Dividend yield represents the annual dividend payment as a percentage of the stock
+          price. A 3% yield on a $100 stock means $3 per share annually. Yields vary widely:
+          growth companies often pay little or nothing, while established companies and REITs
+          may yield 3-6% or more. Be cautious of extremely high yields, as they can signal
+          financial trouble.
+        </p>
+        <p>
+          Many successful investors use dividend stocks as a cornerstone of their retirement
+          strategy. A well-built dividend portfolio can provide reliable, growing income that
+          keeps pace with or exceeds inflation, reducing dependence on selling assets in retirement.
+        </p>
+      </section>
+    </div>
+  );
+}
