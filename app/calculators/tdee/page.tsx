@@ -53,7 +53,7 @@ export default function TDEECalculator() {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             name: "TDEE Calculator",
-            description: "Calculate your Total Daily Energy Expenditure and recommended macro breakdown.",
+            description: "Calculate your Total Daily Energy Expenditure based on your age, weight, height, and activity level.",
             applicationCategory: "HealthApplication",
             operatingSystem: "Web",
             offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -161,37 +161,6 @@ export default function TDEECalculator() {
             </div>
           </div>
 
-          <div className="p-6 bg-card-bg border border-card-border rounded-xl">
-            <h3 className="text-sm font-semibold text-gray-400 mb-4">
-              Macro Breakdown (Maintenance)
-            </h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span>Protein ({Math.round((proteinCals / tdee) * 100)}%)</span>
-                <span className="font-mono text-accent-green">{Math.round(proteinGrams)}g</span>
-              </div>
-              <div className="w-full bg-gray-800 rounded-full h-2">
-                <div className="h-full rounded-full bg-accent-green" style={{ width: `${Math.round((proteinCals / tdee) * 100)}%` }} />
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Carbs ({Math.round((carbCals / tdee) * 100)}%)</span>
-                <span className="font-mono text-blue-400">{Math.round(carbGrams)}g</span>
-              </div>
-              <div className="w-full bg-gray-800 rounded-full h-2">
-                <div className="h-full rounded-full bg-blue-400" style={{ width: `${Math.round((carbCals / tdee) * 100)}%` }} />
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Fat (30%)</span>
-                <span className="font-mono text-yellow-400">{Math.round(fatGrams)}g</span>
-              </div>
-              <div className="w-full bg-gray-800 rounded-full h-2">
-                <div className="h-full rounded-full bg-yellow-400" style={{ width: "30%" }} />
-              </div>
-            </div>
-            <p className="text-xs text-gray-500 mt-3">
-              Protein is capped at 1g per pound of body weight. These are general starting points — adjust based on your individual needs.
-            </p>
-          </div>
         </div>
       </div>
 
@@ -216,13 +185,6 @@ export default function TDEECalculator() {
           muscle, you need to eat more (a caloric surplus). A common recommendation is a 500
           calorie deficit or surplus, which theoretically results in about one pound of change per
           week.
-        </p>
-        <p>
-          The macro breakdown above targets around 30% protein (capped at 1g per pound of body
-          weight), 30% fat, and the rest from carbohydrates. Protein is essential for muscle
-          maintenance and repair. Carbohydrates fuel your workouts and daily activities. Healthy fats
-          support hormone production and nutrient absorption. These are general starting points —
-          adjust based on your specific goals and how your body responds.
         </p>
       </section>
 
