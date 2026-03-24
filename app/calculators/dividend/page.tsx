@@ -266,7 +266,7 @@ export default function DividendCalculator() {
       </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
-        Investments are risky, but listening to a random guy on the internet about investments is riskier. Do your own research. This calculator is for educational purposes only — not financial advice.
+        Investments are risky, but treating what a random guy on the internet says as financial advice is riskier. Do your own research. This is for educational purposes only.
       </p>
     </div>
   );
