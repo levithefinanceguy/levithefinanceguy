@@ -200,6 +200,14 @@ export default function PortfolioClient() {
             />
           </div>
           <p className="text-sm text-gray-500 mt-2">{progressPct.toFixed(2)}% there</p>
+          <a
+            href="https://join.robinhood.com/bretp22"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-4 px-6 py-2 text-sm font-semibold rounded-lg border border-accent-green/30 text-accent-green hover:bg-accent-green/10 transition-all"
+          >
+            Start your own journey →
+          </a>
         </div>
       </div>
 
