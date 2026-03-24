@@ -10,6 +10,7 @@ interface Holding {
   currentPrice: number;
   shares: number;
   sparkline: number[];
+  dividendPerShare: number; // annual dividend per share
 }
 
 const sampleHoldings: Holding[] = [
@@ -21,6 +22,7 @@ const sampleHoldings: Holding[] = [
     currentPrice: 178.72,
     shares: 25,
     sparkline: [142, 148, 155, 160, 153, 162, 170, 168, 175, 178],
+    dividendPerShare: 1.00,
   },
   {
     ticker: "MSFT",
@@ -30,6 +32,7 @@ const sampleHoldings: Holding[] = [
     currentPrice: 415.56,
     shares: 15,
     sparkline: [280, 295, 310, 325, 340, 355, 370, 390, 405, 415],
+    dividendPerShare: 3.00,
   },
   {
     ticker: "VOO",
@@ -39,6 +42,7 @@ const sampleHoldings: Holding[] = [
     currentPrice: 478.92,
     shares: 30,
     sparkline: [348, 360, 375, 390, 405, 420, 435, 450, 465, 478],
+    dividendPerShare: 6.76,
   },
   {
     ticker: "GOOGL",
@@ -48,6 +52,7 @@ const sampleHoldings: Holding[] = [
     currentPrice: 155.84,
     shares: 20,
     sparkline: [120, 125, 130, 128, 135, 140, 145, 148, 152, 155],
+    dividendPerShare: 0.80,
   },
   {
     ticker: "AMZN",
@@ -57,6 +62,7 @@ const sampleHoldings: Holding[] = [
     currentPrice: 185.07,
     shares: 18,
     sparkline: [138, 142, 150, 155, 160, 165, 170, 175, 180, 185],
+    dividendPerShare: 0,
   },
   {
     ticker: "NVDA",
@@ -66,6 +72,7 @@ const sampleHoldings: Holding[] = [
     currentPrice: 878.35,
     shares: 10,
     sparkline: [212, 280, 350, 420, 500, 580, 650, 740, 810, 878],
+    dividendPerShare: 0.16,
   },
   {
     ticker: "TSLA",
@@ -75,6 +82,7 @@ const sampleHoldings: Holding[] = [
     currentPrice: 162.50,
     shares: 12,
     sparkline: [180, 195, 210, 200, 185, 175, 170, 165, 160, 162],
+    dividendPerShare: 0,
   },
   {
     ticker: "VTI",
@@ -84,6 +92,7 @@ const sampleHoldings: Holding[] = [
     currentPrice: 262.41,
     shares: 20,
     sparkline: [238, 225, 230, 240, 235, 245, 250, 255, 258, 262],
+    dividendPerShare: 3.46,
   },
 ];
 
@@ -170,6 +179,9 @@ export default function PortfolioClient() {
   const totalCost = sampleHoldings.reduce((s, h) => s + h.purchasePrice * h.shares, 0);
   const totalGain = totalValue - totalCost;
   const totalGainPct = (totalGain / totalCost) * 100;
+  const totalAnnualDividends = sampleHoldings.reduce((s, h) => s + h.dividendPerShare * h.shares, 0);
+  const totalMonthlyDividends = totalAnnualDividends / 12;
+  const priceGrowth = totalGain; // price appreciation only
 
   const goal = 1000000;
   const progressPct = Math.min((totalValue / goal) * 100, 100);
@@ -229,18 +241,42 @@ export default function PortfolioClient() {
               <span className="text-gray-400">Total Value</span>
               <span className="font-bold text-xl">${fmt(totalValue)}</span>
             </div>
+            <div className="h-px bg-card-border" />
             <div className="flex justify-between">
-              <span className="text-gray-400">Total Cost Basis</span>
-              <span className="font-mono">${fmt(totalCost)}</span>
+              <span className="text-gray-400">Total Invested</span>
+              <span className="font-mono text-blue-400">${fmt(totalCost)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-400">Total Gain / Loss</span>
-              <span
-                className={`font-bold ${totalGain >= 0 ? "text-accent-green" : "text-accent-red"}`}
-              >
-                {totalGain >= 0 ? "+" : ""}${fmt(totalGain)} ({totalGainPct >= 0 ? "+" : ""}
-                {totalGainPct.toFixed(2)}%)
+              <span className="text-gray-400">Price Growth</span>
+              <span className={`font-mono ${priceGrowth >= 0 ? "text-accent-green" : "text-accent-red"}`}>
+                {priceGrowth >= 0 ? "+" : ""}${fmt(priceGrowth)}
               </span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-400">Est. Annual Dividends</span>
+              <span className="font-mono text-accent-green">${fmt(totalAnnualDividends)}/yr</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-400">Est. Monthly Dividends</span>
+              <span className="font-mono text-gray-300">${fmt(totalMonthlyDividends)}/mo</span>
+            </div>
+            <div className="h-px bg-card-border" />
+            <div className="flex justify-between">
+              <span className="text-gray-400">Total Return</span>
+              <span className={`font-bold ${totalGain >= 0 ? "text-accent-green" : "text-accent-red"}`}>
+                {totalGain >= 0 ? "+" : ""}${fmt(totalGain)} ({totalGainPct >= 0 ? "+" : ""}{totalGainPct.toFixed(2)}%)
+              </span>
+            </div>
+            {/* Visual breakdown */}
+            <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+              <div className="h-full flex">
+                <div className="bg-blue-400 h-full" style={{ width: `${(totalCost / totalValue) * 100}%` }} />
+                <div className="bg-accent-green h-full" style={{ width: `${(priceGrowth / totalValue) * 100}%` }} />
+              </div>
+            </div>
+            <div className="flex justify-between text-[10px] text-gray-500">
+              <span>Invested {Math.round((totalCost / totalValue) * 100)}%</span>
+              <span>Growth {Math.round((priceGrowth / totalValue) * 100)}%</span>
             </div>
           </div>
         </div>
