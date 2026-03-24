@@ -33,9 +33,12 @@ export default function DividendCalculator() {
     });
   }
 
+  const totalContributed = investment + (monthlyAdd * 12 * years);
   const finalPortfolio = portfolio;
+  const growthAmount = finalPortfolio - totalContributed;
   const finalAnnualDividend = finalPortfolio * (dividendYield / 100);
   const monthlyDividend = finalAnnualDividend / 12;
+  const maxPortfolio = yearlyData.length > 0 ? yearlyData[yearlyData.length - 1].portfolio : 1;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
@@ -118,6 +121,57 @@ export default function DividendCalculator() {
             <span className="text-gray-400">Total Dividends Earned</span>
             <span className="text-accent-green font-mono">${fmt(totalDividends)}</span>
           </div>
+          <div className="h-px bg-card-border my-2" />
+          <div className="flex justify-between">
+            <span className="text-gray-400">Your Money</span>
+            <span className="font-mono text-blue-400">${fmt(totalContributed)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-400">Growth</span>
+            <span className="font-mono text-accent-green">${fmt(growthAmount)}</span>
+          </div>
+          {/* Stacked bar */}
+          <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+            <div className="h-full flex">
+              <div className="bg-blue-400 h-full" style={{ width: `${(totalContributed / finalPortfolio) * 100}%` }} />
+              <div className="bg-accent-green h-full" style={{ width: `${(growthAmount / finalPortfolio) * 100}%` }} />
+            </div>
+          </div>
+          <div className="flex justify-between text-[10px] text-gray-500">
+            <span>You put in {Math.round((totalContributed / finalPortfolio) * 100)}%</span>
+            <span>Growth did {Math.round((growthAmount / finalPortfolio) * 100)}%</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Growth Chart */}
+      <div className="mb-12 p-6 bg-card-bg border border-card-border rounded-xl">
+        <h2 className="text-lg font-semibold mb-4">Portfolio Growth</h2>
+        <div className="flex items-end gap-1 h-48">
+          {yearlyData.map((row) => {
+            const contributedAtYear = investment + (monthlyAdd * 12 * row.year);
+            const growthAtYear = row.portfolio - contributedAtYear;
+            const totalHeight = (row.portfolio / maxPortfolio) * 100;
+            const contributedHeight = (contributedAtYear / maxPortfolio) * 100;
+            const growthHeight = totalHeight - contributedHeight;
+            return (
+              <div key={row.year} className="flex-1 flex flex-col justify-end h-full group relative">
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-900 text-[10px] text-white px-2 py-1 rounded whitespace-nowrap z-10">
+                  Yr {row.year}: ${fmt(row.portfolio)}
+                </div>
+                <div className="bg-accent-green rounded-t-sm" style={{ height: `${Math.max(growthHeight, 0)}%` }} />
+                <div className="bg-blue-400" style={{ height: `${contributedHeight}%` }} />
+              </div>
+            );
+          })}
+        </div>
+        <div className="flex justify-between text-[10px] text-gray-500 mt-2">
+          <span>Year 1</span>
+          <span>Year {years}</span>
+        </div>
+        <div className="flex gap-4 mt-3 text-xs text-gray-400">
+          <span className="flex items-center gap-1"><span className="w-3 h-3 bg-blue-400 rounded-sm" /> Your money</span>
+          <span className="flex items-center gap-1"><span className="w-3 h-3 bg-accent-green rounded-sm" /> Growth</span>
         </div>
       </div>
 

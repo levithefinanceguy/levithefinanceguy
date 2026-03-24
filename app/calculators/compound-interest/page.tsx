@@ -118,11 +118,24 @@ export default function CompoundInterestCalculator() {
             <span className="text-accent-green font-mono">${fmt(totalInterest)}</span>
           </div>
           <div className="h-px bg-card-border my-2" />
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-400">Interest as % of Total</span>
-            <span className="font-mono">
-              {finalAmount > 0 ? ((totalInterest / finalAmount) * 100).toFixed(1) : 0}%
-            </span>
+          <div className="flex justify-between">
+            <span className="text-gray-400">Your Money</span>
+            <span className="font-mono text-blue-400">${fmt(totalContributions)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-400">Growth</span>
+            <span className="font-mono text-accent-green">${fmt(totalInterest)}</span>
+          </div>
+          {/* Stacked bar */}
+          <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+            <div className="h-full flex">
+              <div className="bg-blue-400 h-full" style={{ width: `${finalAmount > 0 ? (totalContributions / finalAmount) * 100 : 0}%` }} />
+              <div className="bg-accent-green h-full" style={{ width: `${finalAmount > 0 ? (totalInterest / finalAmount) * 100 : 0}%` }} />
+            </div>
+          </div>
+          <div className="flex justify-between text-[10px] text-gray-500">
+            <span>You put in {finalAmount > 0 ? Math.round((totalContributions / finalAmount) * 100) : 0}%</span>
+            <span>Growth did {finalAmount > 0 ? Math.round((totalInterest / finalAmount) * 100) : 0}%</span>
           </div>
         </div>
       </div>
@@ -133,38 +146,26 @@ export default function CompoundInterestCalculator() {
           <h2 className="text-lg font-semibold mb-4">Growth Over Time</h2>
           <div className="flex items-end gap-1 h-48">
             {yearlyData.map((d) => {
-              const height = (d.balance / maxBalance) * 100;
               const contribHeight = (d.contributions / maxBalance) * 100;
+              const growthHeight = ((d.balance - d.contributions) / maxBalance) * 100;
               return (
-                <div key={d.year} className="flex-1 flex flex-col items-center justify-end h-full relative group">
-                  <div className="w-full flex flex-col justify-end h-full">
-                    <div
-                      className="w-full bg-accent-green/30 rounded-t-sm relative"
-                      style={{ height: `${height}%` }}
-                    >
-                      <div
-                        className="absolute bottom-0 w-full bg-accent-green/60 rounded-t-sm"
-                        style={{ height: `${(contribHeight / height) * 100}%` }}
-                      />
-                    </div>
+                <div key={d.year} className="flex-1 flex flex-col justify-end h-full group relative">
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-900 text-[10px] text-white px-2 py-1 rounded whitespace-nowrap z-10">
+                    Yr {d.year}: ${fmt(d.balance)}
                   </div>
-                  {(d.year % 5 === 0 || d.year === years) && (
-                    <span className="text-[10px] text-gray-500 mt-1">{d.year}y</span>
-                  )}
-                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none z-10">
-                    Year {d.year}: ${fmt(d.balance)}
-                  </div>
+                  <div className="bg-accent-green rounded-t-sm" style={{ height: `${Math.max(growthHeight, 0)}%` }} />
+                  <div className="bg-blue-400" style={{ height: `${contribHeight}%` }} />
                 </div>
               );
             })}
           </div>
-          <div className="flex gap-4 mt-4 text-xs text-gray-400">
-            <div className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-sm bg-accent-green/60" /> Contributions
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-sm bg-accent-green/30" /> Interest
-            </div>
+          <div className="flex justify-between text-[10px] text-gray-500 mt-2">
+            <span>Year 1</span>
+            <span>Year {years}</span>
+          </div>
+          <div className="flex gap-4 mt-3 text-xs text-gray-400">
+            <span className="flex items-center gap-1"><span className="w-3 h-3 bg-blue-400 rounded-sm" /> Your money</span>
+            <span className="flex items-center gap-1"><span className="w-3 h-3 bg-accent-green rounded-sm" /> Growth</span>
           </div>
         </div>
       )}
