@@ -157,6 +157,10 @@ export default function BodyFatCalculator() {
           photos, and how your clothes fit for a complete picture.
         </p>
       </section>
+
+      <p className="text-xs text-gray-500 mt-8 max-w-3xl">
+        This calculator is for educational purposes only and is not medical advice. Results are estimates based on general formulas and may not reflect your individual needs. Consult a healthcare professional before making changes to your diet or exercise routine.
+      </p>
     </div>
   );
 }

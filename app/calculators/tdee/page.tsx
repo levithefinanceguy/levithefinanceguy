@@ -32,13 +32,17 @@ export default function TDEECalculator() {
 
   const tdee = bmr * activityLevels[activityIndex].multiplier;
 
-  // Macro breakdown (balanced: 30% protein, 35% carbs, 35% fat)
-  const proteinCals = tdee * 0.3;
-  const carbCals = tdee * 0.35;
-  const fatCals = tdee * 0.35;
-  const proteinGrams = proteinCals / 4;
-  const carbGrams = carbCals / 4;
+  // Macro breakdown (maintenance: 30% protein, 40% carbs, 30% fat)
+  // Cap protein at 1g per pound of body weight
+  const maxProteinGrams = weight; // 1g per lb
+  const rawProteinGrams = (tdee * 0.3) / 4;
+  const proteinGrams = Math.min(rawProteinGrams, maxProteinGrams);
+  const proteinCals = proteinGrams * 4;
+  const fatCals = tdee * 0.3;
   const fatGrams = fatCals / 9;
+  // Remaining calories go to carbs
+  const carbCals = tdee - proteinCals - fatCals;
+  const carbGrams = carbCals / 4;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
@@ -163,27 +167,30 @@ export default function TDEECalculator() {
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span>Protein (30%)</span>
+                <span>Protein ({Math.round((proteinCals / tdee) * 100)}%)</span>
                 <span className="font-mono text-accent-green">{Math.round(proteinGrams)}g</span>
               </div>
               <div className="w-full bg-gray-800 rounded-full h-2">
-                <div className="h-full rounded-full bg-accent-green" style={{ width: "30%" }} />
+                <div className="h-full rounded-full bg-accent-green" style={{ width: `${Math.round((proteinCals / tdee) * 100)}%` }} />
               </div>
               <div className="flex justify-between items-center">
-                <span>Carbs (35%)</span>
+                <span>Carbs ({Math.round((carbCals / tdee) * 100)}%)</span>
                 <span className="font-mono text-blue-400">{Math.round(carbGrams)}g</span>
               </div>
               <div className="w-full bg-gray-800 rounded-full h-2">
-                <div className="h-full rounded-full bg-blue-400" style={{ width: "35%" }} />
+                <div className="h-full rounded-full bg-blue-400" style={{ width: `${Math.round((carbCals / tdee) * 100)}%` }} />
               </div>
               <div className="flex justify-between items-center">
-                <span>Fat (35%)</span>
+                <span>Fat (30%)</span>
                 <span className="font-mono text-yellow-400">{Math.round(fatGrams)}g</span>
               </div>
               <div className="w-full bg-gray-800 rounded-full h-2">
-                <div className="h-full rounded-full bg-yellow-400" style={{ width: "35%" }} />
+                <div className="h-full rounded-full bg-yellow-400" style={{ width: "30%" }} />
               </div>
             </div>
+            <p className="text-xs text-gray-500 mt-3">
+              Protein is capped at 1g per pound of body weight. These are general starting points — adjust based on your individual needs.
+            </p>
           </div>
         </div>
       </div>
@@ -211,12 +218,17 @@ export default function TDEECalculator() {
           week.
         </p>
         <p>
-          The macro breakdown above uses a balanced approach: 30% protein, 35% carbohydrates, and
-          35% fat. Protein is essential for muscle maintenance and repair. Carbohydrates fuel your
-          workouts and daily activities. Healthy fats support hormone production and nutrient
-          absorption. Adjust these ratios based on your specific goals and how your body responds.
+          The macro breakdown above targets around 30% protein (capped at 1g per pound of body
+          weight), 30% fat, and the rest from carbohydrates. Protein is essential for muscle
+          maintenance and repair. Carbohydrates fuel your workouts and daily activities. Healthy fats
+          support hormone production and nutrient absorption. These are general starting points —
+          adjust based on your specific goals and how your body responds.
         </p>
       </section>
+
+      <p className="text-xs text-gray-500 mt-8 max-w-3xl">
+        This calculator is for educational purposes only and is not medical advice. Results are estimates based on general formulas and may not reflect your individual needs. Consult a healthcare professional before making changes to your diet or exercise routine.
+      </p>
     </div>
   );
 }

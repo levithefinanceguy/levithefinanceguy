@@ -56,16 +56,26 @@ export default function AboutPage() {
           <h2 className="text-xl font-bold mb-4">Who I Am</h2>
           <div className="text-gray-400 leading-relaxed space-y-4">
             <p>
-              Hey, I am Levi. I have been obsessed with personal finance since I started
-              investing in my early twenties. What began as curiosity about compound interest
-              turned into a full-on passion for understanding how money works and, more
-              importantly, how to make it work for you.
+              Hey, I am Levi. I first got into personal finance back in high school — we had
+              a class on it and something just clicked. It peaked my interest early and I have
+              been thinking about money ever since.
             </p>
             <p>
-              I am not a certified financial advisor. I am just a regular person who reads
-              obsessively, tracks everything, and believes that sharing what I learn makes
-              us all better with money. I built this site to document my journey and provide
-              free tools that anyone can use.
+              That said, I am not going to pretend I had it all figured out. I have fallen off
+              the wagon more times than I can count. Spent everything, started from zero, built
+              it back up, and then did it all over again. But every time I learned something new,
+              and now I finally have a plan I can actually stick with.
+            </p>
+            <p>
+              I am not a financial advisor. I am just a regular guy who likes to keep things as
+              simple and easy as possible. I built this site and the Cheese app to share what I
+              have learned along the way and hopefully help other people avoid some of the mistakes
+              I made.
+            </p>
+            <p>
+              I am transparent about everything — my real numbers, my real portfolio, the good and
+              the bad — because I want to show people that it can be done, even if you have had to
+              start over a few times.
             </p>
           </div>
         </section>

@@ -143,6 +143,10 @@ export default function SavingsGoalCalculator() {
           need for willpower through automation.
         </p>
       </section>
+
+      <p className="text-xs text-gray-500 mt-8 max-w-3xl">
+        This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.
+      </p>
     </div>
   );
 }

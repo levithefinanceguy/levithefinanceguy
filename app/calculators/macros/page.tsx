@@ -12,9 +12,9 @@ const activityLevels = [
 ];
 
 const goals = [
-  { label: "Cut (Lose Fat)", value: "cut", calAdjust: -500, proteinMult: 1.0, fatPct: 0.25 },
-  { label: "Maintain", value: "maintain", calAdjust: 0, proteinMult: 0.8, fatPct: 0.30 },
-  { label: "Bulk (Build Muscle)", value: "bulk", calAdjust: 500, proteinMult: 0.9, fatPct: 0.30 },
+  { label: "Cut (Lose Fat)", value: "cut", calAdjust: -500, proteinPct: 0.40, carbPct: 0.30, fatPct: 0.30 },
+  { label: "Maintain", value: "maintain", calAdjust: 0, proteinPct: 0.30, carbPct: 0.40, fatPct: 0.30 },
+  { label: "Bulk (Build Muscle)", value: "bulk", calAdjust: 500, proteinPct: 0.25, carbPct: 0.50, fatPct: 0.25 },
 ];
 
 export default function MacroEstimator() {
@@ -40,10 +40,15 @@ export default function MacroEstimator() {
   const goal = goals[goalIndex];
   const targetCalories = Math.round(tdee + goal.calAdjust);
 
-  const proteinGrams = Math.round(weight * goal.proteinMult);
+  // Calculate protein from percentage, but cap at 1g per pound of body weight
+  const maxProteinGrams = weight; // 1g per lb cap
+  const rawProteinGrams = Math.round((targetCalories * goal.proteinPct) / 4);
+  const proteinGrams = Math.min(rawProteinGrams, maxProteinGrams);
   const proteinCals = proteinGrams * 4;
+  // Fat from percentage
   const fatCals = Math.round(targetCalories * goal.fatPct);
   const fatGrams = Math.round(fatCals / 9);
+  // Remaining calories (including any redistributed from protein cap) go to carbs
   const carbCals = targetCalories - proteinCals - fatCals;
   const carbGrams = Math.round(carbCals / 4);
 
@@ -168,6 +173,9 @@ export default function MacroEstimator() {
               </div>
               <p className="text-xs text-gray-500 mt-1">{fatCals} cal</p>
             </div>
+            <p className="text-xs text-gray-500 mt-3">
+              Protein is capped at 1g per pound of body weight. Any excess calories are redistributed to carbs. These are general starting points.
+            </p>
           </div>
         </div>
       </div>
@@ -201,6 +209,10 @@ export default function MacroEstimator() {
           just have to pay attention.
         </p>
       </section>
+
+      <p className="text-xs text-gray-500 mt-8 max-w-3xl">
+        This calculator is for educational purposes only and is not medical advice. Results are estimates based on general formulas and may not reflect your individual needs. Consult a healthcare professional before making changes to your diet or exercise routine.
+      </p>
     </div>
   );
 }
