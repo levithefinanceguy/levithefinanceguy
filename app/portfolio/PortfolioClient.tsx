@@ -1,6 +1,7 @@
 "use client";
 
 import AdBanner from "../components/AdBanner";
+import PortfolioChart from "./PortfolioChart";
 
 interface Holding {
   ticker: string;
@@ -223,6 +224,8 @@ export default function PortfolioClient() {
           <p className="text-[10px] text-gray-600 mt-1">affiliate link</p>
         </div>
       </div>
+
+      <PortfolioChart />
 
       <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
         My Public <span className="text-accent-green">Portfolio</span>
