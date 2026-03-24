@@ -19,16 +19,23 @@ export default function RetirementCalculator() {
   const monthlyRate = expectedReturn / 100 / 12;
 
   let balance = currentSavings;
-  for (let m = 0; m < months; m++) {
+  const yearlyData: { year: number; balance: number; contributions: number }[] = [];
+  let totalContrib = currentSavings;
+
+  for (let m = 1; m <= months; m++) {
     balance = balance * (1 + monthlyRate) + monthlyContribution;
+    totalContrib += monthlyContribution;
+    if (m % 12 === 0) {
+      yearlyData.push({ year: m / 12, balance, contributions: totalContrib });
+    }
   }
 
   const retirementSavings = balance;
-  // 4% rule for monthly income
   const annualIncome = retirementSavings * 0.04;
   const monthlyIncome = annualIncome / 12;
   const totalContributions = currentSavings + monthlyContribution * months;
   const totalGrowth = retirementSavings - totalContributions;
+  const maxBalance = yearlyData.length > 0 ? yearlyData[yearlyData.length - 1].balance : 1;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
@@ -128,11 +135,55 @@ export default function RetirementCalculator() {
             <span className="font-mono">${fmt(totalContributions)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-400">Investment Growth</span>
+            <span className="text-gray-400">Your Money</span>
+            <span className="font-mono text-blue-400">${fmt(totalContributions)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-400">Growth</span>
             <span className="text-accent-green font-mono">${fmt(totalGrowth)}</span>
+          </div>
+          <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+            <div className="h-full flex">
+              <div className="bg-blue-400 h-full" style={{ width: `${retirementSavings > 0 ? (totalContributions / retirementSavings) * 100 : 0}%` }} />
+              <div className="bg-accent-green h-full" style={{ width: `${retirementSavings > 0 ? (totalGrowth / retirementSavings) * 100 : 0}%` }} />
+            </div>
+          </div>
+          <div className="flex justify-between text-[10px] text-gray-500">
+            <span>You put in {retirementSavings > 0 ? Math.round((totalContributions / retirementSavings) * 100) : 0}%</span>
+            <span>Growth did {retirementSavings > 0 ? Math.round((totalGrowth / retirementSavings) * 100) : 0}%</span>
           </div>
         </div>
       </div>
+
+      {/* Growth Chart */}
+      {yearlyData.length > 0 && (
+        <div className="mb-12 p-6 bg-card-bg border border-card-border rounded-xl">
+          <h2 className="text-lg font-semibold mb-4">Growth Over Time</h2>
+          <div className="flex items-end gap-1 h-48">
+            {yearlyData.map((d) => {
+              const contribHeight = (d.contributions / maxBalance) * 100;
+              const growthHeight = ((d.balance - d.contributions) / maxBalance) * 100;
+              return (
+                <div key={d.year} className="flex-1 flex flex-col justify-end h-full group relative">
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-900 text-[10px] text-white px-2 py-1 rounded whitespace-nowrap z-10">
+                    Yr {d.year}: ${fmt(d.balance)}
+                  </div>
+                  <div className="bg-accent-green rounded-t-sm" style={{ height: `${Math.max(growthHeight, 0)}%` }} />
+                  <div className="bg-blue-400" style={{ height: `${contribHeight}%` }} />
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-between text-[10px] text-gray-500 mt-2">
+            <span>Year 1</span>
+            <span>Year {yearsToRetirement}</span>
+          </div>
+          <div className="flex gap-4 mt-3 text-xs text-gray-400">
+            <span className="flex items-center gap-1"><span className="w-3 h-3 bg-blue-400 rounded-sm" /> Your money</span>
+            <span className="flex items-center gap-1"><span className="w-3 h-3 bg-accent-green rounded-sm" /> Growth</span>
+          </div>
+        </div>
+      )}
 
       <AdBanner slot="in-content" size="medium-rectangle" />
 
