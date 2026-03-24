@@ -145,7 +145,6 @@ export default function Home() {
             href="/portfolio"
             className="group block p-8 rounded-xl glass-card transition-all duration-300 hover:scale-[1.01]"
           >
-            <div className="text-3xl mb-4">&#128200;</div>
             <h3 className="text-xl font-bold mb-2 group-hover:text-accent-green transition-colors">
               Public Portfolio
             </h3>
@@ -159,7 +158,6 @@ export default function Home() {
             href="/calculators"
             className="group block p-8 rounded-xl glass-card transition-all duration-300 hover:scale-[1.01]"
           >
-            <div className="text-3xl mb-4">&#128290;</div>
             <h3 className="text-xl font-bold mb-2 group-hover:text-accent-green transition-colors">
               Free Calculators
             </h3>

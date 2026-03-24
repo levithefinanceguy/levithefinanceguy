@@ -132,9 +132,6 @@ function CalculatorCard({ calc }: { calc: (typeof financeCalculators)[0] }) {
       href={calc.href}
       className="group p-6 rounded-xl glass-card transition-all duration-300 hover:scale-[1.02]"
     >
-      <div className="w-12 h-12 rounded-lg bg-accent-green/10 flex items-center justify-center text-xl font-bold mb-4 group-hover:bg-accent-green/20 transition-colors">
-        <span className="gradient-text">{calc.icon}</span>
-      </div>
       <h2 className="text-lg font-bold mb-2 group-hover:text-accent-green transition-colors">
         {calc.name}
       </h2>
