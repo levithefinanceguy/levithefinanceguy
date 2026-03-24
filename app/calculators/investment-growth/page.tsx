@@ -198,7 +198,7 @@ export default function InvestmentGrowthCalculator() {
       </div>
 
       <p className="text-xs text-gray-500 mt-8 max-w-3xl">
-        This calculator is for educational purposes only and is not financial advice. Results are estimates based on the inputs you provide. Consult a qualified financial advisor for personalized guidance.
+        Investments are risky, but listening to a random guy on the internet about investments is riskier. Do your own research. This calculator is for educational purposes only — not financial advice.
       </p>
     </div>
   );
