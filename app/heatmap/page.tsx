@@ -264,6 +264,57 @@ export default function HeatmapPage() {
         ))}
       </div>
 
+      {/* Top Gainers & Losers */}
+      {stocks.length > 0 && (() => {
+        const sorted = [...stocks].sort((a, b) => b.changePercent - a.changePercent);
+        const gainers = sorted.filter(s => s.changePercent > 0).slice(0, 5);
+        const losers = sorted.filter(s => s.changePercent < 0).reverse().slice(0, 5);
+        return (
+          <div className="grid md:grid-cols-2 gap-6 mt-10">
+            <div className="p-6 rounded-xl bg-card-bg border border-card-border">
+              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <span className="text-accent-green">▲</span> Top Gainers
+              </h2>
+              <div className="space-y-3">
+                {gainers.map((s) => (
+                  <div key={`gain-${s.symbol}`} className="flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-white">{s.symbol}</span>
+                      <span className="text-gray-500 text-xs ml-2">{s.name.length > 20 ? s.name.slice(0, 20) + '...' : s.name}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-accent-green font-mono font-semibold">+{s.changePercent.toFixed(2)}%</span>
+                      <span className="text-gray-500 text-xs ml-2">${s.price.toFixed(2)}</span>
+                    </div>
+                  </div>
+                ))}
+                {gainers.length === 0 && <p className="text-gray-500 text-sm">No gainers today</p>}
+              </div>
+            </div>
+            <div className="p-6 rounded-xl bg-card-bg border border-card-border">
+              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <span className="text-accent-red">▼</span> Top Losers
+              </h2>
+              <div className="space-y-3">
+                {losers.map((s) => (
+                  <div key={`lose-${s.symbol}`} className="flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-white">{s.symbol}</span>
+                      <span className="text-gray-500 text-xs ml-2">{s.name.length > 20 ? s.name.slice(0, 20) + '...' : s.name}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-accent-red font-mono font-semibold">{s.changePercent.toFixed(2)}%</span>
+                      <span className="text-gray-500 text-xs ml-2">${s.price.toFixed(2)}</span>
+                    </div>
+                  </div>
+                ))}
+                {losers.length === 0 && <p className="text-gray-500 text-sm">No losers today</p>}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* Mobile-friendly list view for very small screens */}
       {stocks.length > 0 && (
         <div className="mt-10 sm:hidden">
