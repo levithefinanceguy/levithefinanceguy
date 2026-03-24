@@ -35,11 +35,13 @@ export default function AboutPage() {
       />
 
       <div className="max-w-4xl mx-auto px-4 py-16">
-        {/* Photo placeholder */}
+        {/* Photo */}
         <div className="flex justify-center mb-10">
-          <div className="w-40 h-40 rounded-full bg-card-bg border-2 border-accent-green flex items-center justify-center text-4xl text-accent-green font-bold">
-            L
-          </div>
+          <img
+            src="/levi.png"
+            alt="Levi — The Finance Guy"
+            className="w-40 h-40 rounded-full border-2 border-accent-green object-cover"
+          />
         </div>
 
         <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-4">

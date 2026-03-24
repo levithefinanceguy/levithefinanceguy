@@ -92,18 +92,18 @@ The full breakdown of each step is on the Freedom Five page. Go check it out and
   },
   {
     slug: "how-to-start-investing-with-100",
-    title: "How to Start Investing with $100",
+    title: "How to Start Investing with $1",
     date: "2026-03-10",
     description:
-      "You do not need thousands to start investing. Here is exactly how to begin with just $100.",
+      "You do not need thousands to start investing. Here is exactly how to begin with just $1.",
     category: "finance",
     author: "Levi",
     readingTime: "4 min read",
-    content: `The biggest myth in investing is that you need a lot of money to start. You do not. You can start with $100 and build from there. In fact, starting small is better than waiting until you have more, because time in the market matters more than the size of your first deposit.
+    content: `The biggest myth in investing is that you need a lot of money to start. You do not. I started with $1. Literally one dollar. And I built from there. Starting small is better than waiting until you have more, because time in the market matters more than the size of your first deposit.
 
-## Why $100 Is Enough
+## Why $1 Is Enough
 
-Thanks to fractional shares, you can buy a piece of any stock or ETF for as little as $1. That means with $100, you can build a diversified portfolio that would have required thousands of dollars just a decade ago. The barriers to entry are basically gone.
+Thanks to fractional shares, you can buy a piece of any stock or ETF for as little as $1. That means with a single dollar, you can own a piece of companies that were impossible to access just a decade ago. The barriers to entry are gone.
 
 ## Where to Open an Account
 
@@ -111,13 +111,13 @@ You need a brokerage account. I recommend starting with one of the big names lik
 
 ## What to Buy First
 
-With $100, keep it simple. Buy a total stock market index fund like VTI (Vanguard Total Stock Market ETF) or FXAIX (Fidelity 500 Index Fund). This gives you instant exposure to hundreds or thousands of companies in a single purchase. You are not picking individual stocks. You are buying a small piece of the entire market.
+Keep it simple. Buy a total stock market index fund like VTI (Vanguard Total Stock Market ETF) or FXAIX (Fidelity 500 Index Fund). This gives you instant exposure to hundreds or thousands of companies in a single purchase. You are not picking individual stocks. You are buying a small piece of the entire market.
 
 Why index funds? Because they are diversified, low-cost, and historically deliver solid returns. The S&P 500 has averaged about 10% annual returns over the long term. You do not need to beat the market. You just need to participate in it.
 
 ## The Secret: Consistency
 
-The $100 is just the start. The real power comes from making it a habit. Set up automatic investments. Even $25 a week adds up to $1,300 a year. Over 30 years at an average 10% return, that weekly $25 grows to over $150,000. That is the power of consistency and compound interest working together.
+That $1 is just the start. The real power comes from making it a habit. Set up automatic investments. Even $25 a week adds up to $1,300 a year. Over 30 years at an average 10% return, that weekly $25 grows to over $150,000. That is the power of consistency and compound interest working together.
 
 Do not try to time the market. Do not wait for a dip. Do not check your account every day. Just set it and forget it. The people who build the most wealth are the ones who invest consistently regardless of what the market is doing.
 
@@ -129,8 +129,8 @@ Start boring. Stay boring. Let compound interest do the work over decades. That 
 
 ## Take Action Today
 
-Stop reading about investing and start doing it. Open an account, deposit $100, buy a total market index fund, and set up automatic contributions. You can always learn more and adjust your strategy later. But the most important step is the first one.
+Stop reading about investing and start doing it. Open an account, deposit $1, buy a total market index fund, and set up automatic contributions. You can always learn more and adjust your strategy later. But the most important step is the first one.
 
-Your future self will thank you for starting today, even if it is just $100.`,
+Your future self will thank you for starting today, even if it is just one dollar.`,
   },
 ];
