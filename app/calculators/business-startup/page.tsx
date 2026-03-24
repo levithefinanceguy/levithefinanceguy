@@ -47,34 +47,72 @@ const costEstimates: Record<string, {
   },
 };
 
+type CostKey = "legal" | "licenses" | "equipment" | "marketing" | "rent" | "insurance" | "inventory" | "technology" | "monthlyOps";
+
+const categoryLabels: { key: CostKey; label: string }[] = [
+  { key: "legal", label: "Legal & Formation" },
+  { key: "licenses", label: "Licenses & Permits" },
+  { key: "equipment", label: "Equipment & Supplies" },
+  { key: "marketing", label: "Initial Marketing" },
+  { key: "rent", label: "First Month Rent" },
+  { key: "insurance", label: "Insurance" },
+  { key: "inventory", label: "Initial Inventory" },
+  { key: "technology", label: "Technology & Software" },
+];
+
 export default function BusinessStartupCalculator() {
   const [businessType, setBusinessType] = useState("online");
   const [employees, setEmployees] = useState(0);
   const [monthlyRevenue, setMonthlyRevenue] = useState(5000);
+  const [overrides, setOverrides] = useState<Record<string, number | null>>({});
 
   const costs = costEstimates[businessType];
-  const employeeCost = employees * 4000; // avg monthly cost per employee
+  const employeeCost = employees * 4000;
 
-  const categories = [
-    { label: "Legal & Formation", low: costs.legal[0], high: costs.legal[1] },
-    { label: "Licenses & Permits", low: costs.licenses[0], high: costs.licenses[1] },
-    { label: "Equipment & Supplies", low: costs.equipment[0], high: costs.equipment[1] },
-    { label: "Initial Marketing", low: costs.marketing[0], high: costs.marketing[1] },
-    { label: "First Month Rent", low: costs.rent[0], high: costs.rent[1] },
-    { label: "Insurance", low: costs.insurance[0], high: costs.insurance[1] },
-    { label: "Initial Inventory", low: costs.inventory[0], high: costs.inventory[1] },
-    { label: "Technology & Software", low: costs.technology[0], high: costs.technology[1] },
-  ];
+  // Reset overrides when business type changes
+  const handleTypeChange = (type: string) => {
+    setBusinessType(type);
+    setOverrides({});
+  };
 
-  const startupLow = categories.reduce((s, c) => s + c.low, 0);
-  const startupHigh = categories.reduce((s, c) => s + c.high, 0);
+  const getAmount = (key: CostKey): number => {
+    if (overrides[key] != null) return overrides[key] as number;
+    return Math.round((costs[key][0] + costs[key][1]) / 2);
+  };
+
+  const isOverridden = (key: CostKey): boolean => overrides[key] != null;
+
+  const setOverride = (key: CostKey, value: number) => {
+    setOverrides((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const resetOverride = (key: CostKey) => {
+    setOverrides((prev) => {
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
+  };
+
+  const categories = categoryLabels.map(({ key, label }) => ({
+    key,
+    label,
+    amount: getAmount(key),
+    defaultLow: costs[key][0],
+    defaultHigh: costs[key][1],
+    custom: isOverridden(key),
+  }));
+
+  const startupTotal = categories.reduce((s, c) => s + c.amount, 0);
+  const monthlyOpsAmount = getAmount("monthlyOps") + employeeCost;
+  const startupLow = categoryLabels.reduce((s, { key }) => s + costs[key][0], 0);
+  const startupHigh = categoryLabels.reduce((s, { key }) => s + costs[key][1], 0);
   const monthlyOpsLow = costs.monthlyOps[0] + employeeCost;
   const monthlyOpsHigh = costs.monthlyOps[1] + employeeCost;
 
-  const avgStartup = (startupLow + startupHigh) / 2;
-  const avgMonthly = (monthlyOpsLow + monthlyOpsHigh) / 2;
-  const monthlyProfit = monthlyRevenue - avgMonthly;
-  const breakEvenMonths = monthlyProfit > 0 ? Math.ceil(avgStartup / monthlyProfit) : Infinity;
+  const monthlyProfit = monthlyRevenue - monthlyOpsAmount;
+  const breakEvenMonths = monthlyProfit > 0 ? Math.ceil(startupTotal / monthlyProfit) : Infinity;
+  const hasAnyOverride = Object.keys(overrides).length > 0;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
@@ -104,7 +142,7 @@ export default function BusinessStartupCalculator() {
         <div className="space-y-5">
           <div>
             <label className="block text-sm text-gray-400 mb-1">Business Type</label>
-            <select value={businessType} onChange={(e) => setBusinessType(e.target.value)} className="w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none">
+            <select value={businessType} onChange={(e) => handleTypeChange(e.target.value)} className="w-full p-3 bg-card-bg border border-card-border rounded-lg text-white focus:border-accent-green outline-none">
               {businessTypes.map((t) => (
                 <option key={t.value} value={t.value}>{t.label}</option>
               ))}
@@ -125,11 +163,11 @@ export default function BusinessStartupCalculator() {
             <h2 className="text-lg font-semibold">Summary</h2>
             <div className="flex justify-between">
               <span className="text-gray-400">Startup Costs</span>
-              <span className="text-accent-green font-bold">${fmt(startupLow)} - ${fmt(startupHigh)}</span>
+              <span className="text-accent-green font-bold">{hasAnyOverride ? `$${fmt(startupTotal)}` : `$${fmt(startupLow)} - $${fmt(startupHigh)}`}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">Monthly Operating</span>
-              <span className="font-mono">${fmt(monthlyOpsLow)} - ${fmt(monthlyOpsHigh)}</span>
+              <span className="font-mono">{hasAnyOverride ? `$${fmt(monthlyOpsAmount)}` : `$${fmt(monthlyOpsLow)} - $${fmt(monthlyOpsHigh)}`}</span>
             </div>
             {employees > 0 && (
               <div className="flex justify-between text-sm">
@@ -152,21 +190,79 @@ export default function BusinessStartupCalculator() {
         </div>
       </div>
 
-      {/* Cost Breakdown */}
+      {/* Cost Breakdown — editable */}
       <div className="mb-12 p-6 bg-card-bg border border-card-border rounded-xl">
-        <h2 className="text-lg font-semibold mb-4">Startup Cost Breakdown</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-semibold">Startup Cost Breakdown</h2>
+          {hasAnyOverride && (
+            <button onClick={() => setOverrides({})} className="text-xs text-gray-500 hover:text-accent-green transition-colors">
+              Reset to defaults
+            </button>
+          )}
+        </div>
+        <p className="text-xs text-gray-500 mb-4">Click any amount to customize it for your situation.</p>
         <div className="space-y-3">
-          {categories.filter((c) => c.high > 0).map((cat) => (
-            <div key={cat.label}>
-              <div className="flex justify-between text-sm mb-1">
+          {categories.filter((c) => c.defaultHigh > 0 || c.custom).map((cat) => (
+            <div key={cat.key}>
+              <div className="flex justify-between items-center text-sm mb-1">
                 <span className="text-gray-400">{cat.label}</span>
-                <span className="font-mono">${fmt(cat.low)} - ${fmt(cat.high)}</span>
+                <div className="flex items-center gap-2">
+                  {cat.custom ? (
+                    <>
+                      <span className="text-[10px] text-gray-600">was ${fmt(cat.defaultLow)}-${fmt(cat.defaultHigh)}</span>
+                      <input
+                        type="number"
+                        value={cat.amount}
+                        onChange={(e) => setOverride(cat.key, Number(e.target.value))}
+                        className="w-24 px-2 py-1 bg-gray-800 border border-accent-green/50 rounded text-right text-accent-green font-mono text-sm outline-none focus:border-accent-green"
+                      />
+                      <button onClick={() => resetOverride(cat.key)} className="text-gray-600 hover:text-gray-400 text-xs">✕</button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => setOverride(cat.key, Math.round((cat.defaultLow + cat.defaultHigh) / 2))}
+                      className="font-mono hover:text-accent-green transition-colors cursor-pointer"
+                    >
+                      ${fmt(cat.defaultLow)} - ${fmt(cat.defaultHigh)}
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="w-full bg-gray-800 rounded-full h-2">
-                <div className="h-full rounded-full bg-gradient-to-r from-accent-green to-accent-teal" style={{ width: `${startupHigh > 0 ? (cat.high / startupHigh) * 100 : 0}%` }} />
+                <div
+                  className={`h-full rounded-full ${cat.custom ? "bg-accent-green" : "bg-gradient-to-r from-accent-green to-accent-teal"}`}
+                  style={{ width: `${startupTotal > 0 ? (cat.amount / startupTotal) * 100 : 0}%` }}
+                />
               </div>
             </div>
           ))}
+          {/* Monthly operations */}
+          <div className="pt-2 border-t border-card-border mt-2">
+            <div className="flex justify-between items-center text-sm mb-1">
+              <span className="text-gray-400">Monthly Operations</span>
+              <div className="flex items-center gap-2">
+                {isOverridden("monthlyOps") ? (
+                  <>
+                    <span className="text-[10px] text-gray-600">was ${fmt(costs.monthlyOps[0])}-${fmt(costs.monthlyOps[1])}</span>
+                    <input
+                      type="number"
+                      value={getAmount("monthlyOps")}
+                      onChange={(e) => setOverride("monthlyOps", Number(e.target.value))}
+                      className="w-24 px-2 py-1 bg-gray-800 border border-accent-green/50 rounded text-right text-accent-green font-mono text-sm outline-none focus:border-accent-green"
+                    />
+                    <button onClick={() => resetOverride("monthlyOps")} className="text-gray-600 hover:text-gray-400 text-xs">✕</button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => setOverride("monthlyOps", Math.round((costs.monthlyOps[0] + costs.monthlyOps[1]) / 2))}
+                    className="font-mono hover:text-accent-green transition-colors cursor-pointer"
+                  >
+                    ${fmt(costs.monthlyOps[0])} - ${fmt(costs.monthlyOps[1])}/mo
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
