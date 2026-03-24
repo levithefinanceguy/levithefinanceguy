@@ -208,6 +208,7 @@ export default function PortfolioClient() {
           >
             Start your own journey →
           </a>
+          <p className="text-[10px] text-gray-600 mt-1">affiliate link</p>
         </div>
       </div>
 
