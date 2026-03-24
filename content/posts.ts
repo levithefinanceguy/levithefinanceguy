@@ -107,41 +107,43 @@ The hardest part is not picking the right stock or timing the market. The hardes
 Start with $1. See what happens.`,
   },
   {
-    slug: "5-books-that-changed-how-i-think-about-money",
-    title: "5 Books That Actually Changed How I Think About Money",
+    slug: "5-books-that-actually-changed-my-life",
+    title: "5 Books That Actually Changed My Life",
     date: "2026-03-22",
     description:
-      "Not a book review. Just five books that genuinely shifted the way I handle money, think about success, and approach life.",
+      "Not a book review. Five books that genuinely changed how I think, how I handle my money, and how I show up every day.",
     category: "finance",
     author: "Levi",
     readingTime: "4 min read",
-    content: `I am not a huge reader. Or at least I was not. But over the last couple years I have gone through a bunch of books and these five are the ones that actually stuck with me. Not because they were the most popular or had the best reviews, but because they changed something in how I operate. Here is how each one hit different.
+    content: `I am not a huge reader. Or at least I was not. But over the last couple years I have gone through a bunch of books and these five are the ones that actually stuck with me. Not just financially — these changed how I think, how I handle setbacks, and honestly how I move through life. Here is how each one hit different.
 
 ## 1. Atomic Habits — James Clear
 
-[This book](https://amzn.to/4t7asXx) is not about money at all, but it changed my finances more than any finance book. The idea that tiny habits compound over time? That is literally how investing works too. I started applying the habit stacking concept to my money routine — check my accounts in the morning, track spending after lunch, review my budget on Sundays. Small stuff that adds up.
+[This book](https://amzn.to/4t7asXx) changed everything for me. Not just money stuff — everything. The idea that you do not rise to the level of your goals, you fall to the level of your systems? That rewired my brain. I stopped trying to overhaul my whole life overnight and started making tiny changes. Better morning routine. Tracking my spending. Showing up consistently even when I did not feel like it. Those small things compounded into a completely different life.
 
 ## 2. The Psychology of Money — Morgan Housel
 
-[This one](https://amzn.to/4d2tB8e) is the best money book ever written. Fight me on that. Housel does not talk about stock picks or portfolio allocation. He talks about why people make irrational decisions with money and how your personal history shapes your financial behavior. It made me realize a lot of my money mistakes were not math problems — they were mindset problems.
+[This one](https://amzn.to/4d2tB8e) is the best money book ever written. Fight me on that. But it is really about human behavior. Housel breaks down why we make irrational decisions — not just with money but with everything. It made me realize that most of my mistakes were not because I was dumb. They were because I was human. Understanding that changed how I give myself grace and how I plan for the future.
 
 ## 3. You Owe You — Eric Thomas
 
-[ET does not play around](https://amzn.to/4t6Jcs6). This book is a straight-up wake-up call. It is about taking ownership of your life and stopping the excuses. I read this during a time when I was blaming everything and everyone for my financial situation. It was uncomfortable to read because he was basically calling me out on every page. But that is what I needed.
+[ET does not play around](https://amzn.to/4t6Jcs6). This book is a straight-up wake-up call. It is not about money at all. It is about taking full ownership of your life and cutting the excuses. I read this during a time when I was blaming everything and everyone else for where I was. It was uncomfortable because he was basically calling me out on every page. But I needed that. It shifted how I see responsibility and what I owe myself.
 
 ## 4. Twelve and a Half — Gary Vaynerchuk
 
-[This one surprised me](https://amzn.to/4uPqZ3P). I expected Gary V hustle culture stuff but instead he talks about emotional intelligence. Kindness, patience, humility, accountability. The soft skills that actually determine whether you succeed long-term. It made me think about money differently too — it is not just about grinding harder. It is about being smart about how you interact with people and opportunities.
+[This one surprised me](https://amzn.to/4uPqZ3P). I expected Gary V hustle culture stuff but instead he talks about emotional intelligence. Kindness, patience, humility, accountability. The soft skills that actually determine whether you succeed in anything — relationships, business, life. It changed how I interact with people and how I think about what it actually means to win long-term.
 
 ## 5. Don't Believe Everything You Think — Joseph Nguyen
 
-[Shortest book on the list](https://amzn.to/3NULCLv) but maybe the most impactful. The core message is that your thoughts create your suffering, and you can choose to not engage with every thought that pops into your head. I used to spiral about money constantly. Worrying about bills, stressing about not having enough, comparing myself to other people. This book helped me step back and realize most of that anxiety was self-created.
+[Shortest book on the list](https://amzn.to/3NULCLv) but maybe the most impactful. The core message is that your thoughts create your suffering, and you can choose to not engage with every thought that pops into your head. I used to spiral constantly. Worrying about money, stressing about the future, comparing myself to other people. This book helped me step back and realize most of that anxiety was just noise I was choosing to listen to. Life got a lot lighter after this one.
 
 ## The Common Thread
 
-None of these books will teach you how to pick stocks or build a budget. But they will change how you think. And how you think determines everything — what you do with your money, how you handle setbacks, whether you actually follow through on your plans.
+None of these books are about spreadsheets or stock picks. They are about how you think. And how you think determines everything — how you handle your money, how you deal with setbacks, how you treat people, whether you actually follow through on the things that matter.
 
-If you only read one, go with The Psychology of Money. If you need motivation, go with You Owe You. If you want to fix your habits, Atomic Habits. They are all worth your time.
+These five books did not just change my finances. They changed my life. That is not me being dramatic. It is just the truth.
+
+If you only read one, go with The Psychology of Money. If you need a kick, go with You Owe You. If you want to fix your habits across the board, Atomic Habits. They are all worth your time.
 
 I actually "read" most of my books by listening to them. Audiobooks during a commute or workout changed the game for me. If you are not a sit-down-and-read type, [try audiobooks](https://amzn.to/4lMl9w1) — it is the easiest way to get through a book without finding extra time in your day.`,
   },
