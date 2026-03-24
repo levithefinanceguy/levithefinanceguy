@@ -23,11 +23,10 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-3">Connect</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              {/* Replace # with actual social media links */}
-              <li><a href="#" className="hover:text-accent-green transition-colors">Twitter / X</a></li>
-              <li><a href="#" className="hover:text-accent-green transition-colors">YouTube</a></li>
-              <li><a href="#" className="hover:text-accent-green transition-colors">Instagram</a></li>
-              <li><a href="#" className="hover:text-accent-green transition-colors">TikTok</a></li>
+              <li><a href="https://www.youtube.com/@levithefinanceguy" target="_blank" rel="noopener noreferrer" className="hover:text-accent-green transition-colors">YouTube</a></li>
+              <li><a href="https://www.tiktok.com/@levithefinanceguy" target="_blank" rel="noopener noreferrer" className="hover:text-accent-green transition-colors">TikTok</a></li>
+              <li><a href="https://instagram.com/levithefinanceguy" target="_blank" rel="noopener noreferrer" className="hover:text-accent-green transition-colors">Instagram</a></li>
+              <li><a href="https://www.facebook.com/share/18H1hiqGQQ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="hover:text-accent-green transition-colors">Facebook</a></li>
             </ul>
           </div>
         </div>

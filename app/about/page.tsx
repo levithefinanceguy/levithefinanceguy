@@ -25,7 +25,10 @@ export default function AboutPage() {
             description:
               "Personal finance educator and transparent investor sharing his real portfolio and free financial tools.",
             sameAs: [
-              // Add social media URLs here
+              "https://www.youtube.com/@levithefinanceguy",
+              "https://www.tiktok.com/@levithefinanceguy",
+              "https://instagram.com/levithefinanceguy",
+              "https://www.facebook.com/share/18H1hiqGQQ/?mibextid=wwXIfr",
             ],
           }),
         }}
@@ -90,34 +93,37 @@ export default function AboutPage() {
         <section className="mb-12">
           <h2 className="text-xl font-bold mb-4">Connect With Me</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Replace # with actual links */}
             <a
-              href="#"
-              className="flex items-center gap-3 p-4 rounded-lg border border-card-border bg-card-bg hover:border-accent-green/50 transition-all"
-            >
-              <span className="text-accent-green font-bold text-lg">X</span>
-              <span className="text-gray-300">Twitter / X</span>
-            </a>
-            <a
-              href="#"
+              href="https://www.youtube.com/@levithefinanceguy"
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-lg border border-card-border bg-card-bg hover:border-accent-green/50 transition-all"
             >
               <span className="text-accent-green font-bold text-lg">YT</span>
               <span className="text-gray-300">YouTube</span>
             </a>
             <a
-              href="#"
+              href="https://www.tiktok.com/@levithefinanceguy"
+              target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 rounded-lg border border-card-border bg-card-bg hover:border-accent-green/50 transition-all"
+            >
+              <span className="text-accent-green font-bold text-lg">TT</span>
+              <span className="text-gray-300">TikTok</span>
+            </a>
+            <a
+              href="https://instagram.com/levithefinanceguy"
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-lg border border-card-border bg-card-bg hover:border-accent-green/50 transition-all"
             >
               <span className="text-accent-green font-bold text-lg">IG</span>
               <span className="text-gray-300">Instagram</span>
             </a>
             <a
-              href="#"
+              href="https://www.facebook.com/share/18H1hiqGQQ/?mibextid=wwXIfr"
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-lg border border-card-border bg-card-bg hover:border-accent-green/50 transition-all"
             >
-              <span className="text-accent-green font-bold text-lg">TT</span>
-              <span className="text-gray-300">TikTok</span>
+              <span className="text-accent-green font-bold text-lg">FB</span>
+              <span className="text-gray-300">Facebook</span>
             </a>
           </div>
         </section>
