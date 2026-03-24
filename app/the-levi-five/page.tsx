@@ -184,7 +184,7 @@ export default function FreedomFivePage() {
         {/* Hero */}
         <div className="text-center mb-16 animate-fade-in-up">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-            The <span className="gradient-text">The Levi Five</span>
+            The <span className="gradient-text">Levi Five</span>
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-2">
             Five steps. No fluff. A clear path from financial stress to financial freedom.
