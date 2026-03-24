@@ -143,7 +143,7 @@ None of these books will teach you how to pick stocks or build a budget. But the
 
 If you only read one, go with The Psychology of Money. If you need motivation, go with You Owe You. If you want to fix your habits, Atomic Habits. They are all worth your time.
 
-I listen to most of my books on [Audible](https://amzn.to/4lMl9w1) if you are not a sit-down-and-read type. Audiobooks during a commute or workout changed the game for me.`,
+I actually "read" most of my books by listening to them. Audiobooks during a commute or workout changed the game for me. If you are not a sit-down-and-read type, [try audiobooks](https://amzn.to/4lMl9w1) — it is the easiest way to get through a book without finding extra time in your day.`,
   },
   {
     slug: "the-freedom-five-my-simple-plan",
