@@ -47,7 +47,7 @@ Here is what I actually did based on the book:
 
 I made good habits obvious. I put my budgeting app on my home screen. I made investing automatic so I did not have to think about it. I set a weekly reminder to review my spending.
 
-I made bad habits harder. I deleted shopping apps from my phone. I added a 24-hour rule before any purchase over $50. I unsubscribed from every marketing email that tempted me to spend.
+I made bad habits harder. I stopped buying dumb stuff. Not by restricting myself, but by being more intentional. When you are actually paying attention to where your money goes, you naturally stop wasting it on things that do not matter.
 
 None of this was dramatic. None of it felt like a sacrifice. But six months in, my savings rate had doubled and I was investing consistently for the first time in my life.
 

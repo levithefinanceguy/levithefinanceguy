@@ -126,6 +126,12 @@ export default async function BlogPostPage({ params }: Props) {
 
         <div className="prose-custom">{renderContent(post.content)}</div>
 
+        {post.content.includes("amzn.to") || post.content.includes("join.robinhood") || post.content.includes("crypto.com/app") ? (
+          <p className="text-[10px] text-gray-600 mt-8">
+            This article contains affiliate links. If you purchase through them, I may earn a small commission at no extra cost to you.
+          </p>
+        ) : null}
+
         <div className="mt-16 pt-8 border-t border-card-border">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
