@@ -78,7 +78,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body suppressHydrationWarning className="min-h-full flex flex-col bg-background text-foreground">
         <Navigation />
         <AdBanner slot="top" size="responsive" />
         <main className="flex-1">{children}</main>
