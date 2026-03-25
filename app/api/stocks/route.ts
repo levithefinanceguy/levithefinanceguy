@@ -141,10 +141,10 @@ async function getCrumb(): Promise<{ crumb: string; cookie: string }> {
   return { crumb, cookie: cookieStr };
 }
 
-async function fetchStockData(): Promise<StockData[]> {
+async function fetchStockData(): Promise<{ stocks: StockData[]; indices: IndexData[] }> {
   const now = Date.now();
   if (cache && now - cache.timestamp < CACHE_TTL) {
-    return cache.data;
+    return { stocks: cache.data, indices: cache.indices };
   }
 
   const symbols = STOCKS.map((s) => s.symbol).join(",");
