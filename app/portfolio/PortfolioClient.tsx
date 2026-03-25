@@ -225,15 +225,15 @@ export default function PortfolioClient() {
         </div>
       </div>
 
-      <PortfolioChart />
-
       <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
         My Public <span className="text-accent-green">Portfolio</span>
       </h2>
-      <p className="text-gray-400 max-w-3xl mb-12 leading-relaxed">
+      <p className="text-gray-400 max-w-3xl mb-8 leading-relaxed">
         Full transparency. Every stock and ETF I own, what I paid, and how it is performing.
         Real numbers, real ups and downs. No cherry-picked winners.
       </p>
+
+      <PortfolioChart />
 
       {/* Summary */}
       <div className="grid md:grid-cols-2 gap-8 mb-12">
