@@ -60,11 +60,6 @@ const apps = [
     url: "https://amzn.to/4lMl9w1",
     description: "I listen to most of the books I recommend on here. Audiobooks hit different during a commute.",
   },
-  {
-    name: "Amazon Prime",
-    url: "https://amzn.to/4c2OmiZ",
-    description: "I mean, it is Amazon. Free shipping, Prime Video, and all the deals.",
-  },
 ];
 
 const equipment = [
