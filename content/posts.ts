@@ -274,7 +274,7 @@ This is where wealth actually grows. Increase your income through side hustles o
 
 The Levi Five works because it is sequential. Most people fail financially because they try to invest while carrying credit card debt, or they buy a house before they have an emergency fund. This framework forces you to build the foundation before adding floors.
 
-It is not sexy. It is not fast. But it works every single time if you follow the steps. I have seen it transform people is financial lives, and I am living proof that the framework delivers results.
+It is not sexy. It is not fast. But I believe it works if you follow the steps. I am still in the middle of it myself — that is the whole point. I am not teaching from a finish line. I am building this in real time and sharing it so you can follow along.
 
 The full breakdown of each step is on The Levi Five page. Go check it out and figure out which step you are on.`,
   },
