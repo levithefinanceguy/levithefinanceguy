@@ -18,44 +18,40 @@ export const posts: BlogPost[] = [
       "Small daily habits with money add up faster than you think. Here is how one book completely changed my financial game.",
     category: "finance",
     author: "Levi",
-    readingTime: "4 min read",
-    content: `I used to think getting my finances together meant some massive lifestyle overhaul. Like I would wake up one Monday and suddenly become a completely different person who budgets perfectly and never spends on dumb stuff. That never happened. What actually worked was way smaller than that.
+    readingTime: "3 min read",
+    content: `I used to think getting my finances together meant some massive lifestyle overhaul. Wake up one Monday and suddenly become a different person. That never happened. What actually worked was way smaller.
 
-I picked up [Atomic Habits by James Clear](https://amzn.to/4t7asXx) a while back and it hit me different than most books. It is not a finance book at all. It is about habits. But the principles apply to money in a way that kind of blew my mind.
+I picked up [Atomic Habits by James Clear](https://amzn.to/4t7asXx) and it hit different. It is not a finance book. It is about habits. But the principles apply to money in a way that blew my mind.
 
 ## The 1% Rule
 
-The core idea is simple. Get 1% better every day. That is it. You do not need to overhaul your entire budget overnight. You just need to make one small improvement. Track one expense. Move $5 to savings. Check your account balance before you buy something.
-
-These tiny actions feel pointless in the moment. But they compound. Just like investing, small consistent habits stack up over time into something massive. A year of tracking every dollar teaches you more about your spending than any finance course ever will.
+Get 1% better every day. That is it. Track one expense. Move $5 to savings. Check your balance before you buy something. These tiny actions feel pointless in the moment. But they compound. Just like investing, small consistent habits stack up over time into something massive.
 
 ## Systems Over Goals
 
-James Clear talks about how goals are not the thing. Systems are the thing. Everyone has the goal of saving more money. That is not unique. What separates people who actually do it is having a system.
+Everyone has the goal of saving more money. That is not unique. What separates people who actually do it is having a system.
 
-My system is dead simple. Every paycheck, money automatically goes to investments before I can touch it. I track my spending daily in my Cheese app. I review my budget every Sunday for maybe 10 minutes. That is the system. It is boring. It works.
+My system is dead simple. Every paycheck, money automatically goes to investments before I can touch it. I track my spending daily. I review my budget every Sunday for 10 minutes. That is the system. It is boring. It works.
 
 ## Identity-Based Habits
 
-This was the part that really got me. Clear says you do not rise to the level of your goals — you fall to the level of your systems. But even deeper than that, your habits shape your identity. Every time I tracked a purchase instead of ignoring it, I was casting a vote for being the type of person who is intentional with money.
+This was the part that got me. Clear says your habits shape your identity. Every time I tracked a purchase instead of ignoring it, I was casting a vote for being the type of person who is intentional with money.
 
-I stopped saying "I am trying to be better with money" and started saying "I am someone who tracks every dollar." Sounds like a small shift. It changed everything.
+I stopped saying "I am trying to be better with money" and started saying "I am someone who tracks every dollar." Small shift. Changed everything.
 
 ## Making It Stick
 
-Here is what I actually did based on the book:
+I made good habits obvious. Budgeting app on my home screen. Investing on autopilot. Weekly reminder to review spending.
 
-I made good habits obvious. I put my budgeting app on my home screen. I made investing automatic so I did not have to think about it. I set a weekly reminder to review my spending.
+I made bad habits harder. When you are actually paying attention to where your money goes, you naturally stop wasting it on things that do not matter.
 
-I made bad habits harder. I stopped buying dumb stuff. Not by restricting myself, but by being more intentional. When you are actually paying attention to where your money goes, you naturally stop wasting it on things that do not matter.
-
-None of this was dramatic. None of it felt like a sacrifice. But six months in, my savings rate had doubled and I was investing consistently for the first time in my life.
+Six months in, my savings rate had doubled and I was investing consistently for the first time in my life.
 
 ## The Takeaway
 
-If you have tried to get your money right and keep falling off, stop trying to change everything at once. Pick one tiny habit. Do it every day. Let it compound. That is the whole game.
+Stop trying to change everything at once. Pick one tiny habit. Do it every day. Let it compound. That is the whole game.
 
-If you have not read [Atomic Habits](https://amzn.to/4t7asXx), seriously go grab it. It is the best investment you will make this year.`,
+If you have not read [Atomic Habits](https://amzn.to/4t7asXx), go grab it. Best investment you will make this year.`,
   },
   {
     slug: "i-started-investing-with-one-dollar",
@@ -65,46 +61,26 @@ If you have not read [Atomic Habits](https://amzn.to/4t7asXx), seriously go grab
       "I literally started with one dollar. No trust fund, no windfall. Here is the real story of how I got started and kept going.",
     category: "finance",
     author: "Levi",
-    readingTime: "4 min read",
-    content: `People always ask me how I got into investing. They expect some cool story about a mentor or a big moment. The truth is way less exciting. I opened a [Robinhood](https://join.robinhood.com/bretp22) account and put in $1. That is it. That is the story.
+    readingTime: "2 min read",
+    content: `People ask how I got into investing. They expect some cool story. The truth is I opened a [Robinhood](https://join.robinhood.com/bretp22) account and put in $1. That is the whole story.
 
 ## Why One Dollar
 
-I was broke. Not "I cannot afford a vacation" broke. Actually broke. But I kept seeing people talk about investing and I figured I had to start somewhere. One dollar was what I had. So that is what I put in.
+I was broke. Actually broke. But I figured I had to start somewhere. One dollar was what I had. I bought a fractional share of some S&P 500 ETF. I do not even remember which one. It did not matter. I had skin in the game now.
 
-I bought a fractional share of some S&P 500 ETF. I do not even remember which one. It did not matter. What mattered was that I had skin in the game. I owned something. I was an investor now, even if my portfolio was worth less than a coffee.
+## I Fell Off
 
-## The Early Days
+Here is the part most finance creators skip. I fell off. Multiple times. Cashed out my investments to cover bills. Went almost a year without investing. Felt like a fraud.
 
-For the first few months, I would add $5 here, $10 there. Whatever I could. I was not consistent at all. Some weeks I would add money. Some months I would forget it existed. But the account was there, slowly growing, and every time I checked it I felt a little more motivated.
+But that is the thing about starting over — you are not really starting from zero. You still have the knowledge. You still have proof you can do it because you have done it before.
 
-I started learning about index funds, compound interest, dollar-cost averaging. All these concepts that sounded complicated but are actually pretty simple once you break them down. I was hooked.
-
-## Falling Off
-
-Here is the part most finance creators skip. I fell off. Multiple times. Life happened. Unexpected expenses wiped out my savings. I cashed out my investments more than once to cover bills. I felt like a fraud every time.
-
-There was a stretch where I did not invest for almost a year. I was paycheck to paycheck and investing felt like a luxury I could not afford. I thought about giving up on the whole thing. What was the point if I kept starting over?
-
-## Starting Over
-
-But that is the thing about starting over — you are not really starting from zero. You still have the knowledge. You still have the habits, even if they are rusty. And most importantly, you have proof that you can do it because you have done it before.
-
-So I started again. Opened my [Robinhood](https://join.robinhood.com/bretp22) app, set up automatic weekly investments, and committed to not touching it no matter what. I started with $5 a week. That is all I could manage. But I did it every single week.
+So I started again. Set up automatic weekly investments. $5 a week. That is all I could manage. But I did it every single week.
 
 ## Where I Am Now
 
-I am not going to pretend I am rich. I am not. But I have a real portfolio now. I invest consistently. I have been through enough market dips to not panic anymore. And I genuinely believe that starting with that one dollar was the best financial decision I ever made.
+I am not rich. But I have a real portfolio. I invest consistently. I do not panic at dips anymore. That one dollar was the best financial decision I ever made. Not because of the returns. Because it proved I could do this.
 
-Not because of the returns on that single dollar. But because it proved to me that I could do this. That investing is not just for people with money. It is for anyone willing to start, fall down, get back up, and keep going.
-
-## What I Want You to Take From This
-
-If you are sitting there thinking you do not have enough to invest, you are wrong. You have $1. That is enough. Open an account. Buy a fractional share. Start the habit. You will figure out the rest as you go.
-
-The hardest part is not picking the right stock or timing the market. The hardest part is just starting. And staying consistent even when life tries to knock you off track.
-
-Start with $1. See what happens.`,
+If you think you do not have enough to invest, you are wrong. You have $1. Start there. See what happens.`,
   },
   {
     slug: "5-books-that-actually-changed-my-life",
@@ -114,28 +90,38 @@ Start with $1. See what happens.`,
       "Not a book review. Five books that genuinely changed how I think, how I handle my money, and how I show up every day.",
     category: "finance",
     author: "Levi",
-    readingTime: "4 min read",
+    readingTime: "5 min read",
     content: `I am not a huge reader. Or at least I was not. But over the last couple years I have gone through a bunch of books and these five are the ones that actually stuck with me. Not just financially — these changed how I think, how I handle setbacks, and honestly how I move through life. Here is how each one hit different.
 
 ## 1. Atomic Habits — James Clear
 
-[This book](https://amzn.to/4t7asXx) changed everything for me. Not just money stuff — everything. The idea that you do not rise to the level of your goals, you fall to the level of your systems? That rewired my brain. I stopped trying to overhaul my whole life overnight and started making tiny changes. Better morning routine. Tracking my spending. Showing up consistently even when I did not feel like it. Those small things compounded into a completely different life.
+[This book](https://amzn.to/4t7asXx) changed everything for me. Not just money stuff — everything. The idea that you do not rise to the level of your goals, you fall to the level of your systems? That rewired my brain.
+
+There is a part where Clear talks about how every action is a vote for the person you want to become. That line stuck with me for weeks. I started thinking about my daily choices like that. Every time I tracked a purchase instead of ignoring it, that was a vote. Every time I moved $10 to savings instead of spending it, that was a vote. I stopped trying to overhaul my whole life overnight and started making tiny changes. Better morning routine. Tracking my spending. Showing up consistently even when I did not feel like it. Those small things compounded into a completely different life. This is the book I recommend to everyone first.
 
 ## 2. The Psychology of Money — Morgan Housel
 
-[This one](https://amzn.to/4d2tB8e) is the best money book ever written. Fight me on that. But it is really about human behavior. Housel breaks down why we make irrational decisions — not just with money but with everything. It made me realize that most of my mistakes were not because I was dumb. They were because I was human. Understanding that changed how I give myself grace and how I plan for the future.
+[This one](https://amzn.to/4d2tB8e) is the best money book ever written. Fight me on that. But it is really about human behavior. Housel breaks down why we make irrational decisions — not just with money but with everything.
+
+The chapter that hit hardest was about how no one is crazy. Everyone makes financial decisions based on their own unique experiences. Someone who grew up during a recession sees money completely different from someone who grew up during a boom. That reframed everything for me. I stopped judging my past mistakes so harshly. Most of them were not because I was dumb. They were because I was human, making decisions based on what I knew at the time. Understanding that changed how I give myself grace and how I plan for the future. If you read one finance book in your life, make it this one.
 
 ## 3. You Owe You — Eric Thomas
 
-[ET does not play around](https://amzn.to/4t6Jcs6). This book is a straight-up wake-up call. It is not about money at all. It is about taking full ownership of your life and cutting the excuses. I read this during a time when I was blaming everything and everyone else for where I was. It was uncomfortable because he was basically calling me out on every page. But I needed that. It shifted how I see responsibility and what I owe myself.
+[ET does not play around](https://amzn.to/4t6Jcs6). This book is a straight-up wake-up call. It is not about money at all. It is about taking full ownership of your life and cutting the excuses.
+
+I read this during a time when I was blaming everything and everyone else for where I was. My job, my upbringing, my circumstances. ET basically says none of that matters because at the end of the day, you owe it to yourself to show up regardless. There is a section where he talks about his own story — being homeless, sleeping in abandoned buildings — and still deciding he was going to make it. That put my excuses in perspective real quick. It was uncomfortable because he was calling me out on every page. But I needed that. It shifted how I see responsibility and what I owe myself.
 
 ## 4. Twelve and a Half — Gary Vaynerchuk
 
-[This one surprised me](https://amzn.to/4uPqZ3P). I expected Gary V hustle culture stuff but instead he talks about emotional intelligence. Kindness, patience, humility, accountability. The soft skills that actually determine whether you succeed in anything — relationships, business, life. It changed how I interact with people and how I think about what it actually means to win long-term.
+[This one surprised me](https://amzn.to/4uPqZ3P). I expected Gary V hustle culture stuff but instead he talks about emotional intelligence. Kindness, patience, humility, accountability.
+
+The moment that changed me was his chapter on patience. He talks about how the best things he built took years and how impatience destroys more dreams than failure does. I was the guy who wanted results yesterday. With money, with fitness, with everything. Reading that made me realize I was quitting things right before they would have worked because I was not patient enough to let them play out. The soft skills in this book are what actually determine whether you succeed in anything — relationships, business, life. It changed how I interact with people and how I think about what it actually means to win long-term.
 
 ## 5. Don't Believe Everything You Think — Joseph Nguyen
 
-[Shortest book on the list](https://amzn.to/3NULCLv) but maybe the most impactful. The core message is that your thoughts create your suffering, and you can choose to not engage with every thought that pops into your head. I used to spiral constantly. Worrying about money, stressing about the future, comparing myself to other people. This book helped me step back and realize most of that anxiety was just noise I was choosing to listen to. Life got a lot lighter after this one.
+[Shortest book on the list](https://amzn.to/3NULCLv) but maybe the most impactful. The core message is that your thoughts create your suffering, and you can choose to not engage with every thought that pops into your head.
+
+I used to spiral constantly. Worrying about money, stressing about the future, comparing myself to other people. One night I was lying in bed doing math in my head about how behind I was financially compared to where I should be. Just torturing myself. I read this book the next week and it was like someone turned on a light. Most of that anxiety was just noise I was choosing to listen to. Nguyen breaks down how thoughts are not facts — they are just events in your mind. You can observe them without reacting. That single idea changed my relationship with stress. Life got a lot lighter after this one.
 
 ## The Common Thread
 
@@ -155,12 +141,12 @@ I actually "read" most of my books by listening to them. Audiobooks during a com
       "Five steps. No complexity. Here is the exact plan I follow to build financial freedom, and where I honestly am in the process.",
     category: "finance",
     author: "Levi",
-    readingTime: "4 min read",
+    readingTime: "6 min read",
     content: `I created The Levi Five because I was tired of financial advice that was either too complicated or too vague. "Just save more and spend less." Thanks. Very helpful. I needed a real plan with real steps, so I built one. And I follow it myself.
 
 ## What It Is
 
-The Levi Five is a five-step framework that takes you from wherever you are financially to building real wealth. The steps are sequential. You do not skip ahead. You do not try to do everything at once. You focus on one step at a time.
+The Levi Five is a five-step framework that takes you from wherever you are financially to building real wealth. The steps are sequential. You focus on one step at a time. But here is the thing people get wrong — sequential does not mean rigid. Life is messy. Where you start depends on where you are. I did not start at Step 1. I will get into that.
 
 Here is the quick version.
 
@@ -168,27 +154,41 @@ Here is the quick version.
 
 Save one month of expenses. That is your floor. Before you invest, before you pay extra on debt, before anything else — get one month of expenses in a savings account. This keeps one bad week from becoming a financial disaster.
 
+When I first put this together, I realized I did not even know what one month of expenses actually was. I had never added it up. So I sat down and went through my bank statements. Rent, food, car, phone, insurance, subscriptions. It was more than I expected. That number being real and specific made it feel achievable though. It was not "save money." It was "save $2,800." I could work toward that.
+
+It took me a few months. I scraped together what I could. Some weeks it was $50. Some weeks it was $200 if I picked up extra shifts. But I got there. And the peace of mind it gave me was worth every dollar. One flat tire was no longer a crisis. One unexpected bill was not going to send me into a spiral.
+
 ## Step 2: Capture the Match
 
 If your employer offers a 401(k) match, get 100% of it. This is free money. If they match 50% up to 6%, you contribute at least 6%. Not doing this is literally turning down a raise. If you do not have an employer match, skip to Step 3.
+
+I actually started here. I was 20 and I had just landed my first real job. The kind with benefits and a 401(k). I did not know much about investing yet but someone in HR told me the company matched and that I should at least contribute enough to get the full match. So I did. I did not fully understand what I was doing at the time. I just knew free money sounded good. That one decision at 20 years old gave me a head start I am still grateful for. If you are young and you have a match available, please do this. Future you will not believe how much it grew.
+
+After that I went back and saved up my one month of expenses. The steps are numbered but your life does not always follow the numbering. Start wherever makes sense for your situation.
 
 ## Step 3: Eliminate Consumer Debt
 
 Credit cards, personal loans, any high-interest debt. Kill it. I use the avalanche method — highest interest rate first — because the math makes sense. But if you need quick wins to stay motivated, snowball works too. The point is to stop paying interest on stuff that is losing value.
 
+This is where I am right now. Still in it. I have credit card debt I am working through. Some of it came from dumb decisions. Some of it came from real life — car repairs, medical stuff, months where the math just did not work. I am not going to sit here and pretend it is all behind me. It is not. But I have a plan. I know exactly which card I am attacking first. I know my payoff date. And every month the balance goes down. That is progress.
+
+The hardest part of this step is not the math. It is the patience. You are throwing money at debt instead of investing and it feels like you are falling behind. You see other people talking about their portfolios growing and you are over here paying off a credit card. But this step is what makes everything else possible. You cannot build wealth on a foundation of high-interest debt.
+
 ## Step 4: Secure, Invest, and Plan
 
 Build your emergency fund to 3-6 months. Start investing at least 15% of your income. Look into 529s if you have kids. Start paying cash for big purchases. This is where things start to feel real.
 
+I am not fully here yet but I can see it. Once I clear my consumer debt, this is the step where the momentum really kicks in. All that money that was going toward debt payments suddenly goes toward building wealth. That is the moment everything shifts.
+
 ## Step 5: Build and Optimize
 
-Increase your income. Consider real estate. Pay off your mortgage early. The goal is ownership — own your home, own your investments, own your time.
+Increase your income. Consider real estate. Pay off your mortgage early. The goal is ownership — own your home, own your investments, own your time. This is the long game. Not everyone gets here fast. That is fine. The point is to keep moving forward.
 
 ## Where I Am Right Now
 
-I am going to be honest because that is what I do. I am on Step 3. I am still working through consumer debt. I have my one month security fund. I capture my employer match. But I still have debt to eliminate before I can fully move to Step 4.
+I am going to be honest because that is what I do. I am on Step 3. Still working through consumer debt. I have my one month security fund. I capture my employer match. But I still have debt to eliminate before I can fully move to Step 4.
 
-That is real. A lot of finance creators act like they have it all figured out. I do not. I am in the middle of the process, same as most of you. But I have a plan, I know exactly what step I am on, and I know what comes next. That clarity is everything.
+That is real. A lot of finance creators act like they have it all figured out. I do not. I am in the middle of the process, same as most of you. But I have a plan, I know exactly what step I am on, and I know what comes next. That clarity is everything. It is the difference between feeling lost and feeling like you are on a path. Even when the path is slow, at least you know where you are going.
 
 ## Why It Works
 
@@ -206,46 +206,22 @@ If you want the full deep dive on each step, check out the [The Levi Five page](
       "Budgeting sounds boring. It is. But tracking every dollar changed my financial life more than any investment ever did.",
     category: "finance",
     author: "Levi",
-    readingTime: "4 min read",
-    content: `I know what you are thinking. Tracking every dollar sounds exhausting. It sounds like something your parents would tell you to do. It sounds boring. You are right on all counts. But it is also the single most impactful thing I have done for my finances. More than investing. More than reading books. More than anything.
+    readingTime: "2 min read",
+    content: `Before I started tracking my spending, I had no idea where my money went. I would get paid, feel good for a day, and be broke by the end of the month. Every time. It just disappeared.
 
-## The Problem
-
-Before I started tracking, I had no idea where my money went. I would get paid, feel good for a day or two, and then somehow be broke by the end of the month. Every single time. I was not buying anything crazy. No big purchases. It just... disappeared.
-
-Sound familiar? That is because small untracked spending is a silent killer. A coffee here, a subscription there, eating out three times a week instead of two. None of it feels significant in the moment. But add it up and you are leaking hundreds of dollars a month without realizing it.
-
-## What Changed
-
-I started writing down every single purchase. At first I used a notes app. Then a spreadsheet. Now I use Cheese, the app I built, because I wanted something that made tracking fast and simple. The tool does not matter. What matters is that you do it.
-
-The first month I tracked everything, I was shocked. I was spending over $400 a month on food outside of groceries. Four hundred dollars. On what? I could not even tell you. Random lunches, snacks, delivery apps. Stuff I did not even enjoy that much.
+Then I started writing down every purchase. The first month I was shocked. Over $400 on food outside of groceries. Random lunches, delivery apps, snacks. Stuff I did not even enjoy that much.
 
 ## Why It Works
 
-Tracking creates awareness. That is literally all it does. But awareness changes behavior. When you know you are going to write down that $15 lunch, you think twice. Not because you are restricting yourself, but because you are paying attention.
-
-It is the same reason people who step on a scale every day tend to manage their weight better. The act of measuring makes you conscious of your choices. You stop operating on autopilot.
-
-## How I Do It
-
-My system is simple. Every time I spend money, I log it in Cheese. Takes about 5 seconds. At the end of the week, I look at the breakdown. At the end of the month, I review the totals and see where I am versus my budget.
-
-I set budgets for the big categories — food, entertainment, transportation, subscriptions. I do not micromanage every penny. I just make sure I am in the ballpark. If I am consistently over on food, I adjust. If I am under on entertainment, cool, that is extra money for investing.
+Tracking creates awareness. That is all it does. But awareness changes behavior. When you know you are going to write down that $15 lunch, you think twice. Not because you are restricting yourself. Because you are paying attention.
 
 ## The Results
 
-In the first three months of tracking, I found an extra $600 a month. Not by making more money. Not by cutting things I loved. Just by being aware of where the money was going and making small adjustments.
+I found an extra $600 a month. Not by making more money. Not by cutting things I loved. Just by seeing where it was going and making small adjustments. That money goes straight to investments now.
 
-That $600 a month goes straight to investments now. At a 10% average annual return, that is over $120,000 in 10 years. All from just paying attention.
+You do not need a fancy app. You do not need a spreadsheet. Just write it down, look at it, and be honest with yourself. That is the whole secret.
 
-## Start Today
-
-You do not need a fancy app or a complicated spreadsheet. You just need to start. Write it down. Look at it. Be honest with yourself about where the money goes. That is the whole secret.
-
-Budgeting is not about restriction. It is about intention. It is about making sure your money goes where you actually want it to go instead of disappearing into stuff you will not remember next week.
-
-Track every dollar. I promise it will change your life.`,
+Track every dollar. It will change your life.`,
   },
   {
     slug: "why-i-share-my-portfolio-publicly",
