@@ -199,31 +199,6 @@ It is not exciting. It is not fast. But it works every time if you follow the st
 If you want the full deep dive on each step, check out the [The Levi Five page](/the-levi-five). Figure out which step you are on and focus there. One step at a time.`,
   },
   {
-    slug: "why-i-track-every-dollar",
-    title: "Why I Track Every Dollar (And You Should Too)",
-    date: "2026-03-19",
-    description:
-      "Budgeting sounds boring. It is. But tracking every dollar changed my financial life more than any investment ever did.",
-    category: "finance",
-    author: "Levi",
-    readingTime: "2 min read",
-    content: `Before I started tracking my spending, I had no idea where my money went. I would get paid, feel good for a day, and be broke by the end of the month. Every time. It just disappeared.
-
-Then I started writing down every purchase. The first month I was shocked. Over $400 on food outside of groceries. Random lunches, delivery apps, snacks. Stuff I did not even enjoy that much.
-
-## Why It Works
-
-Tracking creates awareness. That is all it does. But awareness changes behavior. When you know you are going to write down that $15 lunch, you think twice. Not because you are restricting yourself. Because you are paying attention.
-
-## The Results
-
-I found an extra $600 a month. Not by making more money. Not by cutting things I loved. Just by seeing where it was going and making small adjustments. That money goes straight to investments now.
-
-You do not need a fancy app. You do not need a spreadsheet. Just write it down, look at it, and be honest with yourself. That is the whole secret.
-
-Track every dollar. It will change your life.`,
-  },
-  {
     slug: "why-i-share-my-portfolio-publicly",
     title: "Why I Share My Portfolio Publicly",
     date: "2026-03-20",
