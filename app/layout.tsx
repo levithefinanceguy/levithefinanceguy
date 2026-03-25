@@ -37,6 +37,10 @@ export const metadata: Metadata = {
     "financial independence",
   ],
   authors: [{ name: "Levi The Finance Guy" }],
+  icons: {
+    icon: "/favicon.png",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
