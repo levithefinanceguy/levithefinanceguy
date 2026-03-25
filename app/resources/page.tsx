@@ -86,8 +86,11 @@ export default function ResourcesPage() {
       <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-4">
         My <span className="text-accent-green">Resources</span>
       </h1>
-      <p className="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+      <p className="text-gray-400 text-center max-w-2xl mx-auto mb-4">
         Books, apps, and tools I actually use. No fluff, no filler — just the stuff that has helped me along the way.
+      </p>
+      <p className="text-[11px] text-gray-600 text-center mb-12">
+        Some links on this page are affiliate links. I may earn a small commission at no extra cost to you.
       </p>
 
       {/* Books */}
@@ -102,7 +105,10 @@ export default function ResourcesPage() {
               rel="noopener noreferrer"
               className="block p-5 rounded-xl border border-card-border bg-card-bg hover:border-accent-green/50 transition-all"
             >
-              <h3 className="font-semibold text-white mb-1">{book.title}</h3>
+              <div className="flex justify-between items-start">
+                <h3 className="font-semibold text-white mb-1">{book.title}</h3>
+                <span className="text-accent-green text-sm ml-2">→</span>
+              </div>
               <p className="text-xs text-accent-green mb-2">by {book.author}</p>
               <p className="text-sm text-gray-400 leading-relaxed">{book.take}</p>
             </a>
@@ -122,7 +128,7 @@ export default function ResourcesPage() {
               rel="noopener noreferrer"
               className="block p-5 rounded-xl border border-card-border bg-card-bg hover:border-accent-green/50 transition-all"
             >
-              <h3 className="font-semibold text-white mb-1">{app.name}</h3>
+              <div className="flex justify-between items-start"><h3 className="font-semibold text-white mb-1">{app.name}</h3><span className="text-accent-green text-sm ml-2">→</span></div>
               <p className="text-sm text-gray-400 leading-relaxed">{app.description}</p>
             </a>
           ))}
@@ -142,7 +148,7 @@ export default function ResourcesPage() {
               rel="noopener noreferrer"
               className="block p-5 rounded-xl border border-card-border bg-card-bg hover:border-accent-green/50 transition-all"
             >
-              <h3 className="font-semibold text-white mb-1">{item.name}</h3>
+              <div className="flex justify-between items-start"><h3 className="font-semibold text-white mb-1">{item.name}</h3><span className="text-accent-green text-sm ml-2">→</span></div>
               <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
             </a>
           ))}
@@ -160,8 +166,6 @@ export default function ResourcesPage() {
             <div className="flex flex-wrap gap-3 text-sm">
               <span className="text-gray-500">Recommended HYSAs:</span>
               <span className="text-accent-green">Marcus by Goldman Sachs</span>
-              <span className="text-gray-600">·</span>
-              <span className="text-accent-green">Ally Bank</span>
               <span className="text-gray-600">·</span>
               <span className="text-accent-green">SoFi</span>
             </div>
