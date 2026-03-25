@@ -96,8 +96,7 @@ export default function AboutPage() {
               paying for tools that should be free.
             </p>
             <p>
-              Financial literacy should not be gatekept behind paywalls and courses. Everything
-              on this site is free and always will be.
+              Financial literacy should not be gatekept behind paywalls and courses.
             </p>
           </div>
         </section>

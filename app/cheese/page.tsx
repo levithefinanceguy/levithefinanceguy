@@ -69,8 +69,7 @@ export default function CheesePage() {
           </p>
           <p className="text-gray-400 max-w-xl mx-auto mb-8">
             I built Cheese because I was tired of using five different apps to track my finances
-            and health. Budget, invest, count calories, log workouts — all in one place. No
-            subscriptions. No selling your data.
+            and health. Budget, invest, count calories, log workouts — all in one place.
           </p>
           {/* Replace # with actual App Store link when available */}
           <a
