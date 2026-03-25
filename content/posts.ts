@@ -168,7 +168,7 @@ After that I went back and saved up my one month of expenses. The steps are numb
 
 ## Step 3: Eliminate Consumer Debt
 
-Credit cards, personal loans, any high-interest debt. Kill it. I use the avalanche method — highest interest rate first — because the math makes sense. But if you need quick wins to stay motivated, snowball works too. The point is to stop paying interest on stuff that is losing value.
+Credit cards, personal loans, any high-interest debt. Kill it. I use the snowball method — smallest balance first — because those quick wins keep you motivated. When you pay something off completely, it gives you momentum to attack the next one. The point is to stop paying interest on stuff that is losing value.
 
 This is where I am right now. Still in it. I have credit card debt I am working through. Some of it came from dumb decisions. Some of it came from real life — car repairs, medical stuff, months where the math just did not work. I am not going to sit here and pretend it is all behind me. It is not. But I have a plan. I know exactly which card I am attacking first. I know my payoff date. And every month the balance goes down. That is progress.
 
@@ -260,7 +260,7 @@ If your employer offers a 401(k) match, you need to get 100% of it. This is lite
 
 ## Step 3: Eliminate Consumer Debt
 
-Credit card debt, personal loans, car loans with ridiculous rates. Anything with high interest needs to go. I recommend the avalanche method (pay off highest interest rate first) because math does not care about feelings. But if you need the motivation of quick wins, the snowball method works too. The point is to stop paying other people interest on depreciating assets.
+Credit card debt, personal loans, car loans with ridiculous rates. Anything with high interest needs to go. I use the snowball method — smallest balance first. The math might say avalanche is better, but the motivation from paying something off completely is what keeps you going. The point is to stop paying other people interest on depreciating assets.
 
 ## Step 4: Secure, Invest, and Plan
 
