@@ -80,7 +80,21 @@ export interface StockData {
   marketCap: number;
 }
 
-let cache: { data: StockData[]; timestamp: number } | null = null;
+export interface IndexData {
+  symbol: string;
+  name: string;
+  price: number;
+  changePercent: number;
+  change: number;
+}
+
+const INDICES = [
+  { symbol: "^GSPC", name: "S&P 500" },
+  { symbol: "^DJI", name: "Dow Jones" },
+  { symbol: "^IXIC", name: "Nasdaq" },
+];
+
+let cache: { data: StockData[]; indices: IndexData[]; timestamp: number } | null = null;
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 let crumbCache: { crumb: string; cookie: string; timestamp: number } | null =
@@ -181,23 +195,51 @@ async function fetchStockData(): Promise<StockData[]> {
       )
       .filter(Boolean) as StockData[];
 
-    if (data.length > 0) {
-      cache = { data, timestamp: now };
+    // Fetch indices in same request
+    const indexSymbols = INDICES.map((i) => i.symbol).join(",");
+    const indexUrl = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(indexSymbols)}&crumb=${encodeURIComponent(crumb)}`;
+    let indices: IndexData[] = [];
+    try {
+      const indexRes = await fetch(indexUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+          Cookie: cookie,
+        },
+      });
+      if (indexRes.ok) {
+        const indexJson = await indexRes.json();
+        const indexQuotes = indexJson.quoteResponse?.result ?? [];
+        indices = indexQuotes.map((q: any) => {
+          const def = INDICES.find((i) => i.symbol === q.symbol);
+          return {
+            symbol: q.symbol,
+            name: def?.name ?? q.symbol,
+            price: q.regularMarketPrice ?? 0,
+            changePercent: q.regularMarketChangePercent ?? 0,
+            change: q.regularMarketChange ?? 0,
+          };
+        });
+      }
+    } catch {
+      // Indices fetch failed — not critical
     }
-    return data;
+
+    if (data.length > 0) {
+      cache = { data, indices, timestamp: now };
+    }
+    return { stocks: data, indices };
   } catch (error) {
     console.error("Failed to fetch from Yahoo Finance:", error);
-    // Return cached data if available, even if stale
-    if (cache) return cache.data;
-    return [];
+    if (cache) return { stocks: cache.data, indices: cache.indices };
+    return { stocks: [], indices: [] };
   }
 }
 
 export async function GET() {
-  const data = await fetchStockData();
+  const { stocks, indices } = await fetchStockData();
 
   return NextResponse.json(
-    { stocks: data, timestamp: Date.now() },
+    { stocks, indices, timestamp: Date.now() },
     {
       headers: {
         "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",

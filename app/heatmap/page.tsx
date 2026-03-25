@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useMemo } from "react";
-import type { StockData } from "../api/stocks/route";
+import type { StockData, IndexData } from "../api/stocks/route";
 
 const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
@@ -35,6 +35,7 @@ interface SectorGroup {
 
 export default function HeatmapPage() {
   const [stocks, setStocks] = useState<StockData[]>([]);
+  const [indices, setIndices] = useState<IndexData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
@@ -46,6 +47,7 @@ export default function HeatmapPage() {
       if (!res.ok) throw new Error("Failed to fetch stock data");
       const json = await res.json();
       setStocks(json.stocks);
+      setIndices(json.indices || []);
       setLastUpdated(new Date(json.timestamp));
       setError(null);
     } catch (err) {
@@ -121,10 +123,25 @@ export default function HeatmapPage() {
           <span className="gradient-text">S&P 500</span>{" "}
           <span className="text-gray-300">Market Heatmap</span>
         </h1>
-        <p className="text-gray-400 max-w-2xl">
+        <p className="text-gray-400 max-w-2xl mb-6">
           Top 50 stocks by market cap, grouped by sector. Box size reflects
           market capitalization. Colors show daily price change.
         </p>
+
+        {/* Market Summary */}
+        {indices.length > 0 && (
+          <div className="grid grid-cols-3 gap-4 mb-2">
+            {indices.map((idx) => (
+              <div key={idx.symbol} className="p-4 rounded-xl bg-card-bg border border-card-border">
+                <p className="text-xs text-gray-500 mb-1">{idx.name}</p>
+                <p className="text-lg font-bold">{idx.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                <p className={`text-sm font-mono ${idx.changePercent >= 0 ? "text-accent-green" : "text-accent-red"}`}>
+                  {idx.changePercent >= 0 ? "+" : ""}{idx.change.toFixed(2)} ({idx.changePercent >= 0 ? "+" : ""}{idx.changePercent.toFixed(2)}%)
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="flex flex-wrap items-center gap-4 mt-4">
           {/* Color legend */}
           <div className="flex items-center gap-1 text-xs text-gray-400">
