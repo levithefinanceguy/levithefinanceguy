@@ -165,9 +165,10 @@ export default function ResourcesPage() {
             <p className="text-sm text-gray-400 mb-2">Park your emergency fund in a high-yield savings account so it actually earns something while it sits there.</p>
             <div className="flex flex-wrap gap-3 text-sm">
               <span className="text-gray-500">Recommended HYSAs:</span>
-              <span className="text-accent-green">Marcus by Goldman Sachs</span>
+              <a href="https://www.marcus.com/us/en/savings/high-yield-savings" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">Marcus by Goldman Sachs</a>
               <span className="text-gray-600">·</span>
-              <span className="text-accent-green">SoFi</span>
+              <a href="https://www.sofi.com/invite/money?gcp=4bbe2774-a1a0-4008-b5c3-d9c59928b61a&isAliasGcp=false" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">SoFi ($25 bonus)</a>
+              <span className="text-[10px] text-gray-600">(affiliate)</span>
             </div>
             <a href="/calculators/emergency-fund" className="inline-block mt-2 text-xs text-accent-green hover:underline">Emergency Fund Calculator →</a>
           </div>
