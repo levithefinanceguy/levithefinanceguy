@@ -198,8 +198,8 @@ export default function PortfolioClient() {
           <span className="gradient-text">$1,000,000</span>
         </h1>
         <p className="text-gray-400 max-w-xl mx-auto mb-8">
-          I started with a single dollar. No trust fund, no windfall, no shortcuts. Just
-          consistency, time, and a plan. Follow along as I build to seven figures in public.
+          I started with a single dollar on Robinhood. No trust fund, no windfall, no shortcuts.
+          Just consistency, time, and a plan. Follow along as I build to seven figures in public.
         </p>
         <div className="max-w-lg mx-auto">
           <div className="flex justify-between text-sm mb-2">

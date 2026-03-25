@@ -78,8 +78,8 @@ export default function Home() {
               Just a regular guy sharing what actually works.
             </p>
             <p className="text-base text-gray-500 max-w-xl mx-auto mb-10">
-              Follow my investing journey, use free calculators, and learn the
-              framework that changed my financial life.
+              Building from $1 to $1,000,000 on Robinhood. Follow the journey,
+              use free tools, and learn the framework that changed my financial life.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

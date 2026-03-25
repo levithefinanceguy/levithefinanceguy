@@ -73,9 +73,10 @@ export default function AboutPage() {
               I made.
             </p>
             <p>
-              I am transparent about everything — my real numbers, my real portfolio, the good and
-              the bad — because I want to show people that it can be done, even if you have had to
-              start over a few times.
+              I am transparent about everything — my real numbers, my real Robinhood portfolio, the good
+              and the bad — because I want to show people that it can be done, even if you have had to
+              start over a few times. I am building from $1 to $1,000,000 in public so you can follow
+              along and see exactly how it is done.
             </p>
           </div>
         </section>
