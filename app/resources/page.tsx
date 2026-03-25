@@ -168,7 +168,7 @@ export default function ResourcesPage() {
               <a href="https://www.marcus.com/us/en/savings/high-yield-savings" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">Marcus by Goldman Sachs</a>
               <span className="text-gray-600">·</span>
               <a href="https://www.sofi.com/invite/money?gcp=4bbe2774-a1a0-4008-b5c3-d9c59928b61a&isAliasGcp=false" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">SoFi ($25 bonus)</a>
-              <span className="text-[10px] text-gray-600">(affiliate)</span>
+              <span className="text-xs text-gray-600 self-center">(affiliate)</span>
             </div>
             <a href="/calculators/emergency-fund" className="inline-block mt-2 text-xs text-accent-green hover:underline">Emergency Fund Calculator →</a>
           </div>
@@ -193,7 +193,7 @@ export default function ResourcesPage() {
             <p className="text-sm text-gray-400 mb-2">Start investing consistently. Even small amounts add up over time.</p>
             <div className="flex flex-wrap gap-3 text-sm mb-2">
               <a href="https://join.robinhood.com/bretp22" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">Robinhood</a>
-              <span className="text-[10px] text-gray-600">(affiliate)</span>
+              <span className="text-xs text-gray-600 self-center">(affiliate)</span>
             </div>
             <div className="flex flex-wrap gap-2">
               <a href="/calculators/compound-interest" className="inline-block text-xs text-accent-green hover:underline">Compound Interest Calculator →</a>
