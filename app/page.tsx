@@ -180,7 +180,7 @@ export default function Home() {
                 href={calc.href}
                 className="glass-card flex flex-col items-center p-5 rounded-xl transition-all duration-300 text-center group hover:scale-[1.03]"
               >
-                <span className="text-sm font-semibold text-gray-300 group-hover:text-accent-green transition-colors">{calc.name}</span>
+                <span className="text-sm font-semibold text-gray-300 group-hover:text-accent-green transition-colors">{calc.name} <span className="text-accent-green">→</span></span>
               </Link>
             ))}
           </div>
