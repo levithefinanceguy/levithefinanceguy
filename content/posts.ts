@@ -236,49 +236,6 @@ My goal is not to impress anyone with my returns. My goal is to show that buildi
 If sharing my portfolio helps even one person start investing or improve their strategy, it is worth every uncomfortable moment of putting my numbers out there. That is what this whole thing is about.`,
   },
   {
-    slug: "the-levi-five-framework",
-    title: "The Levi Five: A Simple Framework for Financial Independence",
-    date: "2026-03-15",
-    description:
-      "A five-step framework to get your finances in order and build lasting wealth. No complexity, no BS.",
-    category: "finance",
-    author: "Levi",
-    readingTime: "5 min read",
-    content: `I created The Levi Five because most financial advice is either too complicated or too vague. People need a clear path, not a textbook. Here is the framework I use and recommend to everyone who asks me where to start.
-
-## What Is The Levi Five?
-
-The Levi Five is a five-step financial framework that takes you from zero to wealth-building. Each step builds on the last. You do not skip ahead. You do not try to do everything at once. You focus on one step until it is done, then move to the next.
-
-## Step 1: One Month Security
-
-Save one month of expenses. That is it. Not six months. Not a year. Just one month. This is your foundation. It keeps one bad week from turning into a financial crisis. Calculate your actual monthly expenses (rent, food, utilities, transportation, insurance) and save that exact amount in a high-yield savings account.
-
-## Step 2: Capture the Match
-
-If your employer offers a 401(k) match, you need to get 100% of it. This is literally free money. If your company matches 50% up to 6% of your salary, contribute at least 6%. Not contributing enough to get the full match is the same as turning down a raise.
-
-## Step 3: Eliminate Consumer Debt
-
-Credit card debt, personal loans, car loans with ridiculous rates. Anything with high interest needs to go. I use the snowball method — smallest balance first. The math might say avalanche is better, but the motivation from paying something off completely is what keeps you going. The point is to stop paying other people interest on depreciating assets.
-
-## Step 4: Secure, Invest, and Plan
-
-Now you level up. Build your emergency fund to 3-6 months of expenses. Start investing at least 15% of your income. If you have kids, look into 529 plans. And here is a big one: start paying cash for large purchases. No more financing furniture or vacations. If you cannot pay for it outright, you cannot afford it yet.
-
-## Step 5: Build and Optimize
-
-This is where wealth actually grows. Increase your income through side hustles or career advancement. Consider real estate. Work on paying off your mortgage early. The goal here is ownership. Own your home, own your investments, own your time.
-
-## Why This Works
-
-The Levi Five works because it is sequential. Most people fail financially because they try to invest while carrying credit card debt, or they buy a house before they have an emergency fund. This framework forces you to build the foundation before adding floors.
-
-It is not sexy. It is not fast. But I believe it works if you follow the steps. I am still in the middle of it myself — that is the whole point. I am not teaching from a finish line. I am building this in real time and sharing it so you can follow along.
-
-The full breakdown of each step is on The Levi Five page. Go check it out and figure out which step you are on.`,
-  },
-  {
     slug: "how-to-start-investing-with-100",
     title: "How to Start Investing with $1",
     date: "2026-03-10",
