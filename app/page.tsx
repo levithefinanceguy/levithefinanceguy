@@ -146,7 +146,7 @@ export default function Home() {
             className="group block p-8 rounded-xl glass-card transition-all duration-300 hover:scale-[1.01]"
           >
             <h3 className="text-xl font-bold mb-2 group-hover:text-accent-green transition-colors">
-              Public Portfolio
+              Public Portfolio <span className="text-accent-green ml-1">→</span>
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               See every stock I own, what I paid, and how it is performing. Full transparency with
@@ -159,7 +159,7 @@ export default function Home() {
             className="group block p-8 rounded-xl glass-card transition-all duration-300 hover:scale-[1.01]"
           >
             <h3 className="text-xl font-bold mb-2 group-hover:text-accent-green transition-colors">
-              Free Calculators
+              Free Calculators <span className="text-accent-green ml-1">→</span>
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               19 free calculators for finance and health. Compound interest, investment growth,
