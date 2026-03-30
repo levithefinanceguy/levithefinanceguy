@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import AdBanner from "../components/AdBanner";
 import PortfolioChart from "./PortfolioChart";
 
@@ -10,126 +11,15 @@ interface Holding {
   purchasePrice: number;
   currentPrice: number;
   shares: number;
-  sparkline: number[];
-  dividendPerShare: number; // annual dividend per share
-}
-
-const sampleHoldings: Holding[] = [
-  {
-    ticker: "AAPL",
-    name: "Apple Inc.",
-    datePurchased: "2023-01-15",
-    purchasePrice: 142.53,
-    currentPrice: 178.72,
-    shares: 25,
-    sparkline: [142, 148, 155, 160, 153, 162, 170, 168, 175, 178],
-    dividendPerShare: 1.00,
-  },
-  {
-    ticker: "MSFT",
-    name: "Microsoft Corp.",
-    datePurchased: "2023-03-20",
-    purchasePrice: 280.74,
-    currentPrice: 415.56,
-    shares: 15,
-    sparkline: [280, 295, 310, 325, 340, 355, 370, 390, 405, 415],
-    dividendPerShare: 3.00,
-  },
-  {
-    ticker: "VOO",
-    name: "Vanguard S&P 500 ETF",
-    datePurchased: "2022-06-10",
-    purchasePrice: 348.19,
-    currentPrice: 478.92,
-    shares: 30,
-    sparkline: [348, 360, 375, 390, 405, 420, 435, 450, 465, 478],
-    dividendPerShare: 6.76,
-  },
-  {
-    ticker: "GOOGL",
-    name: "Alphabet Inc.",
-    datePurchased: "2023-07-05",
-    purchasePrice: 120.97,
-    currentPrice: 155.84,
-    shares: 20,
-    sparkline: [120, 125, 130, 128, 135, 140, 145, 148, 152, 155],
-    dividendPerShare: 0.80,
-  },
-  {
-    ticker: "AMZN",
-    name: "Amazon.com Inc.",
-    datePurchased: "2023-09-12",
-    purchasePrice: 138.12,
-    currentPrice: 185.07,
-    shares: 18,
-    sparkline: [138, 142, 150, 155, 160, 165, 170, 175, 180, 185],
-    dividendPerShare: 0,
-  },
-  {
-    ticker: "NVDA",
-    name: "NVIDIA Corp.",
-    datePurchased: "2023-02-01",
-    purchasePrice: 212.46,
-    currentPrice: 878.35,
-    shares: 10,
-    sparkline: [212, 280, 350, 420, 500, 580, 650, 740, 810, 878],
-    dividendPerShare: 0.16,
-  },
-  {
-    ticker: "TSLA",
-    name: "Tesla Inc.",
-    datePurchased: "2023-05-18",
-    purchasePrice: 180.14,
-    currentPrice: 162.50,
-    shares: 12,
-    sparkline: [180, 195, 210, 200, 185, 175, 170, 165, 160, 162],
-    dividendPerShare: 0,
-  },
-  {
-    ticker: "VTI",
-    name: "Vanguard Total Stock Market ETF",
-    datePurchased: "2022-01-03",
-    purchasePrice: 238.87,
-    currentPrice: 262.41,
-    shares: 20,
-    sparkline: [238, 225, 230, 240, 235, 245, 250, 255, 258, 262],
-    dividendPerShare: 3.46,
-  },
-];
-
-function Sparkline({ data, positive }: { data: number[]; positive: boolean }) {
-  const min = Math.min(...data);
-  const max = Math.max(...data);
-  const range = max - min || 1;
-  const w = 100;
-  const h = 30;
-  const points = data
-    .map((v, i) => {
-      const x = (i / (data.length - 1)) * w;
-      const y = h - ((v - min) / range) * h;
-      return `${x},${y}`;
-    })
-    .join(" ");
-
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-24 h-8" preserveAspectRatio="none">
-      <polyline
-        points={points}
-        fill="none"
-        stroke={positive ? "#2ECC71" : "#E74C3C"}
-        strokeWidth="2"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+  dividendPerShare: number;
 }
 
 function PieChart({ holdings }: { holdings: Holding[] }) {
   const totalValue = holdings.reduce((s, h) => s + h.currentPrice * h.shares, 0);
   const colors = [
     "#2ECC71", "#3498DB", "#9B59B6", "#E67E22", "#1ABC9C",
-    "#E74C3C", "#F39C12", "#2980B9",
+    "#E74C3C", "#F39C12", "#2980B9", "#27AE60", "#8E44AD",
+    "#D35400", "#16A085", "#C0392B", "#F1C40F", "#2C3E50",
   ];
 
   let cumulative = 0;
@@ -175,14 +65,111 @@ function fmt(n: number) {
   return n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+function formatActivityDate(dateStr: string): string {
+  // Convert to Eastern time for display
+  const eastern = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  const nowET = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+
+  const entryET = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date(dateStr + "T12:00:00Z"));
+
+  const todayParts = nowET.split("/");
+  const entryParts = entryET.split("/");
+  const todayDate = new Date(+todayParts[2], +todayParts[0] - 1, +todayParts[1]);
+  const entryDate = new Date(+entryParts[2], +entryParts[0] - 1, +entryParts[1]);
+  const diffDays = Math.round((todayDate.getTime() - entryDate.getTime()) / (1000 * 60 * 60 * 24));
+
+  if (diffDays <= 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return `${diffDays} days ago`;
+  return eastern.format(new Date(dateStr + "T12:00:00Z"));
+}
+
+function LoadingSkeleton() {
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-16 animate-pulse">
+      <div className="mb-16 p-8 rounded-xl bg-card-bg border border-card-border text-center">
+        <div className="h-6 w-32 bg-gray-800 rounded mx-auto mb-4" />
+        <div className="h-12 w-64 bg-gray-800 rounded mx-auto mb-4" />
+        <div className="h-4 w-96 bg-gray-800 rounded mx-auto mb-8" />
+        <div className="h-4 w-full max-w-lg bg-gray-800 rounded mx-auto" />
+      </div>
+      <div className="h-8 w-64 bg-gray-800 rounded mb-4" />
+      <div className="h-[300px] bg-gray-800/50 rounded-xl mb-12" />
+      <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="h-64 bg-gray-800/50 rounded-xl" />
+        <div className="h-64 bg-gray-800/50 rounded-xl" />
+      </div>
+    </div>
+  );
+}
+
 export default function PortfolioClient() {
-  const totalValue = sampleHoldings.reduce((s, h) => s + h.currentPrice * h.shares, 0);
-  const totalCost = sampleHoldings.reduce((s, h) => s + h.purchasePrice * h.shares, 0);
+  const [holdings, setHoldings] = useState<Holding[]>([]);
+  const [cashBalance, setCashBalance] = useState(0);
+  const [personalAmountInvested, setPersonalAmountInvested] = useState(0);
+  const [livePrices, setLivePrices] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/portfolio")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.holdings && json.holdings.length > 0) {
+          setHoldings(json.holdings);
+          setCashBalance(json.cashBalance ?? 0);
+          setPersonalAmountInvested(json.personalAmountInvested ?? 0);
+          setLivePrices(json.livePrices ?? false);
+        } else {
+          setError(true);
+        }
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Sort by total value (heaviest weighted first)
+  const sortedHoldings = [...holdings].sort(
+    (a, b) => b.currentPrice * b.shares - a.currentPrice * a.shares
+  );
+
+  if (loading) return <LoadingSkeleton />;
+
+  if (error || holdings.length === 0) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-16">
+        <div className="p-8 rounded-xl bg-card-bg border border-card-border text-center">
+          <p className="text-gray-400">Portfolio data is currently unavailable. Check back shortly.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const investedValue = holdings.reduce((s, h) => s + h.currentPrice * h.shares, 0);
+  const totalValue = investedValue + cashBalance;
+  const calculatedCost = holdings.reduce((s, h) => s + h.purchasePrice * h.shares, 0);
+  const totalCost = personalAmountInvested > 0 ? personalAmountInvested : calculatedCost;
   const totalGain = totalValue - totalCost;
-  const totalGainPct = (totalGain / totalCost) * 100;
-  const totalAnnualDividends = sampleHoldings.reduce((s, h) => s + h.dividendPerShare * h.shares, 0);
+  const totalGainPct = totalCost > 0 ? (totalGain / totalCost) * 100 : 0;
+  const totalAnnualDividends = holdings.reduce((s, h) => s + h.dividendPerShare * h.shares, 0);
   const totalMonthlyDividends = totalAnnualDividends / 12;
-  const priceGrowth = totalGain; // price appreciation only
+  const priceGrowth = totalGain;
 
   const goal = 1000000;
   const progressPct = Math.min((totalValue / goal) * 100, 100);
@@ -194,7 +181,7 @@ export default function PortfolioClient() {
         <p className="text-sm text-gray-500 uppercase tracking-widest mb-2">The Journey</p>
         <h1 className="text-4xl md:text-5xl font-extrabold mb-3">
           <span className="text-white">$1</span>
-          <span className="text-gray-600 mx-3">→</span>
+          <span className="text-gray-600 mx-3">&rarr;</span>
           <span className="gradient-text">$1,000,000</span>
         </h1>
         <p className="text-gray-400 max-w-xl mx-auto mb-8">
@@ -219,7 +206,7 @@ export default function PortfolioClient() {
             rel="noopener noreferrer"
             className="inline-block mt-4 px-6 py-2 text-sm font-semibold rounded-lg border border-accent-green/30 text-accent-green hover:bg-accent-green/10 transition-all"
           >
-            Start your own journey →
+            Start your own journey &rarr;
           </a>
           <p className="text-[10px] text-gray-600 mt-1">affiliate link</p>
         </div>
@@ -246,45 +233,55 @@ export default function PortfolioClient() {
             </div>
             <div className="h-px bg-card-border" />
             <div className="flex justify-between">
-              <span className="text-gray-400">Total Invested</span>
+              <span className="text-gray-400">Invested</span>
               <span className="font-mono text-blue-400">${fmt(totalCost)}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Price Growth</span>
-              <span className={`font-mono ${priceGrowth >= 0 ? "text-accent-green" : "text-accent-red"}`}>
-                {priceGrowth >= 0 ? "+" : ""}${fmt(priceGrowth)}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Est. Annual Dividends</span>
-              <span className="font-mono text-accent-green">${fmt(totalAnnualDividends)}/yr</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Est. Monthly Dividends</span>
-              <span className="font-mono text-gray-300">${fmt(totalMonthlyDividends)}/mo</span>
-            </div>
-            <div className="h-px bg-card-border" />
-            <div className="flex justify-between">
-              <span className="text-gray-400">Total Return</span>
-              <span className={`font-bold ${totalGain >= 0 ? "text-accent-green" : "text-accent-red"}`}>
-                {totalGain >= 0 ? "+" : ""}${fmt(totalGain)} ({totalGainPct >= 0 ? "+" : ""}{totalGainPct.toFixed(2)}%)
-              </span>
-            </div>
-            {/* Visual breakdown */}
-            <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
-              <div className="h-full flex">
-                <div className="bg-blue-400 h-full" style={{ width: `${(totalCost / totalValue) * 100}%` }} />
-                <div className="bg-accent-green h-full" style={{ width: `${(priceGrowth / totalValue) * 100}%` }} />
+            {cashBalance > 0 && (
+              <div className="flex justify-between">
+                <span className="text-gray-400">Uninvested Cash</span>
+                <span className="font-mono text-gray-300">${fmt(cashBalance)}</span>
               </div>
-            </div>
-            <div className="flex justify-between text-[10px] text-gray-500">
-              <span>Invested {Math.round((totalCost / totalValue) * 100)}%</span>
-              <span>Growth {Math.round((priceGrowth / totalValue) * 100)}%</span>
-            </div>
+            )}
+            {livePrices && (
+              <>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Price Growth</span>
+                  <span className={`font-mono ${priceGrowth >= 0 ? "text-accent-green" : "text-accent-red"}`}>
+                    {priceGrowth >= 0 ? "+" : ""}${fmt(priceGrowth)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Est. Annual Dividends</span>
+                  <span className="font-mono text-accent-green">${fmt(totalAnnualDividends)}/yr</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Est. Monthly Dividends</span>
+                  <span className="font-mono text-gray-300">${fmt(totalMonthlyDividends)}/mo</span>
+                </div>
+                <div className="h-px bg-card-border" />
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Total Return</span>
+                  <span className={`font-bold ${totalGain >= 0 ? "text-accent-green" : "text-accent-red"}`}>
+                    {totalGain >= 0 ? "+" : ""}${fmt(totalGain)} ({totalGainPct >= 0 ? "+" : ""}{totalGainPct.toFixed(2)}%)
+                  </span>
+                </div>
+                {/* Visual breakdown */}
+                <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                  <div className="h-full flex">
+                    <div className="bg-blue-400 h-full" style={{ width: `${(totalCost / totalValue) * 100}%` }} />
+                    <div className="bg-accent-green h-full" style={{ width: `${(priceGrowth / totalValue) * 100}%` }} />
+                  </div>
+                </div>
+                <div className="flex justify-between text-[10px] text-gray-500">
+                  <span>Invested {Math.round((totalCost / totalValue) * 100)}%</span>
+                  <span>Growth {Math.round((priceGrowth / totalValue) * 100)}%</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div className="p-8 rounded-xl bg-card-bg border border-card-border flex items-center justify-center">
-          <PieChart holdings={sampleHoldings} />
+          <PieChart holdings={sortedHoldings} />
         </div>
       </div>
 
@@ -295,52 +292,104 @@ export default function PortfolioClient() {
             <tr>
               <th className="text-left p-4">Ticker</th>
               <th className="text-left p-4 hidden md:table-cell">Company</th>
-              <th className="text-left p-4 hidden lg:table-cell">Purchased</th>
               <th className="text-right p-4">Buy Price</th>
-              <th className="text-right p-4">Current</th>
+              {livePrices && <th className="text-right p-4">Current</th>}
               <th className="text-right p-4 hidden sm:table-cell">Shares</th>
               <th className="text-right p-4">Value</th>
-              <th className="text-right p-4">Gain/Loss</th>
-              <th className="text-center p-4 hidden md:table-cell">Trend</th>
+              {livePrices && <th className="text-right p-4">Gain/Loss</th>}
             </tr>
           </thead>
           <tbody>
-            {sampleHoldings.map((h) => {
+            {sortedHoldings.map((h) => {
               const value = h.currentPrice * h.shares;
               const gain = (h.currentPrice - h.purchasePrice) * h.shares;
               const gainPct = ((h.currentPrice - h.purchasePrice) / h.purchasePrice) * 100;
               const positive = gain >= 0;
               return (
-                <tr key={h.ticker} className="border-t border-card-border hover:bg-card-bg/50">
+                <tr key={h.ticker + h.datePurchased} className="border-t border-card-border hover:bg-card-bg/50">
                   <td className="p-4 font-bold text-accent-green">{h.ticker}</td>
                   <td className="p-4 hidden md:table-cell text-gray-300">{h.name}</td>
-                  <td className="p-4 hidden lg:table-cell text-gray-500">{h.datePurchased}</td>
                   <td className="p-4 text-right font-mono">${fmt(h.purchasePrice)}</td>
-                  <td className="p-4 text-right font-mono">${fmt(h.currentPrice)}</td>
+                  {livePrices && <td className="p-4 text-right font-mono">${fmt(h.currentPrice)}</td>}
                   <td className="p-4 text-right hidden sm:table-cell">{h.shares}</td>
                   <td className="p-4 text-right font-mono font-semibold">${fmt(value)}</td>
-                  <td
-                    className={`p-4 text-right font-mono font-semibold ${
-                      positive ? "text-accent-green" : "text-accent-red"
-                    }`}
-                  >
-                    {positive ? "+" : ""}${fmt(gain)}
-                    <br />
-                    <span className="text-xs">
-                      ({positive ? "+" : ""}{gainPct.toFixed(2)}%)
-                    </span>
-                  </td>
-                  <td className="p-4 hidden md:table-cell">
-                    <div className="flex justify-center">
-                      <Sparkline data={h.sparkline} positive={positive} />
-                    </div>
-                  </td>
+                  {livePrices && (
+                    <td
+                      className={`p-4 text-right font-mono font-semibold ${
+                        positive ? "text-accent-green" : "text-accent-red"
+                      }`}
+                    >
+                      {positive ? "+" : ""}${fmt(gain)}
+                      <br />
+                      <span className="text-xs">
+                        ({positive ? "+" : ""}{gainPct.toFixed(2)}%)
+                      </span>
+                    </td>
+                  )}
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
+
+      {/* Recent Activity */}
+      {(() => {
+        const activities = holdings
+          .filter((h) => h.datePurchased)
+          .map((h) => ({
+            type: "buy" as const,
+            ticker: h.ticker,
+            name: h.name,
+            shares: h.shares,
+            amount: h.purchasePrice * h.shares,
+            date: h.datePurchased,
+          }))
+          .sort((a, b) => b.date.localeCompare(a.date))
+          .slice(0, 15);
+
+        if (activities.length === 0) return null;
+
+        // Group by date
+        const grouped = activities.reduce<Record<string, typeof activities>>((acc, a) => {
+          const label = formatActivityDate(a.date);
+          if (!acc[label]) acc[label] = [];
+          acc[label].push(a);
+          return acc;
+        }, {});
+
+        return (
+          <div className="mt-12 mb-12">
+            <h2 className="text-2xl font-bold mb-6">Recent Activity</h2>
+            <div className="rounded-xl border border-card-border bg-card-bg overflow-hidden">
+              {Object.entries(grouped).map(([dateLabel, items], gi) => (
+                <div key={dateLabel}>
+                  {gi > 0 && <div className="h-px bg-card-border" />}
+                  <div className="px-5 py-3 bg-card-bg/80">
+                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{dateLabel}</span>
+                  </div>
+                  {items.map((a, i) => (
+                    <div key={`${a.ticker}-${i}`} className="flex items-center justify-between px-5 py-4 border-t border-card-border/50">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-accent-green/10 flex items-center justify-center">
+                          <span className="text-accent-green text-xs font-bold">+</span>
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-white">
+                            Bought {a.shares % 1 === 0 ? a.shares : a.shares.toFixed(4)} {a.shares === 1 ? "share" : "shares"} of <span className="text-accent-green">{a.ticker}</span>
+                          </p>
+                          <p className="text-xs text-gray-500">{a.name}</p>
+                        </div>
+                      </div>
+                      <span className="text-sm font-mono text-gray-300">${fmt(a.amount)}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* SEO Content */}
       <section className="mt-16 space-y-6 text-gray-400 leading-relaxed max-w-3xl">
@@ -364,9 +413,14 @@ export default function PortfolioClient() {
 
         <AdBanner slot="in-content" size="medium-rectangle" />
 
-        <p className="text-xs text-gray-600">
-          Note: Current prices shown are sample data for demonstration. Real-time price
-          integration coming soon. Portfolio data will be updated regularly with actual holdings.
+        <div className="mt-8 p-6 rounded-xl border border-card-border bg-card-bg/50">
+          <p className="text-xs text-gray-500 leading-relaxed">
+            <strong className="text-gray-400">Disclaimer:</strong> This portfolio is shared for transparency and educational purposes only. Nothing on this page is investment advice, a recommendation, or a solicitation to buy or sell any security. I am not a licensed financial advisor. Investing involves risk, including the possible loss of principal. Always do your own research and consult a qualified financial professional before making investment decisions. Past performance does not guarantee future results.
+          </p>
+        </div>
+
+        <p className="text-xs text-gray-600 mt-4">
+          Portfolio data synced live from my Cheese app. Prices updated every 5 minutes via Yahoo Finance.
         </p>
       </section>
     </div>

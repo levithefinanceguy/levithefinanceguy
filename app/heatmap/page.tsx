@@ -1,36 +1,173 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import type { StockData, IndexData } from "../api/stocks/route";
 
-const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const FINNHUB_KEY = "d7586opr01qk56kbpvm0d7586opr01qk56kbpvmg";
 
 function getChangeColor(pct: number): string {
   if (pct > 3) return "#00C853";
-  if (pct > 1) return "#2ECC71";
-  if (pct > 0) return "#81C784";
-  if (pct > -1) return "#E57373";
-  if (pct > -3) return "#E74C3C";
-  return "#C62828";
+  if (pct > 2) return "#1B9E45";
+  if (pct > 1) return "#2E7D32";
+  if (pct > 0.5) return "#1B5E20";
+  if (pct > 0) return "#1A3A1A";
+  if (pct === 0) return "#2a2a2a";
+  if (pct > -0.5) return "#3A1A1A";
+  if (pct > -1) return "#5E2020";
+  if (pct > -2) return "#7D2E2E";
+  if (pct > -3) return "#B71C1C";
+  return "#D32F2F";
 }
 
-function getTextColor(pct: number): string {
-  if (pct > 0 && pct <= 1) return "#1a1a1a";
-  if (pct <= 0 && pct > -1) return "#1a1a1a";
-  return "#ffffff";
+interface TreemapRect {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  data: StockData;
 }
 
-function formatMarketCap(cap: number): string {
-  if (cap >= 1e12) return `$${(cap / 1e12).toFixed(2)}T`;
-  if (cap >= 1e9) return `$${(cap / 1e9).toFixed(1)}B`;
-  if (cap >= 1e6) return `$${(cap / 1e6).toFixed(0)}M`;
-  return `$${cap.toLocaleString()}`;
-}
-
-interface SectorGroup {
+interface SectorRect {
   sector: string;
-  stocks: StockData[];
-  totalCap: number;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  children: TreemapRect[];
+}
+
+function squarify(
+  items: { value: number; data: StockData }[],
+  x: number, y: number, w: number, h: number
+): TreemapRect[] {
+  if (items.length === 0) return [];
+  if (items.length === 1) return [{ x, y, w, h, data: items[0].data }];
+
+  const total = items.reduce((s, i) => s + i.value, 0);
+  if (total === 0) return [];
+
+  const sorted = [...items].sort((a, b) => b.value - a.value);
+  const results: TreemapRect[] = [];
+  let remaining = [...sorted];
+  let cx = x, cy = y, cw = w, ch = h;
+
+  while (remaining.length > 0) {
+    const remTotal = remaining.reduce((s, i) => s + i.value, 0);
+    const isWide = cw >= ch;
+    let row: typeof remaining = [];
+    let bestAspect = Infinity;
+
+    for (let i = 1; i <= remaining.length; i++) {
+      const candidate = remaining.slice(0, i);
+      const rowTotal = candidate.reduce((s, item) => s + item.value, 0);
+      const rowFraction = rowTotal / remTotal;
+      const rowSize = isWide ? cw * rowFraction : ch * rowFraction;
+      const crossSize = isWide ? ch : cw;
+      let worstAspect = 0;
+      for (const item of candidate) {
+        const itemFraction = item.value / rowTotal;
+        const itemSize = crossSize * itemFraction;
+        const aspect = Math.max(rowSize / itemSize, itemSize / rowSize);
+        worstAspect = Math.max(worstAspect, aspect);
+      }
+      if (worstAspect <= bestAspect) {
+        bestAspect = worstAspect;
+        row = candidate;
+      } else break;
+    }
+
+    if (row.length === 0) row = [remaining[0]];
+    const rowTotal = row.reduce((s, item) => s + item.value, 0);
+    const rowFraction = rowTotal / remTotal;
+
+    if (isWide) {
+      const rowWidth = cw * rowFraction;
+      let ry = cy;
+      for (const item of row) {
+        const itemHeight = ch * (item.value / rowTotal);
+        results.push({ x: cx, y: ry, w: rowWidth, h: itemHeight, data: item.data });
+        ry += itemHeight;
+      }
+      cx += rowWidth; cw -= rowWidth;
+    } else {
+      const rowHeight = ch * rowFraction;
+      let rx = cx;
+      for (const item of row) {
+        const itemWidth = cw * (item.value / rowTotal);
+        results.push({ x: rx, y: cy, w: itemWidth, h: rowHeight, data: item.data });
+        rx += itemWidth;
+      }
+      cy += rowHeight; ch -= rowHeight;
+    }
+    remaining = remaining.slice(row.length);
+  }
+  return results;
+}
+
+function layoutSectors(
+  sectors: { sector: string; stocks: StockData[]; totalCap: number }[],
+  width: number, height: number
+): SectorRect[] {
+  const totalCap = sectors.reduce((s, sec) => s + sec.totalCap, 0);
+  if (totalCap === 0) return [];
+
+  const sectorItems = [...sectors].sort((a, b) => b.totalCap - a.totalCap);
+  const sectorRects: SectorRect[] = [];
+  let remaining = [...sectorItems];
+  let cx = 0, cy = 0, cw = width, ch = height;
+
+  while (remaining.length > 0) {
+    const remTotal = remaining.reduce((s, i) => s + i.totalCap, 0);
+    const isWide = cw >= ch;
+    let row = [remaining[0]];
+    let bestAspect = Infinity;
+
+    for (let i = 1; i <= Math.min(remaining.length, 5); i++) {
+      const candidate = remaining.slice(0, i);
+      const rowTotal = candidate.reduce((s, item) => s + item.totalCap, 0);
+      const rowFraction = rowTotal / remTotal;
+      const rowSize = isWide ? cw * rowFraction : ch * rowFraction;
+      const crossSize = isWide ? ch : cw;
+      let worstAspect = 0;
+      for (const item of candidate) {
+        const itemFraction = item.totalCap / rowTotal;
+        const itemSize = crossSize * itemFraction;
+        const aspect = Math.max(rowSize / itemSize, itemSize / rowSize);
+        worstAspect = Math.max(worstAspect, aspect);
+      }
+      if (worstAspect <= bestAspect) { bestAspect = worstAspect; row = candidate; }
+      else break;
+    }
+
+    const rowTotal = row.reduce((s, item) => s + item.totalCap, 0);
+    const rowFraction = rowTotal / remTotal;
+
+    if (isWide) {
+      const rowWidth = cw * rowFraction;
+      let ry = cy;
+      for (const item of row) {
+        const itemHeight = ch * (item.totalCap / rowTotal);
+        const stockItems = item.stocks.map((s) => ({ value: s.marketCap, data: s }));
+        const children = squarify(stockItems, cx + 1, ry + 14, rowWidth - 2, itemHeight - 15);
+        sectorRects.push({ sector: item.sector, x: cx, y: ry, w: rowWidth, h: itemHeight, children });
+        ry += itemHeight;
+      }
+      cx += rowWidth; cw -= rowWidth;
+    } else {
+      const rowHeight = ch * rowFraction;
+      let rx = cx;
+      for (const item of row) {
+        const itemWidth = cw * (item.totalCap / rowTotal);
+        const stockItems = item.stocks.map((s) => ({ value: s.marketCap, data: s }));
+        const children = squarify(stockItems, rx + 1, cy + 14, itemWidth - 2, rowHeight - 15);
+        sectorRects.push({ sector: item.sector, x: rx, y: cy, w: itemWidth, h: rowHeight, children });
+        rx += itemWidth;
+      }
+      cy += rowHeight; ch -= rowHeight;
+    }
+    remaining = remaining.slice(row.length);
+  }
+  return sectorRects;
 }
 
 export default function HeatmapPage() {
@@ -39,14 +176,22 @@ export default function HeatmapPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
-  const [hoveredStock, setHoveredStock] = useState<string | null>(null);
+  const [hoveredStock, setHoveredStock] = useState<StockData | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(1200);
+  const [wsConnected, setWsConnected] = useState(false);
+  const stocksRef = useRef<StockData[]>([]);
+  const wsRef = useRef<WebSocket | null>(null);
 
+  // Initial fetch via REST API
   const fetchData = useCallback(async () => {
     try {
       const res = await fetch("/api/stocks");
       if (!res.ok) throw new Error("Failed to fetch stock data");
       const json = await res.json();
       setStocks(json.stocks);
+      stocksRef.current = json.stocks;
       setIndices(json.indices || []);
       setLastUpdated(new Date(json.timestamp));
       setError(null);
@@ -57,20 +202,83 @@ export default function HeatmapPage() {
     }
   }, []);
 
+  // Websocket for real-time updates
   useEffect(() => {
-    fetchData();
-    const interval = setInterval(fetchData, REFRESH_INTERVAL);
-    return () => clearInterval(interval);
+    fetchData().then(() => {
+      const ws = new WebSocket(`wss://ws.finnhub.io?token=${FINNHUB_KEY}`);
+      wsRef.current = ws;
+
+      ws.onopen = () => {
+        setWsConnected(true);
+        // Subscribe to all tickers
+        const current = stocksRef.current;
+        for (const stock of current) {
+          const symbol = stock.symbol.replace("-", ".");
+          ws.send(JSON.stringify({ type: "subscribe", symbol }));
+        }
+      };
+
+      ws.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+        if (msg.type !== "trade" || !msg.data) return;
+
+        // Group trades by symbol, take latest price
+        const updates = new Map<string, number>();
+        for (const trade of msg.data) {
+          updates.set(trade.s, trade.p);
+        }
+
+        if (updates.size === 0) return;
+
+        setStocks((prev) => {
+          let changed = false;
+          const next = prev.map((stock) => {
+            const finnhubSymbol = stock.symbol.replace("-", ".");
+            const newPrice = updates.get(finnhubSymbol);
+            if (newPrice && newPrice !== stock.price) {
+              changed = true;
+              // Recalculate change percent from previous close
+              const prevClose = stock.price / (1 + stock.changePercent / 100);
+              const newChangePct = ((newPrice - prevClose) / prevClose) * 100;
+              return { ...stock, price: newPrice, changePercent: newChangePct };
+            }
+            return stock;
+          });
+          if (changed) {
+            stocksRef.current = next;
+            setLastUpdated(new Date());
+          }
+          return changed ? next : prev;
+        });
+      };
+
+      ws.onclose = () => setWsConnected(false);
+      ws.onerror = () => setWsConnected(false);
+
+      return () => {
+        ws.close();
+        wsRef.current = null;
+      };
+    });
   }, [fetchData]);
 
-  const sectors: SectorGroup[] = useMemo(() => {
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) setContainerWidth(entry.contentRect.width);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const sectors = useMemo(() => {
     const grouped = new Map<string, StockData[]>();
     for (const stock of stocks) {
       const existing = grouped.get(stock.sector) ?? [];
       existing.push(stock);
       grouped.set(stock.sector, existing);
     }
-
     return Array.from(grouped.entries())
       .map(([sector, sectorStocks]) => ({
         sector,
@@ -80,16 +288,17 @@ export default function HeatmapPage() {
       .sort((a, b) => b.totalCap - a.totalCap);
   }, [stocks]);
 
-  const globalMaxCap = useMemo(
-    () => Math.max(...stocks.map((s) => s.marketCap), 1),
-    [stocks]
+  const mapHeight = Math.min(600, Math.max(400, containerWidth * 0.35));
+  const sectorLayout = useMemo(
+    () => layoutSectors(sectors, containerWidth, mapHeight),
+    [sectors, containerWidth, mapHeight]
   );
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-2 border-accent-green border-t-transparent rounded-full animate-spin mb-4" />
+          <div className="inline-block w-8 h-8 border-2 border-green-400 border-t-transparent rounded-full animate-spin mb-4" />
           <p className="text-gray-400">Loading market data...</p>
         </div>
       </div>
@@ -100,16 +309,9 @@ export default function HeatmapPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-accent-red text-lg mb-2">
-            Unable to load market data
-          </p>
+          <p className="text-red-500 text-lg mb-2">Unable to load market data</p>
           <p className="text-gray-400 mb-4">{error}</p>
-          <button
-            onClick={fetchData}
-            className="px-4 py-2 bg-accent-green/20 text-accent-green rounded-lg hover:bg-accent-green/30 transition-colors"
-          >
-            Retry
-          </button>
+          <button onClick={fetchData} className="px-4 py-2 bg-green-500/20 text-green-400 rounded-lg hover:bg-green-500/30 transition-colors">Retry</button>
         </div>
       </div>
     );
@@ -117,168 +319,117 @@ export default function HeatmapPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12">
-      {/* Header */}
-      <div className="mb-8">
+      <div className="mb-6">
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">
           <span className="gradient-text">S&P 500</span>{" "}
           <span className="text-gray-300">Market Heatmap</span>
         </h1>
-        <p className="text-gray-400 max-w-2xl mb-6">
-          Top 50 stocks by market cap, grouped by sector. Box size reflects
-          market capitalization. Colors show daily price change.
+        <p className="text-gray-400 max-w-2xl mb-4">
+          Live market data via websocket. Box size reflects market cap. Colors show daily price change.
         </p>
 
-        {/* Market Summary */}
         {indices.length > 0 && (
-          <div className="grid grid-cols-3 gap-4 mb-2">
+          <div className="grid grid-cols-3 gap-3 mb-4">
             {indices.map((idx) => (
-              <div key={idx.symbol} className="p-4 rounded-xl bg-card-bg border border-card-border">
-                <p className="text-xs text-gray-500 mb-1">{idx.name}</p>
+              <div key={idx.symbol} className="p-3 rounded-xl bg-card-bg border border-card-border">
+                <p className="text-xs text-gray-500">{idx.name}</p>
                 <p className="text-lg font-bold">{idx.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                <p className={`text-sm font-mono ${idx.changePercent >= 0 ? "text-accent-green" : "text-accent-red"}`}>
+                <p className={`text-sm font-mono ${idx.changePercent >= 0 ? "text-green-400" : "text-red-400"}`}>
                   {idx.changePercent >= 0 ? "+" : ""}{idx.change.toFixed(2)} ({idx.changePercent >= 0 ? "+" : ""}{idx.changePercent.toFixed(2)}%)
                 </p>
               </div>
             ))}
           </div>
         )}
-        <div className="flex flex-wrap items-center gap-4 mt-4">
-          {/* Color legend */}
-          <div className="flex items-center gap-1 text-xs text-gray-400">
-            <span
-              className="inline-block w-4 h-3 rounded-sm"
-              style={{ background: "#C62828" }}
-            />
-            <span>&lt;-3%</span>
-            <span
-              className="inline-block w-4 h-3 rounded-sm"
-              style={{ background: "#E74C3C" }}
-            />
-            <span>-3 to -1%</span>
-            <span
-              className="inline-block w-4 h-3 rounded-sm"
-              style={{ background: "#E57373" }}
-            />
-            <span>-1 to 0%</span>
-            <span
-              className="inline-block w-4 h-3 rounded-sm"
-              style={{ background: "#81C784" }}
-            />
-            <span>0 to +1%</span>
-            <span
-              className="inline-block w-4 h-3 rounded-sm"
-              style={{ background: "#2ECC71" }}
-            />
-            <span>+1 to +3%</span>
-            <span
-              className="inline-block w-4 h-3 rounded-sm"
-              style={{ background: "#00C853" }}
-            />
-            <span>&gt;+3%</span>
+
+        <div className="flex items-center gap-2 text-xs text-gray-500">
+          <div className="flex items-center gap-0.5">
+            {[
+              { color: "#D32F2F", label: "-3%" },
+              { color: "#B71C1C", label: "" },
+              { color: "#5E2020", label: "-1%" },
+              { color: "#2a2a2a", label: "0%" },
+              { color: "#1B5E20", label: "+1%" },
+              { color: "#2E7D32", label: "" },
+              { color: "#00C853", label: "+3%" },
+            ].map((c, i) => (
+              <div key={i} className="flex flex-col items-center">
+                <span className="inline-block w-6 h-3 rounded-sm" style={{ background: c.color }} />
+                {c.label && <span className="text-[9px] mt-0.5">{c.label}</span>}
+              </div>
+            ))}
           </div>
-          {lastUpdated && (
-            <span className="text-xs text-gray-500 ml-auto">
-              Updated{" "}
-              {lastUpdated.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </span>
-          )}
+          <div className="ml-auto flex items-center gap-2">
+            <span className={`inline-block w-2 h-2 rounded-full ${wsConnected ? "bg-green-400 animate-pulse" : "bg-gray-500"}`} />
+            <span>{wsConnected ? "Live" : "Connecting..."}</span>
+            {lastUpdated && (
+              <span className="text-gray-600">
+                {lastUpdated.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Heatmap grid */}
-      <div className="space-y-6">
-        {sectors.map((group) => (
-          <div key={group.sector}>
-            <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">
-              {group.sector}
-            </h2>
-            <div className="flex flex-wrap gap-1.5">
-              {group.stocks.map((stock) => {
-                const sizeRatio = stock.marketCap / globalMaxCap;
-                // Scale from min 64px to max 200px on desktop
-                const minSize = 64;
-                const maxSize = 200;
-                const boxSize = Math.round(
-                  minSize + Math.sqrt(sizeRatio) * (maxSize - minSize)
-                );
-                const bgColor = getChangeColor(stock.changePercent);
-                const txtColor = getTextColor(stock.changePercent);
-                const isHovered = hoveredStock === stock.symbol;
-
-                return (
-                  <div
-                    key={stock.symbol}
-                    className="relative cursor-default transition-all duration-150 rounded-md overflow-hidden flex-shrink-0"
-                    style={{
-                      width: `${boxSize}px`,
-                      height: `${boxSize}px`,
-                      minWidth: "56px",
-                      minHeight: "56px",
-                      backgroundColor: bgColor,
-                      transform: isHovered ? "scale(1.05)" : "scale(1)",
-                      zIndex: isHovered ? 10 : 1,
-                      boxShadow: isHovered
-                        ? "0 8px 24px rgba(0,0,0,0.5)"
-                        : "none",
-                    }}
-                    onMouseEnter={() => setHoveredStock(stock.symbol)}
-                    onMouseLeave={() => setHoveredStock(null)}
-                  >
-                    <div
-                      className="w-full h-full flex flex-col items-center justify-center p-1"
-                      style={{ color: txtColor }}
-                    >
-                      <span
-                        className={`font-bold leading-tight ${
-                          boxSize > 100 ? "text-base" : "text-xs"
-                        }`}
-                      >
-                        {stock.symbol}
-                      </span>
-                      <span
-                        className={`font-medium leading-tight ${
-                          boxSize > 100 ? "text-sm" : "text-[10px]"
-                        }`}
-                      >
-                        {stock.changePercent >= 0 ? "+" : ""}
-                        {stock.changePercent.toFixed(2)}%
-                      </span>
-                    </div>
-
-                    {/* Hover tooltip */}
-                    {isHovered && (
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 pointer-events-none">
-                        <div className="bg-[#1a1a1a] border border-card-border rounded-lg px-3 py-2 shadow-xl whitespace-nowrap text-sm">
-                          <p className="font-bold text-white">{stock.name}</p>
-                          <p className="text-gray-400">
-                            ${stock.price.toFixed(2)}
-                          </p>
-                          <p
-                            style={{
-                              color:
-                                stock.changePercent >= 0
-                                  ? "#2ECC71"
-                                  : "#E74C3C",
-                            }}
-                          >
-                            {stock.changePercent >= 0 ? "+" : ""}
-                            {stock.changePercent.toFixed(2)}%
-                          </p>
-                          <p className="text-gray-500 text-xs">
-                            Cap: {formatMarketCap(stock.marketCap)}
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+      {/* Treemap */}
+      <div
+        ref={containerRef}
+        className="relative rounded-lg overflow-hidden border border-card-border"
+        style={{ height: `${mapHeight}px` }}
+        onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
+        onMouseLeave={() => setHoveredStock(null)}
+      >
+        {sectorLayout.map((sec) => (
+          <div key={sec.sector}>
+            <div
+              className="absolute text-[9px] font-bold text-gray-400 uppercase tracking-wider px-1 truncate pointer-events-none z-10"
+              style={{ left: `${sec.x}px`, top: `${sec.y}px`, width: `${sec.w}px`, height: "14px", lineHeight: "14px", backgroundColor: "#111" }}
+            >
+              {sec.sector}
             </div>
+            {sec.children.map((rect) => {
+              const isSmall = rect.w < 60 || rect.h < 40;
+              const isTiny = rect.w < 35 || rect.h < 25;
+              return (
+                <div
+                  key={rect.data.symbol}
+                  className="absolute border border-black/30 flex flex-col items-center justify-center overflow-hidden cursor-pointer"
+                  style={{
+                    left: `${rect.x}px`, top: `${rect.y}px`,
+                    width: `${rect.w}px`, height: `${rect.h}px`,
+                    backgroundColor: getChangeColor(rect.data.changePercent),
+                    opacity: hoveredStock && hoveredStock.symbol !== rect.data.symbol ? 0.6 : 1,
+                    transition: "background-color 0.5s ease, opacity 0.15s ease",
+                  }}
+                  onMouseEnter={() => setHoveredStock(rect.data)}
+                >
+                  {!isTiny && (
+                    <>
+                      <span className={`font-bold text-white leading-none ${isSmall ? "text-[10px]" : "text-sm"}`}>
+                        {rect.data.symbol}
+                      </span>
+                      <span className={`text-white/80 leading-none mt-0.5 ${isSmall ? "text-[8px]" : "text-xs"}`}>
+                        {rect.data.changePercent >= 0 ? "+" : ""}{rect.data.changePercent.toFixed(2)}%
+                      </span>
+                    </>
+                  )}
+                </div>
+              );
+            })}
           </div>
         ))}
+
+        {hoveredStock && (
+          <div className="fixed z-50 pointer-events-none" style={{ left: mousePos.x + 12, top: mousePos.y - 60 }}>
+            <div className="bg-[#1a1a1a] border border-gray-700 rounded-lg px-3 py-2 shadow-2xl text-sm">
+              <p className="font-bold text-white">{hoveredStock.name}</p>
+              <p className="text-gray-400">${hoveredStock.price.toFixed(2)}</p>
+              <p className={hoveredStock.changePercent >= 0 ? "text-green-400" : "text-red-400"}>
+                {hoveredStock.changePercent >= 0 ? "+" : ""}{hoveredStock.changePercent.toFixed(2)}%
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Top Gainers & Losers */}
@@ -287,22 +438,16 @@ export default function HeatmapPage() {
         const gainers = sorted.filter(s => s.changePercent > 0).slice(0, 5);
         const losers = sorted.filter(s => s.changePercent < 0).reverse().slice(0, 5);
         return (
-          <div className="grid md:grid-cols-2 gap-6 mt-10">
+          <div className="grid md:grid-cols-2 gap-6 mt-8">
             <div className="p-6 rounded-xl bg-card-bg border border-card-border">
               <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <span className="text-accent-green">▲</span> Top Gainers
+                <span className="text-green-400">▲</span> Top Gainers
               </h2>
               <div className="space-y-3">
                 {gainers.map((s) => (
                   <div key={`gain-${s.symbol}`} className="flex items-center justify-between">
-                    <div>
-                      <span className="font-bold text-white">{s.symbol}</span>
-                      <span className="text-gray-500 text-xs ml-2">{s.name.length > 20 ? s.name.slice(0, 20) + '...' : s.name}</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-accent-green font-mono font-semibold">+{s.changePercent.toFixed(2)}%</span>
-                      <span className="text-gray-500 text-xs ml-2">${s.price.toFixed(2)}</span>
-                    </div>
+                    <div><span className="font-bold text-white">{s.symbol}</span><span className="text-gray-500 text-xs ml-2">{s.name.length > 20 ? s.name.slice(0, 20) + "..." : s.name}</span></div>
+                    <div className="text-right"><span className="text-green-400 font-mono font-semibold">+{s.changePercent.toFixed(2)}%</span><span className="text-gray-500 text-xs ml-2">${s.price.toFixed(2)}</span></div>
                   </div>
                 ))}
                 {gainers.length === 0 && <p className="text-gray-500 text-sm">No gainers today</p>}
@@ -310,19 +455,13 @@ export default function HeatmapPage() {
             </div>
             <div className="p-6 rounded-xl bg-card-bg border border-card-border">
               <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <span className="text-accent-red">▼</span> Top Losers
+                <span className="text-red-400">▼</span> Top Losers
               </h2>
               <div className="space-y-3">
                 {losers.map((s) => (
                   <div key={`lose-${s.symbol}`} className="flex items-center justify-between">
-                    <div>
-                      <span className="font-bold text-white">{s.symbol}</span>
-                      <span className="text-gray-500 text-xs ml-2">{s.name.length > 20 ? s.name.slice(0, 20) + '...' : s.name}</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-accent-red font-mono font-semibold">{s.changePercent.toFixed(2)}%</span>
-                      <span className="text-gray-500 text-xs ml-2">${s.price.toFixed(2)}</span>
-                    </div>
+                    <div><span className="font-bold text-white">{s.symbol}</span><span className="text-gray-500 text-xs ml-2">{s.name.length > 20 ? s.name.slice(0, 20) + "..." : s.name}</span></div>
+                    <div className="text-right"><span className="text-red-400 font-mono font-semibold">{s.changePercent.toFixed(2)}%</span><span className="text-gray-500 text-xs ml-2">${s.price.toFixed(2)}</span></div>
                   </div>
                 ))}
                 {losers.length === 0 && <p className="text-gray-500 text-sm">No losers today</p>}
@@ -331,53 +470,6 @@ export default function HeatmapPage() {
           </div>
         );
       })()}
-
-      {/* Mobile-friendly list view for very small screens */}
-      {stocks.length > 0 && (
-        <div className="mt-10 sm:hidden">
-          <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
-            All Stocks
-          </h2>
-          <div className="space-y-1">
-            {stocks
-              .sort((a, b) => b.marketCap - a.marketCap)
-              .map((stock) => (
-                <div
-                  key={`list-${stock.symbol}`}
-                  className="flex items-center justify-between px-3 py-2 rounded-lg"
-                  style={{
-                    backgroundColor: getChangeColor(stock.changePercent) + "22",
-                    borderLeft: `3px solid ${getChangeColor(stock.changePercent)}`,
-                  }}
-                >
-                  <div>
-                    <span className="font-bold text-sm text-white">
-                      {stock.symbol}
-                    </span>
-                    <span className="text-gray-400 text-xs ml-2">
-                      {stock.name}
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span
-                      className="font-medium text-sm"
-                      style={{
-                        color:
-                          stock.changePercent >= 0 ? "#2ECC71" : "#E74C3C",
-                      }}
-                    >
-                      {stock.changePercent >= 0 ? "+" : ""}
-                      {stock.changePercent.toFixed(2)}%
-                    </span>
-                    <span className="text-gray-500 text-xs ml-2">
-                      ${stock.price.toFixed(2)}
-                    </span>
-                  </div>
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

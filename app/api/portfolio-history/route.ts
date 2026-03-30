@@ -7,16 +7,34 @@ interface HoldingDef {
   shares: number;
 }
 
-const HOLDINGS: HoldingDef[] = [
-  { ticker: "AAPL", shares: 25 },
-  { ticker: "MSFT", shares: 15 },
-  { ticker: "VOO", shares: 30 },
-  { ticker: "GOOGL", shares: 20 },
-  { ticker: "AMZN", shares: 18 },
-  { ticker: "NVDA", shares: 10 },
-  { ticker: "TSLA", shares: 12 },
-  { ticker: "VTI", shares: 20 },
-];
+const FUNCTIONS_BASE = "https://us-central1-cheeseapphq.cloudfunctions.net";
+
+let holdingsCache: { data: HoldingDef[]; timestamp: number } | null = null;
+const HOLDINGS_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
+async function getHoldings(): Promise<HoldingDef[]> {
+  const now = Date.now();
+  if (holdingsCache && now - holdingsCache.timestamp < HOLDINGS_CACHE_TTL) {
+    return holdingsCache.data;
+  }
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/getPortfolio`);
+    if (!res.ok) throw new Error(`Cloud function returned ${res.status}`);
+    const { holdings: raw } = await res.json();
+    const holdings: HoldingDef[] = (raw || []).map((h: { ticker: string; shares: number }) => ({
+      ticker: h.ticker,
+      shares: h.shares,
+    }));
+    if (holdings.length > 0) {
+      holdingsCache = { data: holdings, timestamp: now };
+    }
+    return holdings;
+  } catch (error) {
+    console.error("Failed to fetch holdings:", error);
+    return holdingsCache?.data ?? [];
+  }
+}
 
 // Start date: Dec 16 2025
 const START_EPOCH = Math.floor(new Date("2025-12-16").getTime() / 1000);
@@ -118,6 +136,9 @@ async function buildPortfolioHistory(): Promise<
   if (cache && now - cache.timestamp < CACHE_TTL) {
     return cache.data;
   }
+
+  const HOLDINGS = await getHoldings();
+  if (HOLDINGS.length === 0) return [];
 
   const { crumb, cookie } = await getCrumb();
 

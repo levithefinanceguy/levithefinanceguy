@@ -71,12 +71,13 @@ export default function CheesePage() {
             I built Cheese because I was tired of using five different apps to track my finances
             and health. Budget, invest, count calories, log workouts — all in one place.
           </p>
-          {/* Replace # with actual App Store link when available */}
           <a
-            href="#"
+            href="https://apps.apple.com/us/app/cheese-your-life-organized/id6760211525"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-gradient-to-r from-accent-green to-accent-teal text-black font-bold rounded-xl text-lg hover:brightness-110 transition-all"
           >
-            Coming Soon to the App Store
+            Available on the App Store
           </a>
         </div>
 
@@ -135,8 +136,16 @@ export default function CheesePage() {
         <div className="text-center py-12">
           <h2 className="text-3xl font-bold mb-4">Get Started</h2>
           <p className="text-gray-400 mb-8">
-            Cheese is launching soon on iOS. Follow me on social media to be the first to know.
+            Download Cheese on iOS and follow me on social media for updates.
           </p>
+          <a
+            href="https://apps.apple.com/us/app/cheese-your-life-organized/id6760211525"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-4 mb-8 bg-gradient-to-r from-accent-green to-accent-teal text-black font-bold rounded-xl text-lg hover:brightness-110 transition-all"
+          >
+            Download on the App Store
+          </a>
           <div className="flex flex-wrap justify-center gap-4">
             <a href="https://www.youtube.com/@levithefinanceguy/shorts" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-lg border border-card-border hover:border-accent-green/50 text-gray-300 hover:text-white transition-all">YouTube</a>
             <a href="https://www.tiktok.com/@levithefinanceguy" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-lg border border-card-border hover:border-accent-green/50 text-gray-300 hover:text-white transition-all">TikTok</a>
