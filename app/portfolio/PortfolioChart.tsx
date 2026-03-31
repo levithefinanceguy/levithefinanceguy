@@ -28,7 +28,7 @@ function formatDate(dateStr: string): string {
 }
 
 function filterByPeriod(data: DataPoint[], period: Period): DataPoint[] {
-  if (period === "ALL" || data.length === 0) return data;
+  if (period === "ALL" || period === "1D" || data.length === 0) return data;
 
   const now = new Date();
   let cutoff: Date;
@@ -45,6 +45,8 @@ function filterByPeriod(data: DataPoint[], period: Period): DataPoint[] {
       cutoff = new Date(now);
       cutoff.setMonth(cutoff.getMonth() - 3);
       break;
+    default:
+      return data;
   }
 
   const cutoffStr = cutoff.toISOString().split("T")[0];
