@@ -41,12 +41,21 @@ const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
 
 async function fetchTickerHistory(ticker: string): Promise<Map<string, number>> {
   const now = Math.floor(Date.now() / 1000);
-  // Use Yahoo's v8 chart API without crumb (works for most tickers)
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?period1=${START_EPOCH}&period2=${now}&interval=1d`;
+  // Try multiple Yahoo endpoints
+  const urls = [
+    `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?period1=${START_EPOCH}&period2=${now}&interval=1d`,
+    `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?period1=${START_EPOCH}&period2=${now}&interval=1d`,
+  ];
 
-  try {
-    const res = await fetch(url, { headers: { "User-Agent": UA } });
-    if (!res.ok) return new Map();
+  for (const url of urls) {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          "User-Agent": UA,
+          "Accept": "application/json",
+        },
+      });
+      if (!res.ok) continue;
 
     const json = await res.json();
     const result = json.chart?.result?.[0];
@@ -66,9 +75,11 @@ async function fetchTickerHistory(ticker: string): Promise<Map<string, number>> 
       if (lastClose > 0) priceMap.set(dateStr, lastClose);
     }
     return priceMap;
-  } catch {
-    return new Map();
+    } catch {
+      continue;
+    }
   }
+  return new Map();
 }
 
 async function buildPortfolioHistory(): Promise<{ date: string; value: number }[]> {
