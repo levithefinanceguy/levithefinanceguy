@@ -187,7 +187,7 @@ export default function FreedomFivePage() {
             The <span className="gradient-text">Levi Five</span>
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-2">
-            Five steps. No fluff. A clear path from financial stress to financial freedom.
+            Five steps. A clear path from financial stress to financial freedom.
           </p>
           <p className="text-sm text-gray-500 max-w-xl mx-auto">
             Follow these steps in order. Master each one before moving to the next.

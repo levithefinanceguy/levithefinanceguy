@@ -82,7 +82,7 @@ export default function ResourcesPage() {
         My <span className="text-accent-green">Resources</span>
       </h1>
       <p className="text-gray-400 text-center max-w-2xl mx-auto mb-4">
-        Books, apps, and tools I actually use. No fluff, no filler — just the stuff that has helped me along the way.
+        Books, apps, and tools I actually use. Just the stuff that's helped me along the way.
       </p>
       <p className="text-[11px] text-gray-600 text-center mb-12">
         Some links on this page are affiliate links. I may earn a small commission at no extra cost to you.

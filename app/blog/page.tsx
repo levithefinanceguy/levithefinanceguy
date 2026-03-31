@@ -5,11 +5,11 @@ import { posts } from "../../content/posts";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Personal finance articles, investing insights, and wealth-building strategies from Levi The Finance Guy. Transparent, practical, no BS.",
+    "Personal finance articles, investing insights, and wealth-building strategies from Levi The Finance Guy. Transparent and practical.",
   openGraph: {
     title: "Blog | Levi The Finance Guy",
     description:
-      "Personal finance articles and investing insights. Transparent, practical, no BS.",
+      "Personal finance articles and investing insights. Transparent and practical.",
   },
 };
 
@@ -56,8 +56,7 @@ export default function BlogPage() {
             The <span className="gradient-text">Blog</span>
           </h1>
           <p className="text-gray-400 leading-relaxed">
-            Thoughts on money, investing, and building wealth. No fluff, no gatekeeping
-            — just what I have learned along the way.
+            Thoughts on money, investing, and building wealth.
           </p>
         </div>
 

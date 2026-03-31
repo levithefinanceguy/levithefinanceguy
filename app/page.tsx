@@ -107,7 +107,7 @@ export default function Home() {
               The <span className="gradient-text">Levi Five</span> Framework
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Five steps from financial stress to financial freedom. No complexity, no BS.
+              Five steps from financial stress to financial freedom.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
