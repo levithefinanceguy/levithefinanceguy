@@ -293,7 +293,7 @@ export default function PortfolioChart() {
 
       {/* Period buttons */}
       <div className="flex justify-center gap-2 mt-4">
-        {(["1W", "1M", "3M", "ALL"] as Period[]).map((p) => (
+        {(["1D", "1W", "1M", "3M", "ALL"] as Period[]).map((p) => (
           <button
             key={p}
             onClick={() => {
