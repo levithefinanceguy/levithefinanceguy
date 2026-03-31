@@ -78,11 +78,18 @@ export async function GET() {
     const priceMap = new Map<string, { price: number; dividendPerShare: number }>();
 
     const quotePromises = tickers.map(async (ticker) => {
-      const quote = await fetchFinnhubQuote(ticker);
+      const finnhubSymbol = ticker.replace("-", ".");
+      const [quote, metrics] = await Promise.all([
+        fetchFinnhubQuote(finnhubSymbol),
+        fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${encodeURIComponent(finnhubSymbol)}&metric=all&token=${FINNHUB_KEY}`)
+          .then((r) => r.ok ? r.json() : null)
+          .catch(() => null),
+      ]);
       if (quote && quote.c > 0) {
+        const dps = metrics?.metric?.dividendPerShareAnnual ?? 0;
         priceMap.set(ticker, {
           price: quote.c,
-          dividendPerShare: 0, // Finnhub quote doesn't include dividends
+          dividendPerShare: dps,
         });
       }
     });
