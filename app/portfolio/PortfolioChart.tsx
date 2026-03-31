@@ -7,7 +7,7 @@ interface DataPoint {
   value: number;
 }
 
-type Period = "1W" | "1M" | "3M" | "ALL";
+type Period = "1D" | "1W" | "1M" | "3M" | "ALL";
 
 function fmt(n: number) {
   return n.toLocaleString("en-US", {
@@ -17,12 +17,14 @@ function fmt(n: number) {
 }
 
 function formatDate(dateStr: string): string {
+  // Intraday: "2026-03-31T14:30" → "2:30 PM"
+  if (dateStr.includes("T")) {
+    const d = new Date(dateStr + ":00Z");
+    return d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  }
+  // Daily: "2026-03-31" → "Mar 31, 2026"
   const d = new Date(dateStr + "T12:00:00");
-  return d.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
 function filterByPeriod(data: DataPoint[], period: Period): DataPoint[] {
@@ -58,8 +60,10 @@ export default function PortfolioChart() {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    fetch("/api/portfolio-history")
+  const fetchHistory = useCallback((range: string) => {
+    setLoading(true);
+    setError(false);
+    fetch(`/api/portfolio-history?range=${range}`)
       .then((res) => res.json())
       .then((json) => {
         if (json.history && json.history.length > 0) {
@@ -72,7 +76,14 @@ export default function PortfolioChart() {
       .finally(() => setLoading(false));
   }, []);
 
-  const data = useMemo(() => filterByPeriod(allData, period), [allData, period]);
+  useEffect(() => {
+    fetchHistory("ALL");
+  }, [fetchHistory]);
+
+  const data = useMemo(() => {
+    if (period === "1D") return allData; // Already filtered server-side
+    return filterByPeriod(allData, period);
+  }, [allData, period]);
 
   const startValue = data.length > 0 ? data[0].value : 0;
   const endValue = data.length > 0 ? data[data.length - 1].value : 0;
@@ -165,7 +176,7 @@ export default function PortfolioChart() {
           <div className="h-5 w-32 bg-gray-800 rounded mb-6" />
           <div className="h-[300px] bg-gray-800/50 rounded-lg" />
           <div className="flex gap-2 mt-4 justify-center">
-            {["1W", "1M", "3M", "ALL"].map((p) => (
+            {["1D", "1W", "1M", "3M", "ALL"].map((p) => (
               <div key={p} className="h-8 w-14 bg-gray-800 rounded-full" />
             ))}
           </div>
@@ -288,6 +299,8 @@ export default function PortfolioChart() {
             onClick={() => {
               setPeriod(p);
               setHoverIndex(null);
+              if (p === "1D") fetchHistory("1D");
+              else if (period === "1D") fetchHistory("ALL"); // switching back from 1D
             }}
             className={`px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 ${
               period === p
