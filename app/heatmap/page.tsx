@@ -5,6 +5,19 @@ import type { StockData, IndexData } from "../api/stocks/route";
 
 const FINNHUB_KEY = "d7586opr01qk56kbpvm0d7586opr01qk56kbpvmg";
 
+function LiveClock() {
+  const [time, setTime] = useState(new Date());
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+  return (
+    <span className="text-gray-600 tabular-nums">
+      {time.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+    </span>
+  );
+}
+
 function getChangeColor(pct: number): string {
   if (pct > 3) return "#00C853";
   if (pct > 2) return "#1B9E45";
@@ -376,11 +389,7 @@ export default function HeatmapPage() {
           <div className="ml-auto flex items-center gap-2">
             <span className={`inline-block w-2 h-2 rounded-full ${wsConnected ? "bg-green-400 animate-pulse" : "bg-gray-500"}`} />
             <span>{wsConnected ? "Live" : "Loading..."}</span>
-            {lastUpdated && (
-              <span className="text-gray-600">
-                {elapsed < 5 ? "just now" : elapsed < 60 ? `${elapsed}s ago` : `${Math.floor(elapsed / 60)}m ago`}
-              </span>
-            )}
+            <LiveClock />
           </div>
         </div>
       </div>
