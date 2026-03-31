@@ -83,6 +83,7 @@ export default function RootLayout({
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        <meta name="google-site-verification" content="2RAOm4rvwb300RM-h6gi5qiWF0vhqHRWJWOZSno16Dc" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2105872295580232"
