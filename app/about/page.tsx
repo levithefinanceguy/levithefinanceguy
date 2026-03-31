@@ -147,9 +147,10 @@ export default function AboutPage() {
             I also built Cheese, an all-in-one personal finance and health tracking app for iOS.
             Budget tracking, investment portfolio, calorie counting, and more.
           </p>
-          {/* Replace # with actual App Store link */}
           <a
-            href="#"
+            href="https://apps.apple.com/us/app/cheese-your-life-organized/id6760211525"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block px-6 py-3 bg-accent-green text-black font-semibold rounded-lg hover:brightness-110 transition-all"
           >
             Download Cheese on the App Store
