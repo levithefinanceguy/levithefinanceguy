@@ -119,46 +119,53 @@ async function fetchStockData(): Promise<{ stocks: StockData[]; indices: IndexDa
   }
 
   try {
-    // Batch fetch in groups of 10 to stay within Finnhub rate limit
-    const BATCH_SIZE = 10;
-    const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    // Fire all requests in parallel, retry failures once
+    const allItems = [
+      ...STOCKS.map((s) => ({ type: "stock" as const, stock: s })),
+      ...INDICES.map((i) => ({ type: "index" as const, index: i })),
+    ];
 
-    const stockResults: (StockData | null)[] = [];
-    for (let i = 0; i < STOCKS.length; i += BATCH_SIZE) {
-      const batch = STOCKS.slice(i, i + BATCH_SIZE);
-      const batchResults = await Promise.all(
-        batch.map(async (stock) => {
-          const finnhubSymbol = stock.symbol.replace("-", ".");
-          const quote = await fetchFinnhubQuote(finnhubSymbol);
-          if (!quote || quote.c === 0) return null;
-          return {
-            symbol: stock.symbol,
-            name: stock.name,
-            sector: stock.sector,
-            price: quote.c,
-            changePercent: quote.dp ?? 0,
-            marketCap: stock.approxCap * 1e9,
-          } as StockData;
-        })
-      );
-      stockResults.push(...batchResults);
-      if (i + BATCH_SIZE < STOCKS.length) await delay(1100);
-    }
+    const results = await Promise.all(
+      allItems.map(async (item) => {
+        const symbol = item.type === "stock"
+          ? item.stock.symbol.replace("-", ".")
+          : item.index.finnhubSymbol;
+        let quote = await fetchFinnhubQuote(symbol);
+        // Retry once on failure (rate limit)
+        if (!quote) {
+          await new Promise((r) => setTimeout(r, 1200));
+          quote = await fetchFinnhubQuote(symbol);
+        }
+        return { item, quote };
+      })
+    );
 
-    // Fetch index ETF proxies
-    const indexResults = await Promise.all(
-      INDICES.map(async (idx) => {
-        const quote = await fetchFinnhubQuote(idx.finnhubSymbol);
-        if (!quote || quote.c === 0) return null;
+    const stockResults = results
+      .filter((r) => r.item.type === "stock" && r.quote && r.quote.c > 0)
+      .map((r) => {
+        const stock = (r.item as { type: "stock"; stock: StockDef }).stock;
+        return {
+          symbol: stock.symbol,
+          name: stock.name,
+          sector: stock.sector,
+          price: r.quote!.c,
+          changePercent: r.quote!.dp ?? 0,
+          marketCap: stock.approxCap * 1e9,
+        } as StockData;
+      });
+
+    const indexResults = results
+      .filter((r) => r.item.type === "index" && r.quote && r.quote.c > 0)
+      .map((r) => {
+        const idx = (r.item as { type: "index"; index: typeof INDICES[0] }).index;
         return {
           symbol: idx.symbol,
           name: idx.name,
-          price: quote.c,
-          changePercent: quote.dp ?? 0,
-          change: quote.c - (quote.pc ?? 0),
+          price: r.quote!.c,
+          changePercent: r.quote!.dp ?? 0,
+          change: r.quote!.c - (r.quote!.pc ?? 0),
         } as IndexData;
-      })
-    );
+      });
 
     const stocks = stockResults.filter(Boolean) as StockData[];
     const indices = indexResults.filter(Boolean) as IndexData[];
