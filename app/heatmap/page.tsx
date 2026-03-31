@@ -180,6 +180,7 @@ export default function HeatmapPage() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(1200);
+  const [elapsed, setElapsed] = useState(0);
   const [wsConnected, setWsConnected] = useState(false);
   const stocksRef = useRef<StockData[]>([]);
   const wsRef = useRef<WebSocket | null>(null);
@@ -261,6 +262,15 @@ export default function HeatmapPage() {
       };
     });
   }, [fetchData]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (lastUpdated) {
+        setElapsed(Math.floor((Date.now() - lastUpdated.getTime()) / 1000));
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [lastUpdated]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -368,7 +378,7 @@ export default function HeatmapPage() {
             <span>{wsConnected ? "Live" : "Loading..."}</span>
             {lastUpdated && (
               <span className="text-gray-600">
-                {lastUpdated.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                {elapsed < 5 ? "just now" : elapsed < 60 ? `${elapsed}s ago` : `${Math.floor(elapsed / 60)}m ago`}
               </span>
             )}
           </div>
