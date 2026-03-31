@@ -50,13 +50,13 @@ async function fetchFinnhubQuote(symbol: string): Promise<{ c: number; dp: numbe
 }
 
 let portfolioCache: { data: unknown; timestamp: number } | null = null;
-const PORTFOLIO_CACHE_TTL = 30 * 1000; // 30 seconds
+const PORTFOLIO_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 export async function GET() {
   const now = Date.now();
   if (portfolioCache && now - portfolioCache.timestamp < PORTFOLIO_CACHE_TTL) {
     return NextResponse.json(portfolioCache.data, {
-      headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60" },
+      headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" },
     });
   }
 
@@ -107,7 +107,7 @@ export async function GET() {
     portfolioCache = { data: result, timestamp: now };
 
     return NextResponse.json(result, {
-      headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60" },
+      headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" },
     });
   } catch (error) {
     console.error("Portfolio fetch error:", error);
