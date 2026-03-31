@@ -325,43 +325,47 @@ export default function HeatmapPage() {
           <span className="text-gray-300">Market Heatmap</span>
         </h1>
         <p className="text-gray-400 max-w-2xl mb-4">
-          Live market data via websocket. Box size reflects market cap. Colors show daily price change.
+          Real-time market data. Box size reflects market cap. Colors show daily price change.
         </p>
 
-        {indices.length > 0 && (
-          <div className="grid grid-cols-3 gap-3 mb-4">
-            {indices.map((idx) => (
-              <div key={idx.symbol} className="p-3 rounded-xl bg-card-bg border border-card-border">
-                <p className="text-xs text-gray-500">{idx.name}</p>
-                <p className="text-lg font-bold">{idx.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                <p className={`text-sm font-mono ${idx.changePercent >= 0 ? "text-green-400" : "text-red-400"}`}>
-                  {idx.changePercent >= 0 ? "+" : ""}{idx.change.toFixed(2)} ({idx.changePercent >= 0 ? "+" : ""}{idx.changePercent.toFixed(2)}%)
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
+        {indices.length > 0 && (() => {
+          // Convert ETF proxy prices to approximate index values
+          const indexMultipliers: Record<string, number> = {
+            "^GSPC": 10.34,  // SPY → S&P 500
+            "^DJI": 106.8,   // DIA → Dow Jones
+            "^IXIC": 36.7,   // QQQ → Nasdaq (approximate)
+          };
+          return (
+            <div className="grid grid-cols-3 gap-3 mb-4">
+              {indices.map((idx) => {
+                const mult = indexMultipliers[idx.symbol] || 1;
+                const displayPrice = idx.price * mult;
+                const displayChange = idx.change * mult;
+                return (
+                  <div key={idx.symbol} className="p-3 rounded-xl bg-card-bg border border-card-border">
+                    <p className="text-xs text-gray-500">{idx.name}</p>
+                    <p className="text-lg font-bold">{displayPrice.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
+                    <p className={`text-sm font-mono ${idx.changePercent >= 0 ? "text-green-400" : "text-red-400"}`}>
+                      {idx.changePercent >= 0 ? "+" : ""}{displayChange.toFixed(0)} ({idx.changePercent >= 0 ? "+" : ""}{idx.changePercent.toFixed(2)}%)
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })()}
 
         <div className="flex items-center gap-2 text-xs text-gray-500">
-          <div className="flex items-center gap-0.5">
-            {[
-              { color: "#D32F2F", label: "-3%" },
-              { color: "#B71C1C", label: "" },
-              { color: "#5E2020", label: "-1%" },
-              { color: "#2a2a2a", label: "0%" },
-              { color: "#1B5E20", label: "+1%" },
-              { color: "#2E7D32", label: "" },
-              { color: "#00C853", label: "+3%" },
-            ].map((c, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <span className="inline-block w-6 h-3 rounded-sm" style={{ background: c.color }} />
-                {c.label && <span className="text-[9px] mt-0.5">{c.label}</span>}
-              </div>
+          <div className="flex items-center">
+            <span className="text-[9px] mr-1">-3%</span>
+            {["#D32F2F","#B71C1C","#7D2E2E","#5E2020","#3A1A1A","#2a2a2a","#1A3A1A","#1B5E20","#2E7D32","#1B9E45","#00C853"].map((c, i) => (
+              <span key={i} className="inline-block w-4 h-3" style={{ background: c }} />
             ))}
+            <span className="text-[9px] ml-1">+3%</span>
           </div>
           <div className="ml-auto flex items-center gap-2">
             <span className={`inline-block w-2 h-2 rounded-full ${wsConnected ? "bg-green-400 animate-pulse" : "bg-gray-500"}`} />
-            <span>{wsConnected ? "Live" : "Connecting..."}</span>
+            <span>{wsConnected ? "Live" : "Loading..."}</span>
             {lastUpdated && (
               <span className="text-gray-600">
                 {lastUpdated.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
