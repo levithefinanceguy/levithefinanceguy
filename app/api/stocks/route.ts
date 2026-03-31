@@ -98,7 +98,7 @@ const INDICES = [
 ];
 
 let cache: { data: StockData[]; indices: IndexData[]; timestamp: number } | null = null;
-const CACHE_TTL = 2 * 60 * 1000; // 2 minutes
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes — websocket handles real-time after initial load
 
 async function fetchFinnhubQuote(symbol: string): Promise<{ c: number; dp: number; pc: number } | null> {
   try {
@@ -119,39 +119,46 @@ async function fetchStockData(): Promise<{ stocks: StockData[]; indices: IndexDa
   }
 
   try {
-    // Fetch all stock quotes in parallel
-    const quotePromises = STOCKS.map(async (stock) => {
-      // Finnhub uses "." instead of "-" for special tickers
-      const finnhubSymbol = stock.symbol.replace("-", ".");
-      const quote = await fetchFinnhubQuote(finnhubSymbol);
-      if (!quote || quote.c === 0) return null;
-      return {
-        symbol: stock.symbol,
-        name: stock.name,
-        sector: stock.sector,
-        price: quote.c,
-        changePercent: quote.dp ?? 0,
-        marketCap: stock.approxCap * 1e9,
-      } as StockData;
-    });
+    // Batch fetch in groups of 10 to stay within Finnhub rate limit
+    const BATCH_SIZE = 10;
+    const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-    // Fetch index ETF proxies in parallel
-    const indexPromises = INDICES.map(async (idx) => {
-      const quote = await fetchFinnhubQuote(idx.finnhubSymbol);
-      if (!quote || quote.c === 0) return null;
-      return {
-        symbol: idx.symbol,
-        name: idx.name,
-        price: quote.c,
-        changePercent: quote.dp ?? 0,
-        change: quote.c - (quote.pc ?? 0),
-      } as IndexData;
-    });
+    const stockResults: (StockData | null)[] = [];
+    for (let i = 0; i < STOCKS.length; i += BATCH_SIZE) {
+      const batch = STOCKS.slice(i, i + BATCH_SIZE);
+      const batchResults = await Promise.all(
+        batch.map(async (stock) => {
+          const finnhubSymbol = stock.symbol.replace("-", ".");
+          const quote = await fetchFinnhubQuote(finnhubSymbol);
+          if (!quote || quote.c === 0) return null;
+          return {
+            symbol: stock.symbol,
+            name: stock.name,
+            sector: stock.sector,
+            price: quote.c,
+            changePercent: quote.dp ?? 0,
+            marketCap: stock.approxCap * 1e9,
+          } as StockData;
+        })
+      );
+      stockResults.push(...batchResults);
+      if (i + BATCH_SIZE < STOCKS.length) await delay(1100);
+    }
 
-    const [stockResults, indexResults] = await Promise.all([
-      Promise.all(quotePromises),
-      Promise.all(indexPromises),
-    ]);
+    // Fetch index ETF proxies
+    const indexResults = await Promise.all(
+      INDICES.map(async (idx) => {
+        const quote = await fetchFinnhubQuote(idx.finnhubSymbol);
+        if (!quote || quote.c === 0) return null;
+        return {
+          symbol: idx.symbol,
+          name: idx.name,
+          price: quote.c,
+          changePercent: quote.dp ?? 0,
+          change: quote.c - (quote.pc ?? 0),
+        } as IndexData;
+      })
+    );
 
     const stocks = stockResults.filter(Boolean) as StockData[];
     const indices = indexResults.filter(Boolean) as IndexData[];
