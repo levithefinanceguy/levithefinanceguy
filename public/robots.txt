@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://levithefinanceguy.com/sitemap.xml
