@@ -82,11 +82,16 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2105872295580232"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-background text-foreground">
         <Navigation />
-        <AdBanner slot="top" size="responsive" />
         <main className="flex-1">{children}</main>
-        <AdBanner slot="bottom" size="responsive" />
         <Footer />
       </body>
     </html>
