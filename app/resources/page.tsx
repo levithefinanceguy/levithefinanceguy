@@ -150,66 +150,6 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* The Levi Five Resources */}
-      <section className="mb-14">
-        <h2 className="text-xl font-bold mb-2">The Levi Five Resources</h2>
-        <p className="text-gray-400 text-sm mb-6">Tools that tie directly into each step of <a href="/the-levi-five" className="text-accent-green hover:underline">The Levi Five</a>.</p>
-        <div className="space-y-4">
-          <div className="p-5 rounded-xl border border-card-border bg-card-bg">
-            <h3 className="font-semibold text-white mb-1">Step 1: One Month Security</h3>
-            <p className="text-sm text-gray-400 mb-2">Park your emergency fund in a high-yield savings account so it actually earns something while it sits there.</p>
-            <div className="flex flex-wrap gap-3 text-sm">
-              <span className="text-gray-500">Recommended HYSAs:</span>
-              <a href="https://www.marcus.com/us/en/savings/high-yield-savings" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">Marcus by Goldman Sachs</a>
-              <span className="text-gray-600">·</span>
-              <a href="https://www.sofi.com/invite/money?gcp=4bbe2774-a1a0-4008-b5c3-d9c59928b61a&isAliasGcp=false" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">SoFi ($25 bonus)</a>
-              <span className="text-xs text-gray-600 self-center">(affiliate)</span>
-            </div>
-            <a href="/calculators/emergency-fund" className="inline-block mt-2 text-xs text-accent-green hover:underline">Emergency Fund Calculator →</a>
-          </div>
-          <div className="p-5 rounded-xl border border-card-border bg-card-bg">
-            <h3 className="font-semibold text-white mb-1">Step 2: Capture the Match</h3>
-            <p className="text-sm text-gray-400 mb-2">Make sure you are getting 100% of your employer match. Check with your HR department.</p>
-            <a href="/calculators/retirement" className="inline-block text-xs text-accent-green hover:underline">Retirement Calculator →</a>
-          </div>
-          <div className="p-5 rounded-xl border border-card-border bg-card-bg">
-            <h3 className="font-semibold text-white mb-1">Step 3: Eliminate Consumer Debt</h3>
-            <p className="text-sm text-gray-400 mb-2">Know your numbers. Check your credit score for free and make a payoff plan.</p>
-            <div className="flex flex-wrap gap-3 text-sm mb-2">
-              <span className="text-gray-500">Free credit score:</span>
-              <a href="https://www.creditkarma.com" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">Credit Karma</a>
-              <span className="text-gray-600">·</span>
-              <a href="https://www.annualcreditreport.com" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">AnnualCreditReport.com</a>
-            </div>
-            <a href="/calculators/debt-payoff" className="inline-block text-xs text-accent-green hover:underline">Debt Payoff Calculator →</a>
-          </div>
-          <div className="p-5 rounded-xl border border-card-border bg-card-bg">
-            <h3 className="font-semibold text-white mb-1">Step 4: Secure, Invest, & Plan</h3>
-            <p className="text-sm text-gray-400 mb-2">Start investing consistently. Even small amounts add up over time.</p>
-            <div className="flex flex-wrap gap-3 text-sm mb-2">
-              <a href="https://join.robinhood.com/bretp22" target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">Robinhood</a>
-              <span className="text-xs text-gray-600 self-center">(affiliate)</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <a href="/calculators/compound-interest" className="inline-block text-xs text-accent-green hover:underline">Compound Interest Calculator →</a>
-              <span className="text-gray-600">·</span>
-              <a href="/calculators/fire" className="inline-block text-xs text-accent-green hover:underline">FIRE Calculator →</a>
-            </div>
-          </div>
-          <div className="p-5 rounded-xl border border-card-border bg-card-bg">
-            <h3 className="font-semibold text-white mb-1">Step 5: Build & Optimize</h3>
-            <p className="text-sm text-gray-400 mb-2">Grow your wealth, pay down your mortgage, build ownership.</p>
-            <div className="flex flex-wrap gap-2">
-              <a href="/calculators/net-worth" className="inline-block text-xs text-accent-green hover:underline">Net Worth Calculator →</a>
-              <span className="text-gray-600">·</span>
-              <a href="/calculators/mortgage" className="inline-block text-xs text-accent-green hover:underline">Mortgage Calculator →</a>
-              <span className="text-gray-600">·</span>
-              <a href="/calculators/investment-growth" className="inline-block text-xs text-accent-green hover:underline">Investment Growth Calculator →</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Disclaimer */}
       <div className="mt-8 p-4 rounded-lg border border-card-border bg-card-bg/50">
         <p className="text-xs text-gray-500 leading-relaxed">

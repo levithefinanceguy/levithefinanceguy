@@ -20,7 +20,6 @@ export default function CheesePage() {
         { title: "Investment Portfolio", description: "Track your stocks, ETFs, and crypto. See real-time performance and allocation." },
         { title: "Dividend Tracking", description: "Monitor dividend income, track payout dates, and see your passive income grow." },
         { title: "Net Worth", description: "Assets minus liabilities. One number that tells you where you stand financially." },
-        { title: "The Levi Five", description: "A step-by-step framework to go from zero to financially independent." },
         { title: "Finance Calculators", description: "Compound interest, mortgage, FIRE, retirement, debt payoff, and more." },
       ],
     },
@@ -122,13 +121,13 @@ export default function CheesePage() {
           </div>
         </div>
 
-        {/* Powered by Culture */}
+        {/* Smart Nutrition */}
         <div className="mb-16 p-8 rounded-xl border border-accent-green/20 bg-accent-green/5">
-          <h2 className="text-2xl font-bold mb-4">Powered by <span className="gradient-text">Culture API</span></h2>
+          <h2 className="text-2xl font-bold mb-4">Smart <span className="gradient-text">Nutrition Tracking</span></h2>
           <p className="text-gray-400 leading-relaxed">
-            Cheese uses Culture, our own food nutrition API with over 460,000 foods, AI-powered
-            photo recognition, personalized health scoring, and data from the USDA. Scan a barcode,
-            take a photo of your meal, or just type what you ate — Culture handles the rest.
+            Cheese gives you access to over 460,000 foods, AI-powered photo recognition,
+            personalized health scoring, and verified restaurant nutrition data. Scan a barcode,
+            take a photo of your meal, or just type what you ate — Cheese handles the rest.
           </p>
         </div>
 

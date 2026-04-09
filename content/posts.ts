@@ -11,6 +11,325 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "roth-ira-vs-traditional-ira-2026",
+    title: "Roth IRA vs Traditional IRA in 2026: Which One Should You Pick?",
+    date: "2026-04-09",
+    description:
+      "A straightforward breakdown of Roth and Traditional IRAs — contribution limits, tax differences, and how to decide which one makes sense for you.",
+    category: "finance",
+    author: "Levi",
+    readingTime: "5 min read",
+    content: `If you are looking into retirement accounts, you have probably seen Roth IRA and Traditional IRA come up a hundred times. They sound similar but they work differently, and which one you pick matters. Here is what you need to know heading into 2026.
+
+## The Basics
+
+Both are individual retirement accounts. Both let your money grow over time. The difference is when you pay taxes.
+
+**Traditional IRA:** You may get a tax deduction when you contribute. Your money grows tax-deferred. You pay taxes when you withdraw in retirement.
+
+**Roth IRA:** You contribute money you have already paid taxes on. Your money grows tax-free. You pay nothing when you withdraw in retirement.
+
+Think of it this way. Traditional IRA gives you a tax break now and you pay later. Roth IRA gives you no break now but you never pay taxes on the growth.
+
+## 2026 Contribution Limits
+
+The IRS raised the limit this year. You can contribute up to $7,500 across all your IRAs combined. If you are 50 or older, you get an extra $1,100 for a total of $8,600.
+
+That is a combined limit. You cannot put $7,500 in a Roth and another $7,500 in a Traditional. It is $7,500 total between them.
+
+The deadline to make a 2025 contribution is April 15, 2026. So if you have not maxed out last year yet, you still have time.
+
+## Income Limits
+
+This is where it gets important.
+
+**Roth IRA:** In 2026, single filers need to make less than $153,000 to contribute the full amount. Married filing jointly, the limit is $242,000. If you make more than that, you cannot contribute directly to a Roth. There are workarounds like a backdoor Roth, but that is a separate conversation.
+
+**Traditional IRA:** Anyone with earned income can contribute regardless of how much they make. But your ability to deduct the contribution on your taxes depends on whether you or your spouse have a retirement plan at work and how much you earn.
+
+## So Which One Do You Pick?
+
+There is no universally right answer. It depends on your situation.
+
+**A Roth IRA makes more sense if:**
+
+You are early in your career and your income is relatively low right now. You expect to earn more in the future and be in a higher tax bracket when you retire. Paying taxes now at a lower rate and letting everything grow tax-free is a good deal.
+
+You also might prefer a Roth if you want flexibility. Roth IRA contributions (not earnings) can be withdrawn at any time without penalty. That is not the case with a Traditional IRA before age 59 and a half.
+
+**A Traditional IRA makes more sense if:**
+
+You are in a higher tax bracket right now and want to reduce your taxable income this year. If you are making good money and need the deduction, a Traditional IRA can lower your tax bill today. You will pay taxes in retirement, but if your income is lower then, you come out ahead.
+
+It also makes sense if you are over the Roth income limit and do not want to deal with backdoor conversions.
+
+## What I Did
+
+I went with a Roth. I am still building my income and I would rather pay taxes now while my rate is lower than pay them later when I hopefully have a lot more money. The idea of tax-free growth for decades just makes more sense for where I am right now.
+
+That said, if I were making significantly more, I would probably split between both. There is no rule that says you have to pick one forever. You can contribute to a Traditional one year and a Roth the next as your situation changes.
+
+## One More Thing
+
+A lot of brokerages offer IRA matching now. [Robinhood](https://join.robinhood.com/bretp22) gives a 3% match on IRA contributions if you have Gold. That is basically free money on top of whatever you contribute. Worth looking into if you are deciding where to open an account.
+
+## The Bottom Line
+
+If you are young and your income is on the lower end, lean toward a Roth. If you need a tax break right now and are in a higher bracket, lean toward Traditional. If you are not sure, a Roth is generally the safer bet for most people starting out because you are locking in your tax rate while it is low.
+
+The most important thing is that you are actually putting money into one of them. The Roth vs Traditional debate matters less than the decision to start contributing in the first place.`,
+  },
+  {
+    slug: "high-yield-savings-accounts-2026",
+    title: "High-Yield Savings Accounts in 2026: What to Know Before You Open One",
+    date: "2026-04-09",
+    description:
+      "High-yield savings accounts are still paying 4-5% APY in 2026. Here is how they work, what to look for, and whether they are worth it.",
+    category: "finance",
+    author: "Levi",
+    readingTime: "4 min read",
+    content: `If your savings are sitting in a regular bank account earning 0.01%, you are leaving money on the table. High-yield savings accounts are paying between 4% and 5% APY right now. On $10,000 that is the difference between earning $1 a year and earning $400 to $500.
+
+## What Is a High-Yield Savings Account?
+
+It is a savings account with a higher interest rate than what traditional banks offer. Most big banks pay next to nothing on savings. Online banks and neobanks can afford to pay more because they have lower overhead — no physical branches to maintain.
+
+Your money is still FDIC insured up to $250,000. You can still access it whenever you need it. The only real difference is you earn more interest.
+
+## Current Rates (April 2026)
+
+Rates vary, but here is what the market looks like right now:
+
+- Top rates are around 4% to 5% APY
+- The national average for a regular savings account is still around 0.39%
+- [SoFi](https://www.sofi.com/invite/money?gcp=4bbe2774-a1a0-4008-b5c3-d9c59928b61a&isAliasGcp=false) is offering around 4% APY with direct deposit
+
+These rates change as the Federal Reserve adjusts interest rates. When the Fed cuts rates, savings account yields tend to drop too. But even with potential cuts, high-yield accounts will still significantly outperform traditional savings accounts.
+
+## What to Look For
+
+Not all high-yield savings accounts are the same. Here is what matters:
+
+**APY:** The annual percentage yield is the headline number. Higher is better, but do not chase the absolute highest rate if the bank has other issues.
+
+**Fees:** Most good high-yield accounts have no monthly fees and no minimum balance requirements. If an account charges fees, keep looking.
+
+**Access:** You should be able to transfer money in and out easily. Some accounts let you link external bank accounts for transfers in 1-2 business days.
+
+**FDIC Insurance:** Make sure the bank is FDIC insured. This protects your money up to $250,000 if the bank fails.
+
+**Minimum Deposit:** Some accounts require a minimum to open or to earn the advertised rate. Many have no minimum at all.
+
+## What They Are Good For
+
+A high-yield savings account is not an investment. It is not going to make you wealthy. But it is the right place for money you might need soon.
+
+**Emergency fund.** This is the main use case. You want your emergency fund somewhere safe, accessible, and earning something while it sits there. A high-yield savings account checks all three boxes.
+
+**Short-term savings goals.** Saving for a vacation, a car, a down payment on something — money you need in the next 1-3 years should not be in the stock market. A savings account keeps it safe and growing.
+
+**Cash buffer.** Some people keep a month or two of expenses in a high-yield account as a buffer on top of their checking account.
+
+## What They Are Not Good For
+
+Long-term wealth building. If you have money you will not need for 5 or more years, it should probably be invested. The stock market has historically returned around 10% per year on average. A savings account at 4% will not keep up over decades.
+
+Do not park all your money in a savings account just because the rate is high. Use it for what it is designed for — safe, liquid, short-term savings.
+
+## Do Rates Matter That Much?
+
+The difference between 4% and 4.5% on $10,000 is about $50 a year. It is not nothing, but it is not worth spending hours comparing every option either.
+
+Pick an account from a reputable bank with no fees, a competitive rate, and easy access. Set it up, automate your savings, and move on. The rate will fluctuate over time regardless of which bank you choose.
+
+## The Bottom Line
+
+If you do not have a high-yield savings account yet, open one. It takes 10 minutes and it immediately starts earning you more on money you are already saving. There is no downside. Your money is insured, accessible, and working harder than it is in a traditional bank account.`,
+  },
+  {
+    slug: "50-30-20-budget-rule-explained",
+    title: "The 50/30/20 Budget Rule Explained: Does It Actually Work?",
+    date: "2026-04-08",
+    description:
+      "The 50/30/20 rule is one of the most popular budgeting methods out there. Here is how it works, when it makes sense, and when it does not.",
+    category: "finance",
+    author: "Levi",
+    readingTime: "4 min read",
+    content: `The 50/30/20 rule is probably the most recommended budgeting method on the internet. It is simple, easy to remember, and gives you a framework without making you track every single dollar. But does it actually work?
+
+## How It Works
+
+Take your after-tax income and split it into three buckets:
+
+**50% for Needs** — rent or mortgage, utilities, groceries, insurance, transportation, minimum debt payments. The things you have to pay to live.
+
+**30% for Wants** — eating out, subscriptions, entertainment, clothes, travel. The things you enjoy but could survive without.
+
+**20% for Savings and Debt** — emergency fund, retirement contributions, extra debt payments, investing. The things that build your future.
+
+So if you bring home $4,000 a month after taxes, that is $2,000 for needs, $1,200 for wants, and $800 for savings and debt repayment.
+
+## Why People Like It
+
+It is simple. You do not need a spreadsheet with 47 categories. You do not need to track whether the coffee you bought counts as groceries or dining out. Three buckets. That is it.
+
+It also gives you permission to spend. A lot of budget advice makes you feel guilty for buying anything that is not strictly necessary. The 50/30/20 rule says 30% of your income can go to things you want. That is built into the system.
+
+And the 20% savings rate is a reasonable starting point. If you save and invest 20% of your income consistently over your career, you will be in a solid position for retirement.
+
+## When It Does Not Work
+
+The biggest issue is that 50% for needs is not realistic for everyone. If you live in a high cost of living area, rent alone might eat up 40% of your take-home pay. Add in utilities, groceries, insurance, and a car payment and you are well past 50% before you even think about wants or savings.
+
+According to recent data, a lot of people are spending closer to 60-70% on needs, especially in cities where housing costs have gone up significantly. If that is your reality, the 50/30/20 split just does not fit and that is not a personal failure. It is math.
+
+It also does not account for debt. If you have significant student loans or credit card debt, you might need to put way more than 20% toward debt repayment to make real progress. Following the rule strictly could slow down your debt payoff.
+
+## How to Adapt It
+
+The percentages are a guideline, not a law. If your needs take up 60%, adjust to 60/20/20 or 60/15/25. The point is having a framework, not hitting exact numbers.
+
+Some people flip it and prioritize savings. A 50/20/30 approach where you save 30% and spend 20% on wants works if you can afford it. Others go aggressive with something like 70/10/20 during high-income periods to build wealth faster.
+
+The key is knowing where your money goes and being intentional about it. The specific percentages matter less than the habit of dividing your income into categories and sticking to a plan.
+
+## My Take
+
+I use a version of this but I do not stress about hitting exact percentages. I have a set amount that goes to savings and investments automatically every paycheck. I know roughly what my fixed expenses are. Everything else is flexible.
+
+What helped me most was tracking my spending for a month without changing anything. Just seeing where my money actually went was enough to make better decisions going forward. You do not need a fancy system. You just need awareness.
+
+## The Bottom Line
+
+The 50/30/20 rule is a solid starting point, especially if you have never budgeted before. It gives you structure without being overwhelming. But do not treat it as a rigid formula. Adjust the percentages to fit your life, your income, and your goals. The best budget is the one you actually follow.`,
+  },
+  {
+    slug: "how-to-start-investing-in-2026",
+    title: "How to Start Investing in 2026 (Even with $1)",
+    date: "2026-04-07",
+    description:
+      "You do not need thousands of dollars to start investing. Here is how to get started with whatever you have, including what to buy and where to open an account.",
+    category: "finance",
+    author: "Levi",
+    readingTime: "5 min read",
+    content: `The number one thing that stops people from investing is thinking they need a lot of money to start. You do not. You can open an account and buy your first investment with $1. I know because that is exactly what I did.
+
+## What You Need to Get Started
+
+**A brokerage account.** This is where you buy and hold investments. You can open one online in about 10 minutes. Popular options include [Robinhood](https://join.robinhood.com/bretp22), Fidelity, Charles Schwab, and [SoFi](https://www.sofi.com/invite/money?gcp=4bbe2774-a1a0-4008-b5c3-d9c59928b61a&isAliasGcp=false). Most have no minimums and no fees for basic trading.
+
+**Money to invest.** Even $5. Thanks to fractional shares, you do not need to buy a whole share of anything. If a share of a company costs $500, you can buy $5 worth and own a fraction of that share. Your $5 grows at the same rate as someone who bought the whole thing.
+
+**A basic understanding of what you are buying.** You do not need to be an expert. You just need to know the basics.
+
+## What to Invest In (Keeping It Simple)
+
+If you are just starting out, do not try to pick individual stocks. The simplest and most reliable approach is index funds or ETFs that track the overall market.
+
+**S&P 500 Index Fund (like VOO or SPY):** This holds the 500 largest US companies. When you buy a share, you own a small piece of Apple, Microsoft, Amazon, Google, and 496 other companies. One purchase gives you instant diversification.
+
+**Total Stock Market Fund (like VTI):** Similar to an S&P 500 fund but includes smaller companies too. Broader diversification.
+
+**Target Date Fund:** These automatically adjust your investment mix as you get closer to retirement. Pick the one closest to the year you plan to retire and it handles everything. These are common in 401(k) plans.
+
+You can build a solid portfolio with just one or two of these funds. It is not exciting, but it works.
+
+## How Much Should You Invest?
+
+Whatever you can. Seriously. The amount matters less than the consistency. $25 a week is $1,300 a year. Do that for 30 years with average market returns and you are looking at over $100,000.
+
+The key is making it automatic. Set up recurring investments so money moves from your bank account to your brokerage on a schedule. You will not miss money you never see, and you will not have to make the decision to invest every week. It just happens.
+
+This is called dollar cost averaging. You invest the same amount regularly regardless of what the market is doing. When prices are high, you buy fewer shares. When prices are low, you buy more. Over time it averages out and you do not have to worry about timing the market.
+
+## What About Risk?
+
+The stock market goes up and down. That is normal. If you invest $1,000 today, it could be worth $900 next month. It could also be worth $1,100. In the short term, anything can happen.
+
+But historically, the US stock market has returned about 10% per year on average over the long term. The key word is long term. If you are investing money you will not need for 10, 20, or 30 years, short-term drops do not matter.
+
+The biggest risk for most people is not investing at all. Inflation eats away at the value of cash sitting in a bank account. If your money is not growing, it is shrinking in real terms.
+
+## Common Mistakes to Avoid
+
+**Waiting for the right time.** There is no perfect time to start. The market might drop after you invest. It might also go on a run. You cannot predict it and trying to time it usually means you never start.
+
+**Checking your account every day.** This leads to panic selling when things dip. Set up your automatic investments and check in once a month or once a quarter. You are investing for the long haul.
+
+**Investing money you need soon.** Do not invest your rent money or your emergency fund. The stock market is for money you can leave alone for years.
+
+**Picking individual stocks without research.** Buying a stock because someone on social media said it was going to the moon is not a strategy. Stick with diversified funds until you really understand what you are doing.
+
+## The Bottom Line
+
+Open an account. Set up automatic investments. Buy a simple index fund. Do it every week or every paycheck. Do not touch it.
+
+That is the whole strategy. It is not complicated. The hard part is actually doing it and not stopping. The best time to start was years ago. The second best time is right now.`,
+  },
+  {
+    slug: "robinhood-gold-card-review-2026",
+    title: "Robinhood Gold Card Review 2026: Is 3% Cash Back Actually Worth It?",
+    date: "2026-04-08",
+    description:
+      "I have been using the Robinhood Gold Card for a few months now. Here is what I think after actually spending on it every day.",
+    category: "finance",
+    author: "Levi",
+    readingTime: "5 min read",
+    content: `I have been using the Robinhood Gold Card for a few months now and it has become one of my two main cards. I want to share what it is actually like to use day to day because most reviews just list the features and call it a day.
+
+## What You Get
+
+A flat 3% back on almost everything. Not rotating categories you have to activate. Not tiered rewards that change every quarter. Just 3% on whatever you buy. Groceries, gas, Amazon, eating out, bills. All of it.
+
+You also get 5% back on travel if you book through Robinhood's travel portal. There is purchase protection, extended warranty, return protection, and rental car insurance baked in. And you can create single-use virtual card numbers for online purchases which is a nice security feature.
+
+The card itself is metal. Looks good. Feels good in your hand. That part does not matter at all but I am not going to lie and say I did not notice.
+
+## The Part That Actually Matters
+
+Here is why this card stuck for me when other cards did not.
+
+You earn points on every purchase. When you redeem them into your Robinhood brokerage account, each point is worth one cent. So your 3% cash back turns into money sitting in your investment account ready to go. There is also an auto redeem option if you want your points to convert automatically without you having to do anything. I personally redeem mine manually but it is nice knowing that option is there.
+
+That is the thing that keeps me using it. Every time I buy groceries or fill up the tank or pay a bill, I know those points are going to end up in my investment account. It keeps investing on my mind in a way that other cards never did.
+
+I am trying to stay consistent with investing and this card makes my everyday spending work toward that. Over time those redeemed points compound. It is not just rewards sitting there. It is rewards that grow.
+
+If you are someone who is trying to build a habit around investing, that connection between spending and investing is a big deal. At least it has been for me.
+
+## The Cost
+
+There is no annual fee on the card itself but you need Robinhood Gold to have it. That is $50 a year or about $5 a month.
+
+Is it worth it? Depends on how much you spend. At $500 a month on the card you are earning about $180 a year in rewards. Minus the $50 Gold fee that is $130. A free 2% card would get you $120. So even at relatively low spending the math works out, barely.
+
+At $1,000 a month it gets more interesting. You are earning $360, minus $50, so $310 net. A 2% card would get you $240. That is a $70 difference going straight into your investments every year.
+
+But Gold is not just the card. You also get a higher APY on uninvested cash, a 3% IRA match on contributions, and better margin rates. If you use any of those the $50 pays for itself fast even before the card benefits.
+
+## What I Do Not Love
+
+I am going to be real about the downsides.
+
+If you redeem your points as a statement credit instead of putting them in your brokerage account, they are only worth 0.7 cents each. That is a 30% cut. So this card really only makes sense if you are investing through Robinhood. If you are not, you are leaving money on the table.
+
+The APR can go up to about 30%. That is high. If you carry a balance the rewards mean nothing. You will pay way more in interest than you ever earn in points. I pay mine off every month and you should too.
+
+The 5% travel rate only counts if you book through their portal. Book directly with the airline or hotel and it is the standard 3%. Not a huge deal but worth knowing before you get excited about that number.
+
+## Who This Is For
+
+If you already invest through Robinhood or you have been thinking about starting, this card makes a lot of sense. The 3% flat rate is hard to beat and having those points auto redeem straight into your brokerage account is the kind of thing that sounds small but actually changes your behavior over time. It did for me.
+
+If you are not planning to invest through Robinhood, there are solid free cards out there that give you 2% on everything with no membership fee. Nothing wrong with those.
+
+## Where I Am With It
+
+A few months in and I do not see myself switching. The investing piece is what keeps me. I like opening my app and seeing points from last week already redeemed and sitting in my account ready to be invested. It keeps the momentum going.
+
+If you want to check it out, [you can sign up for Robinhood here](https://join.robinhood.com/bretp22). That is my referral link. We both get something out of it if you do.`,
+  },
+  {
     slug: "how-atomic-habits-changed-my-approach-to-money",
     title: "How Atomic Habits Changed My Approach to Money",
     date: "2026-03-24",
@@ -132,71 +451,6 @@ These five books did not just change my finances. They changed my life. That is 
 If you only read one, go with The Psychology of Money. If you need a kick, go with You Owe You. If you want to fix your habits across the board, Atomic Habits. They are all worth your time.
 
 I actually "read" most of my books by listening to them. Audiobooks during a commute or workout changed the game for me. If you are not a sit-down-and-read type, [try audiobooks](https://amzn.to/4lMl9w1) — it is the easiest way to get through a book without finding extra time in your day.`,
-  },
-  {
-    slug: "the-levi-five-my-simple-plan",
-    title: "The Levi Five: My Simple Plan for Financial Independence",
-    date: "2026-03-21",
-    description:
-      "Five steps. No complexity. Here is the exact plan I follow to build financial freedom, and where I honestly am in the process.",
-    category: "finance",
-    author: "Levi",
-    readingTime: "6 min read",
-    content: `I created The Levi Five because I was tired of financial advice that was either too complicated or too vague. "Just save more and spend less." Thanks. Very helpful. I needed a real plan with real steps, so I built one. And I follow it myself.
-
-## What It Is
-
-The Levi Five is a five-step framework that takes you from wherever you are financially to building real wealth. The steps are sequential. You focus on one step at a time. But here is the thing people get wrong — sequential does not mean rigid. Life is messy. Where you start depends on where you are. I did not start at Step 1. I will get into that.
-
-Here is the quick version.
-
-## Step 1: One Month Security
-
-Save one month of expenses. That is your floor. Before you invest, before you pay extra on debt, before anything else — get one month of expenses in a savings account. This keeps one bad week from becoming a financial disaster.
-
-When I first put this together, I realized I did not even know what one month of expenses actually was. I had never added it up. So I sat down and went through my bank statements. Rent, food, car, phone, insurance, subscriptions. It was more than I expected. That number being real and specific made it feel achievable though. It was not "save money." It was "save $2,800." I could work toward that.
-
-It took me a few months. I scraped together what I could. Some weeks it was $50. Some weeks it was $200 if I picked up extra shifts. But I got there. And the peace of mind it gave me was worth every dollar. One flat tire was no longer a crisis. One unexpected bill was not going to send me into a spiral.
-
-## Step 2: Capture the Match
-
-If your employer offers a 401(k) match, get 100% of it. This is free money. If they match 50% up to 6%, you contribute at least 6%. Not doing this is literally turning down a raise. If you do not have an employer match, skip to Step 3.
-
-I actually started here. I was 20 and I had just landed my first real job. The kind with benefits and a 401(k). I did not know much about investing yet but someone in HR told me the company matched and that I should at least contribute enough to get the full match. So I did. I did not fully understand what I was doing at the time. I just knew free money sounded good. That one decision at 20 years old gave me a head start I am still grateful for. If you are young and you have a match available, please do this. Future you will not believe how much it grew.
-
-After that I went back and saved up my one month of expenses. The steps are numbered but your life does not always follow the numbering. Start wherever makes sense for your situation.
-
-## Step 3: Eliminate Consumer Debt
-
-Credit cards, personal loans, any high-interest debt. Kill it. I use the snowball method — smallest balance first — because those quick wins keep you motivated. When you pay something off completely, it gives you momentum to attack the next one. The point is to stop paying interest on stuff that is losing value.
-
-This is where I am right now. Still in it. I have credit card debt I am working through. Some of it came from dumb decisions. Some of it came from real life — car repairs, medical stuff, months where the math just did not work. I am not going to sit here and pretend it is all behind me. It is not. But I have a plan. I know exactly which card I am attacking first. I know my payoff date. And every month the balance goes down. That is progress.
-
-The hardest part of this step is not the math. It is the patience. You are throwing money at debt instead of investing and it feels like you are falling behind. You see other people talking about their portfolios growing and you are over here paying off a credit card. But this step is what makes everything else possible. You cannot build wealth on a foundation of high-interest debt.
-
-## Step 4: Secure, Invest, and Plan
-
-Build your emergency fund to 3-6 months. Start investing at least 15% of your income. Look into 529s if you have kids. Start paying cash for big purchases. This is where things start to feel real.
-
-I am not fully here yet but I can see it. Once I clear my consumer debt, this is the step where the momentum really kicks in. All that money that was going toward debt payments suddenly goes toward building wealth. That is the moment everything shifts.
-
-## Step 5: Build and Optimize
-
-Increase your income. Consider real estate. Pay off your mortgage early. The goal is ownership — own your home, own your investments, own your time. This is the long game. Not everyone gets here fast. That is fine. The point is to keep moving forward.
-
-## Where I Am Right Now
-
-I am going to be honest because that is what I do. I am on Step 3. Still working through consumer debt. I have my one month security fund. I capture my employer match. But I still have debt to eliminate before I can fully move to Step 4.
-
-That is real. A lot of finance creators act like they have it all figured out. I do not. I am in the middle of the process, same as most of you. But I have a plan, I know exactly what step I am on, and I know what comes next. That clarity is everything. It is the difference between feeling lost and feeling like you are on a path. Even when the path is slow, at least you know where you are going.
-
-## Why It Works
-
-Most people fail financially because they try to do everything at once. They invest while carrying credit card debt. They buy a house before they have an emergency fund. The Levi Five forces you to build the foundation before adding floors.
-
-It is not exciting. It is not fast. But it works every time if you follow the steps.
-
-If you want the full deep dive on each step, check out the [The Levi Five page](/the-levi-five). Figure out which step you are on and focus there. One step at a time.`,
   },
   {
     slug: "why-i-share-my-portfolio-publicly",

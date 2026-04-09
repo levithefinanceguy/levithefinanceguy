@@ -395,27 +395,60 @@ export default function PortfolioClient() {
       <section className="mt-16 space-y-6 text-gray-400 leading-relaxed max-w-3xl">
         <h2 className="text-xl font-bold text-white">Why I Share My Portfolio Publicly</h2>
         <p>
-          Transparency is the foundation of trust. Most financial content creators tell you
-          what to buy but never show you their actual positions. I believe that changes the
-          dynamic between educator and audience in a way that is not helpful.
+          Most finance creators tell you what to buy but never show their own positions. That always
+          bugged me. How can you trust someone&apos;s investing advice if you have no idea whether they
+          actually follow it themselves? Sharing my real portfolio — every position, every purchase price,
+          every loss — keeps me honest and gives you something most financial content does not: proof.
         </p>
         <p>
-          By sharing my real portfolio, including the losers, I hold myself accountable and
-          give you a realistic picture of what investing actually looks like. It is not all
-          green days. There are drawdowns, mistakes, and lessons along the way.
+          Public accountability also changes my own behavior. When I know thousands of people can see
+          my holdings, I am way less likely to panic-sell during a dip or chase some random meme stock.
+          It forces me to stick to my plan, which is honestly the hardest part of investing.
+        </p>
+
+        <h3 className="text-lg font-semibold text-white">How to Read This Portfolio</h3>
+        <p>
+          The table above shows every stock and ETF I currently own. Here is what the columns mean:
+        </p>
+        <ul className="list-disc list-inside space-y-2 ml-2">
+          <li><strong className="text-white">Buy Price</strong> (also called cost basis) — the price I paid per share when I bought it. This is my starting point for measuring profit or loss.</li>
+          <li><strong className="text-white">Current Price</strong> — what the stock is trading at right now, updated throughout the day.</li>
+          <li><strong className="text-white">Gain/Loss</strong> — the difference between what I paid and what it is worth now, shown in both dollar amount and percentage. Green means I am up, red means I am down.</li>
+          <li><strong className="text-white">Value</strong> — the total dollar value of that position (current price multiplied by the number of shares I own).</li>
+        </ul>
+        <p>
+          The pie chart shows allocation — what percentage of my total portfolio each holding represents.
+          A bigger slice means more of my money is in that position. Diversification matters because it
+          means a single bad stock cannot wipe you out.
+        </p>
+
+        <h3 className="text-lg font-semibold text-white">My Investing Approach</h3>
+        <p>
+          I keep it simple. The core of my portfolio is broad market index ETFs like VOO and VTI, which
+          give me exposure to hundreds of companies in a single purchase. On top of that, I hold individual
+          stocks in companies I genuinely believe in for the long term. I am not a day trader and I am not
+          trying to time the market. I dollar-cost average — meaning I invest a set amount on a regular
+          schedule regardless of whether the market is up or down. Over time, this smooths out the bumps
+          and removes the guesswork of &quot;when should I buy?&quot;
         </p>
         <p>
-          My strategy focuses on long-term growth through a mix of individual stocks I believe
-          in and broad market index ETFs for diversification. I dollar-cost average into
-          positions over time rather than trying to time the market. This is not financial
-          advice, just what works for me.
+          My time horizon is years, not days. Some of my positions are down right now and that is fine.
+          The goal is not to be right on every single pick — it is to build wealth steadily over a long
+          period. That is the boring truth about investing that most social media content skips over.
         </p>
 
         <AdBanner slot="in-content" size="medium-rectangle" />
 
         <div className="mt-8 p-6 rounded-xl border border-card-border bg-card-bg/50">
           <p className="text-xs text-gray-500 leading-relaxed">
-            <strong className="text-gray-400">Disclaimer:</strong> This portfolio is shared for transparency and educational purposes only. Nothing on this page is investment advice, a recommendation, or a solicitation to buy or sell any security. I am not a licensed financial advisor. Investing involves risk, including the possible loss of principal. Always do your own research and consult a qualified financial professional before making investment decisions. Past performance does not guarantee future results.
+            <strong className="text-gray-400">Disclaimer:</strong> This portfolio is shared for
+            transparency and educational purposes only. Nothing on this page is investment advice,
+            a recommendation, or a solicitation to buy or sell any security. I am not a licensed
+            financial advisor. Investing involves risk, including the possible loss of principal.
+            Always do your own research and consult a qualified financial professional before making
+            investment decisions. Past performance does not guarantee future results. The holdings
+            shown here reflect my personal positions and should not be interpreted as endorsements
+            of any specific stock or ETF.
           </p>
         </div>
 

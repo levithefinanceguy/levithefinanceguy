@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import type { StockData, IndexData } from "../api/stocks/route";
 
-const FINNHUB_KEY = "d7586opr01qk56kbpvm0d7586opr01qk56kbpvmg";
+const FINNHUB_KEY = process.env.NEXT_PUBLIC_FINNHUB_KEY ?? "";
 
 function LiveClock() {
   const [time, setTime] = useState(new Date());
@@ -493,6 +493,57 @@ export default function HeatmapPage() {
           </div>
         );
       })()}
+
+      {/* Educational Content */}
+      <section className="mt-16 space-y-6 text-gray-400 leading-relaxed max-w-3xl">
+        <h2 className="text-xl font-bold text-white">What Is a Stock Market Heatmap?</h2>
+        <p>
+          A heatmap is basically a visual snapshot of how the stock market is doing right now. Instead
+          of scrolling through a spreadsheet of ticker symbols and numbers, you get a single image where
+          every company is a colored box. Green means the stock price went up today, red means it went
+          down, and the deeper the color, the bigger the move. If you see a box that is dark green, that
+          stock is having a great day. Dark red? Not so much.
+        </p>
+        <p>
+          The heatmap above tracks the <strong className="text-white">S&amp;P 500</strong>, which is a
+          collection of roughly 500 of the largest publicly traded companies in the United States. Think
+          of it as a scoreboard for the American economy. When people say &quot;the market is up&quot;
+          or &quot;the market is down,&quot; they are usually talking about the S&amp;P 500. It includes
+          companies like Apple, Microsoft, Amazon, and Google, along with hundreds of others across every
+          major industry.
+        </p>
+
+        <h3 className="text-lg font-semibold text-white">Why Are Some Boxes Bigger Than Others?</h3>
+        <p>
+          Box size is determined by <strong className="text-white">market capitalization</strong>, or
+          &quot;market cap&quot; for short. Market cap is just the total value of all a company&apos;s
+          shares — you calculate it by multiplying the stock price by the number of shares that exist.
+          A company like Apple has a market cap in the trillions, so its box is massive. A smaller
+          company might barely be visible. This gives you an instant sense of which companies carry the
+          most weight in the index. When Apple moves 2%, it has a much bigger impact on the S&amp;P 500
+          than when a smaller company moves 2%.
+        </p>
+
+        <h3 className="text-lg font-semibold text-white">How to Read the Sector Groupings</h3>
+        <p>
+          Stocks on the heatmap are grouped by sector — Technology, Healthcare, Financials, Energy, and
+          so on. This is useful because stocks in the same sector tend to move together. If oil prices
+          drop, you will probably see the entire Energy section turn red. If interest rates go up, banks
+          in the Financials sector might turn green. The heatmap lets you spot these patterns at a glance
+          instead of checking stocks one by one.
+        </p>
+        <p>
+          The percentage shown on each box is the daily price change. That is how much the stock has moved
+          compared to where it closed yesterday. A stock showing +1.50% means its price is 1.5% higher
+          than yesterday&apos;s close. These numbers update in real time during market hours (9:30 AM to
+          4:00 PM Eastern, Monday through Friday).
+        </p>
+        <p>
+          If you are new to investing, spending a few minutes each day looking at the heatmap is a solid
+          way to start understanding how different parts of the economy connect and react to news. You do
+          not need to trade based on it — just watching and learning is enough.
+        </p>
+      </section>
     </div>
   );
 }

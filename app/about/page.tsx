@@ -156,6 +156,23 @@ export default function AboutPage() {
             Download Cheese on the App Store
           </a>
         </section>
+
+        {/* Get in Touch */}
+        <section className="mt-12 p-8 rounded-xl bg-card-bg border border-accent-green/30 text-center">
+          <h2 className="text-2xl font-bold mb-3">Get in Touch</h2>
+          <p className="text-gray-400 mb-6 max-w-lg mx-auto">
+            Have a question, want to collaborate, or just want to say what&apos;s up? I read every email.
+          </p>
+          <a
+            href="mailto:info@proctoradvisory.com"
+            className="inline-block px-8 py-3 text-lg font-semibold rounded-lg bg-accent-green text-black hover:brightness-110 transition-all"
+          >
+            info@proctoradvisory.com
+          </a>
+          <p className="text-sm text-gray-500 mt-3">
+            Business inquiries, sponsorships, and general questions welcome.
+          </p>
+        </section>
       </div>
     </>
   );

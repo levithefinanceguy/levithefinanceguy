@@ -33,7 +33,6 @@ export const metadata: Metadata = {
     "FIRE",
     "retirement planning",
     "transparent investing",
-    "The Levi Five",
     "financial independence",
   ],
   authors: [{ name: "Levi The Finance Guy" }],

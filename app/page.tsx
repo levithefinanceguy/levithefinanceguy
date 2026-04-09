@@ -17,14 +17,6 @@ const featuredCalcs = [
   { name: "Retirement", href: "/calculators/retirement", icon: "R" },
 ];
 
-const freedomSteps = [
-  { number: 1, title: "One Month Security", color: "#2ECC71" },
-  { number: 2, title: "Capture the Match", color: "#3498DB" },
-  { number: 3, title: "Eliminate Debt", color: "#E74C3C" },
-  { number: 4, title: "Secure & Invest", color: "#9B59B6" },
-  { number: 5, title: "Build & Optimize", color: "#F39C12" },
-];
-
 function formatDate(dateStr: string) {
   return new Date(dateStr + "T00:00:00").toLocaleDateString("en-US", {
     year: "numeric",
@@ -89,51 +81,12 @@ export default function Home() {
                 View My Portfolio
               </Link>
               <Link
-                href="/the-levi-five"
+                href="/calculators"
                 className="px-8 py-3.5 border border-card-border text-white font-semibold rounded-lg hover:bg-card-bg hover:border-accent-green/30 transition-all duration-200"
               >
-                The Levi Five
+                Free Calculators
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* The Levi Five Quick Links */}
-      <section className="bg-card-bg/50 border-y border-card-border">
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">
-              The <span className="gradient-text">Levi Five</span> Framework
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Five steps from financial stress to financial freedom.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {freedomSteps.map((step) => (
-              <Link
-                key={step.number}
-                href="/the-levi-five"
-                className="glass-card p-5 rounded-xl text-center group transition-all duration-300 hover:scale-[1.02]"
-              >
-                <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center text-sm font-bold text-black mx-auto mb-3 transition-transform duration-300 group-hover:scale-110"
-                  style={{ backgroundColor: step.color }}
-                >
-                  {step.number}
-                </div>
-                <p className="text-sm font-medium text-gray-300">{step.title}</p>
-              </Link>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link
-              href="/the-levi-five"
-              className="text-sm text-accent-green hover:underline font-medium"
-            >
-              Learn the full framework &rarr;
-            </Link>
           </div>
         </div>
       </section>
