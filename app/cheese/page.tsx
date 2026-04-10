@@ -129,6 +129,9 @@ export default function CheesePage() {
             personalized health scoring, and verified restaurant nutrition data. Scan a barcode,
             take a photo of your meal, or just type what you ate — Cheese handles the rest.
           </p>
+          <p className="text-gray-500 text-sm mt-4">
+            <a href="https://platform.fatsecret.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">Powered by fatsecret Platform API</a>
+          </p>
         </div>
 
         {/* CTA */}
