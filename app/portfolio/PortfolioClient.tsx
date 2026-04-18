@@ -184,9 +184,70 @@ export default function PortfolioClient() {
 
   const goal = 1000000;
   const progressPct = Math.min((totalValue / goal) * 100, 100);
+  const [showActivity, setShowActivity] = useState(false);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
+      {/* Activity Sheet */}
+      {showActivity && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center pt-16 px-4" onClick={() => setShowActivity(false)}>
+          <div className="w-full max-w-lg bg-[#0f0f0f] border border-gray-800 rounded-2xl overflow-hidden max-h-[70vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-5 border-b border-gray-800">
+              <h3 className="text-lg font-bold">Activity</h3>
+              <button onClick={() => setShowActivity(false)} className="text-gray-500 hover:text-white text-xl">&times;</button>
+            </div>
+            <div className="overflow-y-auto flex-1">
+              {transactions.length === 0 ? (
+                <div className="p-8 text-center text-gray-500 text-sm">No activity recorded yet. Future purchases in Cheese will appear here.</div>
+              ) : (
+                (() => {
+                  const grouped = transactions.reduce<Record<string, Transaction[]>>((acc, t) => {
+                    const label = t.date ? formatActivityDate(t.date) : "Unknown";
+                    if (!acc[label]) acc[label] = [];
+                    acc[label].push(t);
+                    return acc;
+                  }, {});
+                  return Object.entries(grouped).map(([dateLabel, items], gi) => (
+                    <div key={dateLabel}>
+                      {gi > 0 && <div className="h-px bg-gray-800" />}
+                      <div className="px-5 py-2.5 bg-gray-900/50">
+                        <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">{dateLabel}</span>
+                      </div>
+                      {items.map((t, i) => {
+                        const isBuy = t.type === "buy";
+                        const isDeposit = t.type === "deposit";
+                        return (
+                          <div key={`${t.ticker}-${i}`} className="flex items-center justify-between px-5 py-3.5 border-t border-gray-800/50">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-7 h-7 rounded-full ${isBuy || isDeposit ? "bg-emerald-500/10" : "bg-red-500/10"} flex items-center justify-center`}>
+                                <span className={`text-xs font-bold ${isBuy || isDeposit ? "text-emerald-400" : "text-red-400"}`}>
+                                  {isBuy ? "+" : isDeposit ? "$" : "−"}
+                                </span>
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-white">
+                                  {isBuy && <>Bought <span className="text-emerald-400">{t.ticker}</span></>}
+                                  {isDeposit && <>Deposited cash</>}
+                                  {t.type === "sell" && <>Sold <span className="text-red-400">{t.ticker}</span></>}
+                                </p>
+                                {isBuy && t.shares > 0 && (
+                                  <p className="text-[11px] text-gray-500">{t.shares % 1 === 0 ? t.shares : t.shares.toFixed(4)} shares @ ${fmt(t.pricePerShare)}</p>
+                                )}
+                              </div>
+                            </div>
+                            <span className="text-sm font-mono text-gray-300">${fmt(t.amount)}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ));
+                })()
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* $1 to $1,000,000 Journey */}
       <div className="mb-16 p-8 rounded-xl bg-card-bg border border-card-border text-center">
         <p className="text-sm text-gray-500 uppercase tracking-widest mb-2">The Journey</p>
@@ -223,9 +284,20 @@ export default function PortfolioClient() {
         </div>
       </div>
 
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
-        My Public <span className="text-accent-green">Portfolio</span>
-      </h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-3xl md:text-4xl font-extrabold">
+          My Public <span className="text-accent-green">Portfolio</span>
+        </h2>
+        <button
+          onClick={() => setShowActivity(true)}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-400 hover:text-white transition-all text-sm"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Activity
+        </button>
+      </div>
       <p className="text-gray-400 max-w-3xl mb-8 leading-relaxed">
         Full transparency. Every stock and ETF I own, what I paid, and how it is performing.
         Real numbers, real ups and downs. No cherry-picked winners.
