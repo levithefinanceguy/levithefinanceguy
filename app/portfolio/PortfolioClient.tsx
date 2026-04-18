@@ -119,8 +119,18 @@ function LoadingSkeleton() {
   );
 }
 
+interface Transaction {
+  type: string;
+  ticker: string;
+  shares: number;
+  pricePerShare: number;
+  amount: number;
+  date: string;
+}
+
 export default function PortfolioClient() {
   const [holdings, setHoldings] = useState<Holding[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [cashBalance, setCashBalance] = useState(0);
   const [personalAmountInvested, setPersonalAmountInvested] = useState(0);
   const [livePrices, setLivePrices] = useState(false);
@@ -136,6 +146,7 @@ export default function PortfolioClient() {
           setCashBalance(json.cashBalance ?? 0);
           setPersonalAmountInvested(json.personalAmountInvested ?? 0);
           setLivePrices(json.livePrices ?? false);
+          setTransactions(json.transactions ?? []);
         } else {
           setError(true);
         }
@@ -332,6 +343,60 @@ export default function PortfolioClient() {
           </tbody>
         </table>
       </div>
+
+      {/* Recent Activity (from transaction log) */}
+      {transactions.length > 0 && (() => {
+        const grouped = transactions.reduce<Record<string, Transaction[]>>((acc, t) => {
+          const label = t.date ? formatActivityDate(t.date) : "Unknown";
+          if (!acc[label]) acc[label] = [];
+          acc[label].push(t);
+          return acc;
+        }, {});
+
+        return (
+          <div className="mt-12 mb-12">
+            <h2 className="text-2xl font-bold mb-6">Recent Activity</h2>
+            <div className="rounded-xl border border-card-border bg-card-bg overflow-hidden">
+              {Object.entries(grouped).map(([dateLabel, items], gi) => (
+                <div key={dateLabel}>
+                  {gi > 0 && <div className="h-px bg-card-border" />}
+                  <div className="px-5 py-3 bg-card-bg/80">
+                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{dateLabel}</span>
+                  </div>
+                  {items.map((t, i) => {
+                    const isBuy = t.type === "buy";
+                    const isDeposit = t.type === "deposit";
+                    const icon = isBuy ? "+" : isDeposit ? "$" : "−";
+                    const color = isBuy || isDeposit ? "text-accent-green" : "text-accent-red";
+                    const bgColor = isBuy || isDeposit ? "bg-accent-green/10" : "bg-red-500/10";
+                    return (
+                      <div key={`${t.ticker}-${i}`} className="flex items-center justify-between px-5 py-4 border-t border-card-border/50">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-8 h-8 rounded-full ${bgColor} flex items-center justify-center`}>
+                            <span className={`${color} text-xs font-bold`}>{icon}</span>
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-white">
+                              {isBuy && <>Bought {t.shares % 1 === 0 ? t.shares : t.shares.toFixed(4)} {t.shares === 1 ? "share" : "shares"} of <span className="text-accent-green">{t.ticker}</span></>}
+                              {isDeposit && <>Deposited cash</>}
+                              {t.type === "sell" && <>Sold {t.shares % 1 === 0 ? t.shares : t.shares.toFixed(4)} shares of <span className="text-accent-red">{t.ticker}</span></>}
+                              {t.type === "withdrawal" && <>Withdrew cash</>}
+                            </p>
+                            {isBuy && t.pricePerShare > 0 && (
+                              <p className="text-xs text-gray-500">@ ${fmt(t.pricePerShare)}/share</p>
+                            )}
+                          </div>
+                        </div>
+                        <span className="text-sm font-mono text-gray-300">${fmt(t.amount)}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Current Positions */}
       {sortedHoldings.length > 0 && (

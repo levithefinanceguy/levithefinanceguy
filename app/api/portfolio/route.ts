@@ -137,7 +137,19 @@ export async function GET() {
     );
     const amountInvested = personalAmountInvested > 0 ? personalAmountInvested : calculatedInvested;
 
-    const result = { holdings, cashBalance, personalAmountInvested: amountInvested, livePrices, timestamp: now };
+    // Fetch transaction history
+    let transactions: { type: string; ticker: string; shares: number; pricePerShare: number; amount: number; date: string }[] = [];
+    try {
+      const txRes = await fetch(`${FUNCTIONS_BASE}/getPortfolioTransactions`);
+      if (txRes.ok) {
+        const txJson = await txRes.json();
+        transactions = txJson.transactions ?? [];
+      }
+    } catch {
+      // Transaction history is optional — don't fail if unavailable
+    }
+
+    const result = { holdings, cashBalance, personalAmountInvested: amountInvested, livePrices, transactions, timestamp: now };
     portfolioCache = { data: result, timestamp: now };
 
     return NextResponse.json(result, {
