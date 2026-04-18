@@ -36,6 +36,22 @@ const STOCK_NAMES: Record<string, string> = {
   RVI: "Robinhood Ventures Fund I",
 };
 
+// Fallback annual dividend per share for tickers where Finnhub returns 0
+// Source: fund fact sheets / morningstar (updated periodically)
+const DIVIDEND_FALLBACKS: Record<string, number> = {
+  VTI: 3.41,    // Vanguard Total Stock Market - ~1.3% yield
+  VXUS: 3.20,   // Vanguard Total Intl - ~3.0% yield
+  BND: 3.30,    // Vanguard Total Bond - ~4.4% yield
+  DGRO: 1.46,   // iShares Dividend Growth - ~2.3% yield
+  VOO: 6.76,    // Vanguard S&P 500 - ~1.3% yield
+  VYM: 3.55,    // Vanguard High Dividend - ~2.8% yield
+  SCHD: 2.82,   // Schwab US Dividend - ~3.5% yield
+  JEPI: 4.93,   // JPMorgan Equity Premium - ~7.3% yield
+  SPY: 6.82,    // SPDR S&P 500 - ~1.2% yield
+  QQQ: 2.86,    // Invesco QQQ - ~0.6% yield
+  O: 3.22,      // Realty Income - ~5.6% yield
+};
+
 async function fetchFinnhubQuote(symbol: string): Promise<{ c: number; dp: number; pc: number } | null> {
   try {
     const finnhubSymbol = symbol.replace("-", ".");
@@ -86,7 +102,11 @@ export async function GET() {
           .catch(() => null),
       ]);
       if (quote && quote.c > 0) {
-        const dps = metrics?.metric?.dividendPerShareAnnual ?? 0;
+        let dps = metrics?.metric?.dividendPerShareAnnual ?? 0;
+        // Fallback for ETFs where Finnhub returns 0
+        if (dps === 0 && DIVIDEND_FALLBACKS[ticker]) {
+          dps = DIVIDEND_FALLBACKS[ticker];
+        }
         priceMap.set(ticker, {
           price: quote.c,
           dividendPerShare: dps,
@@ -106,11 +126,18 @@ export async function GET() {
         purchasePrice: Math.round(h.purchasePrice * 100) / 100,
         currentPrice: live?.price ?? h.purchasePrice,
         datePurchased: h.datePurchased,
-        dividendPerShare: live?.dividendPerShare ?? 0,
+        dividendPerShare: live?.dividendPerShare ?? (DIVIDEND_FALLBACKS[h.ticker] ?? 0),
       };
     });
 
-    const result = { holdings, cashBalance, personalAmountInvested, livePrices, timestamp: now };
+    // Calculate accurate amount invested from holdings if personalAmountInvested is 0
+    const calculatedInvested = rawHoldings.reduce(
+      (sum: number, h: { shares: number; costBasis: number }) => sum + h.shares * h.costBasis,
+      0
+    );
+    const amountInvested = personalAmountInvested > 0 ? personalAmountInvested : calculatedInvested;
+
+    const result = { holdings, cashBalance, personalAmountInvested: amountInvested, livePrices, timestamp: now };
     portfolioCache = { data: result, timestamp: now };
 
     return NextResponse.json(result, {

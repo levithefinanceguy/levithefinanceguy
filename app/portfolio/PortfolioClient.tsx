@@ -333,63 +333,64 @@ export default function PortfolioClient() {
         </table>
       </div>
 
-      {/* Recent Activity */}
-      {(() => {
-        const activities = holdings
-          .filter((h) => h.datePurchased)
-          .map((h) => ({
-            type: "buy" as const,
-            ticker: h.ticker,
-            name: h.name,
-            shares: h.shares,
-            amount: h.purchasePrice * h.shares,
-            date: h.datePurchased,
-          }))
-          .sort((a, b) => b.date.localeCompare(a.date))
-          .slice(0, 15);
-
-        if (activities.length === 0) return null;
-
-        // Group by date
-        const grouped = activities.reduce<Record<string, typeof activities>>((acc, a) => {
-          const label = formatActivityDate(a.date);
-          if (!acc[label]) acc[label] = [];
-          acc[label].push(a);
-          return acc;
-        }, {});
-
-        return (
-          <div className="mt-12 mb-12">
-            <h2 className="text-2xl font-bold mb-6">Recent Activity</h2>
-            <div className="rounded-xl border border-card-border bg-card-bg overflow-hidden">
-              {Object.entries(grouped).map(([dateLabel, items], gi) => (
-                <div key={dateLabel}>
-                  {gi > 0 && <div className="h-px bg-card-border" />}
-                  <div className="px-5 py-3 bg-card-bg/80">
-                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{dateLabel}</span>
-                  </div>
-                  {items.map((a, i) => (
-                    <div key={`${a.ticker}-${i}`} className="flex items-center justify-between px-5 py-4 border-t border-card-border/50">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-accent-green/10 flex items-center justify-center">
-                          <span className="text-accent-green text-xs font-bold">+</span>
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-white">
-                            Bought {a.shares % 1 === 0 ? a.shares : a.shares.toFixed(4)} {a.shares === 1 ? "share" : "shares"} of <span className="text-accent-green">{a.ticker}</span>
-                          </p>
-                          <p className="text-xs text-gray-500">{a.name}</p>
-                        </div>
+      {/* Current Positions */}
+      {sortedHoldings.length > 0 && (
+        <div className="mt-12 mb-12">
+          <h2 className="text-2xl font-bold mb-2">Current Positions</h2>
+          <p className="text-sm text-gray-500 mb-6">Each position with cost basis and current performance</p>
+          <div className="rounded-xl border border-card-border bg-card-bg overflow-hidden">
+            {sortedHoldings.map((h, i) => {
+              const value = h.currentPrice * h.shares;
+              const cost = h.purchasePrice * h.shares;
+              const gain = value - cost;
+              const gainPct = cost > 0 ? (gain / cost) * 100 : 0;
+              const positive = gain >= 0;
+              const annualDiv = h.dividendPerShare * h.shares;
+              return (
+                <div key={h.ticker}>
+                  {i > 0 && <div className="h-px bg-card-border/50" />}
+                  <div className="px-5 py-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <p className="text-sm font-bold text-white">
+                          <span className="text-accent-green">{h.ticker}</span>
+                          <span className="text-gray-500 font-normal ml-2">{h.name}</span>
+                        </p>
+                        <p className="text-xs text-gray-500 mt-0.5">
+                          {h.shares % 1 === 0 ? h.shares : h.shares.toFixed(4)} shares @ ${fmt(h.purchasePrice)} avg
+                          {h.datePurchased && (
+                            <span className="ml-2">· Opened {formatActivityDate(h.datePurchased)}</span>
+                          )}
+                        </p>
                       </div>
-                      <span className="text-sm font-mono text-gray-300">${fmt(a.amount)}</span>
+                      <div className="text-right">
+                        <p className="text-sm font-mono font-semibold">${fmt(value)}</p>
+                        <p className={`text-xs font-mono ${positive ? "text-accent-green" : "text-accent-red"}`}>
+                          {positive ? "+" : ""}${fmt(gain)} ({positive ? "+" : ""}{gainPct.toFixed(1)}%)
+                        </p>
+                      </div>
                     </div>
-                  ))}
+                    {/* Position bar */}
+                    <div className="flex items-center gap-3 mt-1">
+                      <div className="flex-1 bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                        <div
+                          className={`h-full rounded-full ${positive ? "bg-accent-green" : "bg-accent-red"}`}
+                          style={{ width: `${Math.min(Math.abs(gainPct), 100)}%` }}
+                        />
+                      </div>
+                      {annualDiv > 0 && (
+                        <span className="text-[10px] text-gray-500 whitespace-nowrap">
+                          ${fmt(annualDiv)}/yr div
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        );
-      })()}
+        </div>
+      )}
 
       {/* SEO Content */}
       <section className="mt-16 space-y-6 text-gray-400 leading-relaxed max-w-3xl">
@@ -453,7 +454,7 @@ export default function PortfolioClient() {
         </div>
 
         <p className="text-xs text-gray-600 mt-4">
-          Portfolio data synced live from my Cheese app. Prices updated every 5 minutes via Yahoo Finance.
+          Portfolio data synced live from my Cheese app. Prices updated every 5 minutes via Finnhub.
         </p>
       </section>
     </div>
