@@ -1,3 +1,4 @@
+import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -36,6 +37,36 @@ function formatDate(dateStr: string) {
   });
 }
 
+function renderInline(text: string) {
+  // Parse **bold**, [links](url)
+  const parts: (string | React.ReactElement)[] = [];
+  const regex = /\*\*(.+?)\*\*|\[([^\]]+)\]\(([^)]+)\)/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    if (match[1]) {
+      // **bold**
+      parts.push(<strong key={match.index} className="text-white font-semibold">{match[1]}</strong>);
+    } else if (match[2] && match[3]) {
+      // [text](url)
+      parts.push(
+        <a key={match.index} href={match[3]} target="_blank" rel="noopener noreferrer" className="text-accent-green hover:underline">
+          {match[2]}
+        </a>
+      );
+    }
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+  return parts.length > 0 ? parts : text;
+}
+
 function renderContent(content: string) {
   const lines = content.split("\n");
   const elements: { type: string; content: string }[] = [];
@@ -56,18 +87,18 @@ function renderContent(content: string) {
     if (el.type === "h2")
       return (
         <h2 key={i} className="text-2xl font-bold text-white mt-10 mb-4">
-          {el.content}
+          {renderInline(el.content)}
         </h2>
       );
     if (el.type === "h3")
       return (
         <h3 key={i} className="text-xl font-semibold text-white mt-8 mb-3">
-          {el.content}
+          {renderInline(el.content)}
         </h3>
       );
     return (
       <p key={i} className="text-gray-400 leading-[1.85] mb-5">
-        {el.content}
+        {renderInline(el.content)}
       </p>
     );
   });

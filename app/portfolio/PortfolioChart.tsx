@@ -61,6 +61,8 @@ export default function PortfolioChart() {
   const [period, setPeriod] = useState<Period>("ALL");
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   const fetchHistory = useCallback((range: string) => {
     setLoading(true);
@@ -109,7 +111,7 @@ export default function PortfolioChart() {
 
   const buildPath = useCallback(
     (width: number, height: number) => {
-      if (data.length < 2) return { linePath: "", areaPath: "", points: [] };
+      if (!data || data.length < 2) return { linePath: "", areaPath: "", points: [] };
 
       const values = data.map((d) => d.value);
       const min = Math.min(...values);
@@ -170,7 +172,7 @@ export default function PortfolioChart() {
   const accentColor = isPositive ? "#2ECC71" : "#E74C3C";
   const gradientId = isPositive ? "greenGradient" : "redGradient";
 
-  if (loading) {
+  if (!mounted || loading) {
     return (
       <div className="mb-12 p-8 rounded-xl bg-card-bg border border-card-border">
         <div className="animate-pulse">
