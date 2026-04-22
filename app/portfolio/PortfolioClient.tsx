@@ -136,6 +136,7 @@ export default function PortfolioClient() {
   const [livePrices, setLivePrices] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [showActivity, setShowActivity] = useState(false);
 
   useEffect(() => {
     fetch("/api/portfolio")
@@ -184,7 +185,6 @@ export default function PortfolioClient() {
 
   const goal = 1000000;
   const progressPct = Math.min((totalValue / goal) * 100, 100);
-  const [showActivity, setShowActivity] = useState(false);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-16" suppressHydrationWarning>
