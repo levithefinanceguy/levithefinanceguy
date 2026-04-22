@@ -33,5 +33,19 @@ export default function HeatmapLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <div className="sr-only">
+        <h1>Live S&P 500 Stock Market Heatmap</h1>
+        <p>
+          Real-time stock market heatmap showing the top 50 S&P 500 stocks by market cap.
+          Sized by market capitalization and colored by daily price change — green for gains,
+          red for losses. Grouped by sector including Technology, Healthcare, Finance, Energy,
+          and Consumer. Auto-refreshes with live data from Finnhub. Free alternative to Finviz
+          heatmap with a cleaner mobile experience.
+        </p>
+      </div>
+      {children}
+    </>
+  );
 }

@@ -61,7 +61,7 @@ export default function CheesePage() {
         {/* Hero */}
         <div className="text-center mb-16">
           <div className="inline-block mb-6">
-            <span className="text-6xl md:text-8xl font-extrabold gradient-text">Cheese</span>
+            <h1 className="text-6xl md:text-8xl font-extrabold gradient-text">Cheese</h1>
           </div>
           <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-4">
             Your money. Your health. One app.

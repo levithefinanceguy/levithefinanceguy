@@ -28,6 +28,18 @@ export default function PortfolioPage() {
           }),
         }}
       />
+
+      {/* Server-rendered heading for SEO — always in the HTML */}
+      <div className="sr-only">
+        <h1>My Public Investment Portfolio — Levi The Finance Guy</h1>
+        <p>
+          Follow Levi&apos;s real investment portfolio with full transparency. See every holding,
+          purchase price, current value, and gain/loss. Track the journey from $1 to $1,000,000
+          with real numbers, real-time stock prices, dividend income tracking, and complete
+          transaction history. Updated live from the Cheese app via Finnhub.
+        </p>
+      </div>
+
       <PortfolioClient />
     </div>
   );
