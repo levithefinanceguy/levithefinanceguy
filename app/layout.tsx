@@ -90,8 +90,9 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <Script
+          id="adsense"
+          strategy="lazyOnload"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2105872295580232"
-          strategy="afterInteractive"
           crossOrigin="anonymous"
         />
       </body>
