@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -19,8 +19,11 @@ const navLinks = [
 export default function Navigation() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
 
   const isActive = (href: string) => {
+    if (!hydrated) return false; // Don't highlight anything during SSR — prevents hydration mismatch
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
