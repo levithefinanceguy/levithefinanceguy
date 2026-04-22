@@ -136,9 +136,6 @@ export default function PortfolioClient() {
   const [livePrices, setLivePrices] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     fetch("/api/portfolio")
@@ -163,9 +160,7 @@ export default function PortfolioClient() {
     (a, b) => b.currentPrice * b.shares - a.currentPrice * a.shares
   );
 
-  // Don't render anything on server — prevents React error #310 hydration mismatch
-  if (typeof window === "undefined") return <LoadingSkeleton />;
-  if (!mounted || loading) return <LoadingSkeleton />;
+  if (loading) return null; // ClientOnly wrapper shows skeleton
 
   if (error || holdings.length === 0) {
     return (

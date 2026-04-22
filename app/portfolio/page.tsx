@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ClientOnly from "./ClientOnly";
 import PortfolioClient from "./PortfolioClient";
 
 export const metadata: Metadata = {
@@ -12,9 +13,28 @@ export const metadata: Metadata = {
   },
 };
 
+function LoadingSkeleton() {
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-16 animate-pulse">
+      <div className="mb-16 p-8 rounded-xl bg-card-bg border border-card-border text-center">
+        <div className="h-6 w-32 bg-gray-800 rounded mx-auto mb-4" />
+        <div className="h-12 w-64 bg-gray-800 rounded mx-auto mb-4" />
+        <div className="h-4 w-96 bg-gray-800 rounded mx-auto mb-8" />
+        <div className="h-4 w-full max-w-lg bg-gray-800 rounded mx-auto" />
+      </div>
+      <div className="h-8 w-64 bg-gray-800 rounded mb-4" />
+      <div className="h-[300px] bg-gray-800/50 rounded-xl mb-12" />
+      <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="h-64 bg-gray-800/50 rounded-xl" />
+        <div className="h-64 bg-gray-800/50 rounded-xl" />
+      </div>
+    </div>
+  );
+}
+
 export default function PortfolioPage() {
   return (
-    <div suppressHydrationWarning>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -29,18 +49,19 @@ export default function PortfolioPage() {
         }}
       />
 
-      {/* Server-rendered heading for SEO — always in the HTML */}
       <div className="sr-only">
         <h1>My Public Investment Portfolio — Levi The Finance Guy</h1>
         <p>
           Follow Levi&apos;s real investment portfolio with full transparency. See every holding,
           purchase price, current value, and gain/loss. Track the journey from $1 to $1,000,000
           with real numbers, real-time stock prices, dividend income tracking, and complete
-          transaction history. Updated live from the Cheese app via Finnhub.
+          transaction history.
         </p>
       </div>
 
-      <PortfolioClient />
-    </div>
+      <ClientOnly fallback={<LoadingSkeleton />}>
+        <PortfolioClient />
+      </ClientOnly>
+    </>
   );
 }
