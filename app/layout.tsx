@@ -84,9 +84,9 @@ export default function RootLayout({
       <head>
         <meta name="google-site-verification" content="2RAOm4rvwb300RM-h6gi5qiWF0vhqHRWJWOZSno16Dc" />
         <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2105872295580232"
-          crossOrigin="anonymous"
+          dangerouslySetInnerHTML={{
+            __html: `try{var s=document.createElement('script');s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2105872295580232';s.async=true;s.crossOrigin='anonymous';s.onerror=function(){};document.head.appendChild(s)}catch(e){}`,
+          }}
         />
       </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-background text-foreground">
