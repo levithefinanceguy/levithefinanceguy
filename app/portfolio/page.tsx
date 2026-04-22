@@ -1,5 +1,25 @@
 import type { Metadata } from "next";
-import PortfolioClient from "./PortfolioClient";
+import dynamic from "next/dynamic";
+
+const PortfolioClient = dynamic(() => import("./PortfolioClient"), {
+  ssr: false,
+  loading: () => (
+    <div className="max-w-6xl mx-auto px-4 py-16 animate-pulse">
+      <div className="mb-16 p-8 rounded-xl bg-card-bg border border-card-border text-center">
+        <div className="h-6 w-32 bg-gray-800 rounded mx-auto mb-4" />
+        <div className="h-12 w-64 bg-gray-800 rounded mx-auto mb-4" />
+        <div className="h-4 w-96 bg-gray-800 rounded mx-auto mb-8" />
+        <div className="h-4 w-full max-w-lg bg-gray-800 rounded mx-auto" />
+      </div>
+      <div className="h-8 w-64 bg-gray-800 rounded mb-4" />
+      <div className="h-[300px] bg-gray-800/50 rounded-xl mb-12" />
+      <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="h-64 bg-gray-800/50 rounded-xl" />
+        <div className="h-64 bg-gray-800/50 rounded-xl" />
+      </div>
+    </div>
+  ),
+});
 
 export const metadata: Metadata = {
   title: "My Public Investment Portfolio",
