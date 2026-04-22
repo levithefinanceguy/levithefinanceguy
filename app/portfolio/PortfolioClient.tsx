@@ -163,6 +163,8 @@ export default function PortfolioClient() {
     (a, b) => b.currentPrice * b.shares - a.currentPrice * a.shares
   );
 
+  // Don't render anything on server — prevents React error #310 hydration mismatch
+  if (typeof window === "undefined") return <LoadingSkeleton />;
   if (!mounted || loading) return <LoadingSkeleton />;
 
   if (error || holdings.length === 0) {
@@ -190,7 +192,7 @@ export default function PortfolioClient() {
   const [showActivity, setShowActivity] = useState(false);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16">
+    <div className="max-w-6xl mx-auto px-4 py-16" suppressHydrationWarning>
       {/* Activity Sheet */}
       {showActivity && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center pt-16 px-4" onClick={() => setShowActivity(false)}>

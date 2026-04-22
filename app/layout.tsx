@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
@@ -83,16 +84,16 @@ export default function RootLayout({
     >
       <head>
         <meta name="google-site-verification" content="2RAOm4rvwb300RM-h6gi5qiWF0vhqHRWJWOZSno16Dc" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var s=document.createElement('script');s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2105872295580232';s.async=true;s.crossOrigin='anonymous';s.onerror=function(){};document.head.appendChild(s)}catch(e){}`,
-          }}
-        />
       </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-background text-foreground">
         <Navigation />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2105872295580232"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
       </body>
     </html>
   );
