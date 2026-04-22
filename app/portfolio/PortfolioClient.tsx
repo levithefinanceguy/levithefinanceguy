@@ -136,6 +136,9 @@ export default function PortfolioClient() {
   const [livePrices, setLivePrices] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     fetch("/api/portfolio")
@@ -160,7 +163,7 @@ export default function PortfolioClient() {
     (a, b) => b.currentPrice * b.shares - a.currentPrice * a.shares
   );
 
-  if (loading) return <LoadingSkeleton />;
+  if (!mounted || loading) return <LoadingSkeleton />;
 
   if (error || holdings.length === 0) {
     return (
