@@ -229,11 +229,12 @@ export default function PortfolioClient() {
             {livePrices && (
               <>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Price Growth</span>
-                  <span className={`font-mono ${priceGrowth >= 0 ? "text-accent-green" : "text-accent-red"}`}>
-                    {priceGrowth >= 0 ? "+" : ""}${fmt(priceGrowth)}
+                  <span className="text-gray-400">Total Return</span>
+                  <span className={`font-bold ${totalGain >= 0 ? "text-accent-green" : "text-accent-red"}`}>
+                    {totalGain >= 0 ? "+" : ""}${fmt(totalGain)} ({totalGainPct >= 0 ? "+" : ""}{totalGainPct.toFixed(2)}%)
                   </span>
                 </div>
+                <div className="h-px bg-card-border" />
                 <div className="flex justify-between">
                   <span className="text-gray-400">Est. Annual Dividends</span>
                   <span className="font-mono text-accent-green">${fmt(totalAnnualDividends)}/yr</span>
@@ -242,23 +243,19 @@ export default function PortfolioClient() {
                   <span className="text-gray-400">Est. Monthly Dividends</span>
                   <span className="font-mono text-gray-300">${fmt(totalMonthlyDividends)}/mo</span>
                 </div>
+                {/* Visual breakdown: cost basis + growth + cash = total value */}
                 <div className="h-px bg-card-border" />
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Total Return</span>
-                  <span className={`font-bold ${totalGain >= 0 ? "text-accent-green" : "text-accent-red"}`}>
-                    {totalGain >= 0 ? "+" : ""}${fmt(totalGain)} ({totalGainPct >= 0 ? "+" : ""}{totalGainPct.toFixed(2)}%)
-                  </span>
-                </div>
-                {/* Visual breakdown */}
                 <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
                   <div className="h-full flex">
-                    <div className="bg-blue-400 h-full" style={{ width: `${(displayInvested / totalValue) * 100}%` }} />
-                    <div className="bg-accent-green h-full" style={{ width: `${(priceGrowth / totalValue) * 100}%` }} />
+                    <div className="bg-blue-400 h-full" style={{ width: `${(calculatedCost / totalValue) * 100}%` }} />
+                    <div className={`h-full ${totalGain >= 0 ? "bg-accent-green" : "bg-accent-red"}`} style={{ width: `${(Math.abs(totalGain) / totalValue) * 100}%` }} />
+                    {cashBalance > 0 && <div className="bg-gray-500 h-full" style={{ width: `${(cashBalance / totalValue) * 100}%` }} />}
                   </div>
                 </div>
                 <div className="flex justify-between text-[10px] text-gray-500">
-                  <span>Invested {Math.round((displayInvested / totalValue) * 100)}%</span>
-                  <span>Growth {Math.round((priceGrowth / totalValue) * 100)}%</span>
+                  <span>Cost Basis ${fmt(calculatedCost)}</span>
+                  <span>{totalGain >= 0 ? "+" : ""}{fmt(totalGain)} growth</span>
+                  {cashBalance > 0 && <span>${fmt(cashBalance)} cash</span>}
                 </div>
               </>
             )}
