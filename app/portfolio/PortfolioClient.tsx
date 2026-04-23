@@ -53,7 +53,7 @@ function PieChart({ holdings }: { holdings: Holding[] }) {
         {slices.map((s, i) => (
           <div key={i} className="flex items-center gap-1.5 text-xs text-gray-400">
             <span className="w-3 h-3 rounded-sm inline-block" style={{ backgroundColor: s.color }} />
-            {s.ticker} {(s.pct * 100).toFixed(1)}%
+            {displayTicker(s.ticker)} {(s.pct * 100).toFixed(1)}%
           </div>
         ))}
       </div>
@@ -65,14 +65,18 @@ function fmt(n: number) {
   return n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-function formatActivityDate(dateStr: string): string {
-  const eastern = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/New_York",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-  return eastern.format(new Date(dateStr + "T12:00:00Z"));
+// Parse OCC option symbols like "USO260515C00275000" → "USO $275 Call 5/15/26"
+function parseOptionTicker(ticker: string): string | null {
+  const match = ticker.match(/^([A-Z]+)(\d{2})(\d{2})(\d{2})([CP])(\d{8})$/);
+  if (!match) return null;
+  const [, underlying, yy, mm, dd, type, strikeRaw] = match;
+  const strike = parseInt(strikeRaw) / 1000;
+  const side = type === "C" ? "Call" : "Put";
+  return `${underlying} $${strike % 1 === 0 ? strike : strike.toFixed(2)} ${side} ${parseInt(mm)}/${parseInt(dd)}/${yy}`;
+}
+
+function displayTicker(ticker: string): string {
+  return parseOptionTicker(ticker) ?? ticker;
 }
 
 function LoadingSkeleton() {
@@ -287,8 +291,8 @@ export default function PortfolioClient() {
               const positive = gain >= 0;
               return (
                 <tr key={h.ticker + h.datePurchased} className="border-t border-card-border hover:bg-card-bg/50">
-                  <td className="p-4 font-bold text-accent-green">{h.ticker}</td>
-                  <td className="p-4 hidden md:table-cell text-gray-300">{h.name}</td>
+                  <td className="p-4 font-bold text-accent-green">{displayTicker(h.ticker)}</td>
+                  <td className="p-4 hidden md:table-cell text-gray-300">{parseOptionTicker(h.ticker) ? "Options Contract" : h.name}</td>
                   <td className="p-4 text-right font-mono">${fmt(h.purchasePrice)}</td>
                   {livePrices && <td className="p-4 text-right font-mono">${fmt(h.currentPrice)}</td>}
                   <td className="p-4 text-right hidden sm:table-cell">{h.shares}</td>
@@ -312,65 +316,6 @@ export default function PortfolioClient() {
           </tbody>
         </table>
       </div>
-
-      {/* Current Positions */}
-      {sortedHoldings.length > 0 && (
-        <div className="mt-12 mb-12">
-          <h2 className="text-2xl font-bold mb-2">Current Positions</h2>
-          <p className="text-sm text-gray-500 mb-6">Each position with cost basis and current performance</p>
-          <div className="rounded-xl border border-card-border bg-card-bg overflow-hidden">
-            {sortedHoldings.map((h, i) => {
-              const value = h.currentPrice * h.shares;
-              const cost = h.purchasePrice * h.shares;
-              const gain = value - cost;
-              const gainPct = cost > 0 ? (gain / cost) * 100 : 0;
-              const positive = gain >= 0;
-              const annualDiv = h.dividendPerShare * h.shares;
-              return (
-                <div key={h.ticker}>
-                  {i > 0 && <div className="h-px bg-card-border/50" />}
-                  <div className="px-5 py-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <p className="text-sm font-bold text-white">
-                          <span className="text-accent-green">{h.ticker}</span>
-                          <span className="text-gray-500 font-normal ml-2">{h.name}</span>
-                        </p>
-                        <p className="text-xs text-gray-500 mt-0.5">
-                          {h.shares % 1 === 0 ? h.shares : h.shares.toFixed(4)} shares @ ${fmt(h.purchasePrice)} avg
-                          {h.datePurchased && (
-                            <span className="ml-2">· Opened {formatActivityDate(h.datePurchased)}</span>
-                          )}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm font-mono font-semibold">${fmt(value)}</p>
-                        <p className={`text-xs font-mono ${positive ? "text-accent-green" : "text-accent-red"}`}>
-                          {positive ? "+" : ""}${fmt(gain)} ({positive ? "+" : ""}{gainPct.toFixed(1)}%)
-                        </p>
-                      </div>
-                    </div>
-                    {/* Position bar */}
-                    <div className="flex items-center gap-3 mt-1">
-                      <div className="flex-1 bg-gray-800 rounded-full h-1.5 overflow-hidden">
-                        <div
-                          className={`h-full rounded-full ${positive ? "bg-accent-green" : "bg-accent-red"}`}
-                          style={{ width: `${Math.min(Math.abs(gainPct), 100)}%` }}
-                        />
-                      </div>
-                      {annualDiv > 0 && (
-                        <span className="text-[10px] text-gray-500 whitespace-nowrap">
-                          ${fmt(annualDiv)}/yr div
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
 
       {/* SEO Content */}
       <section className="mt-16 space-y-6 text-gray-400 leading-relaxed max-w-3xl">
