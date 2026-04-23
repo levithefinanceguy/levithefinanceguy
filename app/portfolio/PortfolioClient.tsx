@@ -147,8 +147,8 @@ export default function PortfolioClient() {
   // so return is based on actual tracked holdings, not deposits that include unsynced holdings
   const totalCost = calculatedCost;
   const displayInvested = personalAmountInvested > 0 ? personalAmountInvested : calculatedCost;
-  const totalGain = totalValue - totalCost;
-  const totalGainPct = totalCost > 0 ? (totalGain / totalCost) * 100 : 0;
+  const totalGain = investedValue - calculatedCost;
+  const totalGainPct = calculatedCost > 0 ? (totalGain / calculatedCost) * 100 : 0;
   const totalAnnualDividends = holdings.reduce((s, h) => s + h.dividendPerShare * h.shares, 0);
   const totalMonthlyDividends = totalAnnualDividends / 12;
   const priceGrowth = totalGain;
