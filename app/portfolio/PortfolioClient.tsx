@@ -66,37 +66,12 @@ function fmt(n: number) {
 }
 
 function formatActivityDate(dateStr: string): string {
-  // Convert to Eastern time for display
   const eastern = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York",
     year: "numeric",
     month: "short",
     day: "numeric",
   });
-
-  const nowET = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/New_York",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(new Date());
-
-  const entryET = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/New_York",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(new Date(dateStr + "T12:00:00Z"));
-
-  const todayParts = nowET.split("/");
-  const entryParts = entryET.split("/");
-  const todayDate = new Date(+todayParts[2], +todayParts[0] - 1, +todayParts[1]);
-  const entryDate = new Date(+entryParts[2], +entryParts[0] - 1, +entryParts[1]);
-  const diffDays = Math.round((todayDate.getTime() - entryDate.getTime()) / (1000 * 60 * 60 * 24));
-
-  if (diffDays <= 0) return "Today";
-  if (diffDays === 1) return "Yesterday";
-  if (diffDays < 7) return `${diffDays} days ago`;
   return eastern.format(new Date(dateStr + "T12:00:00Z"));
 }
 
@@ -119,24 +94,13 @@ function LoadingSkeleton() {
   );
 }
 
-interface Transaction {
-  type: string;
-  ticker: string;
-  shares: number;
-  pricePerShare: number;
-  amount: number;
-  date: string;
-}
-
 export default function PortfolioClient() {
   const [holdings, setHoldings] = useState<Holding[]>([]);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [cashBalance, setCashBalance] = useState(0);
   const [personalAmountInvested, setPersonalAmountInvested] = useState(0);
   const [livePrices, setLivePrices] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [showActivity, setShowActivity] = useState(false);
 
   useEffect(() => {
     fetch("/api/portfolio")
@@ -147,7 +111,6 @@ export default function PortfolioClient() {
           setCashBalance(json.cashBalance ?? 0);
           setPersonalAmountInvested(json.personalAmountInvested ?? 0);
           setLivePrices(json.livePrices ?? false);
-          setTransactions(json.transactions ?? []);
         } else {
           setError(true);
         }
@@ -176,7 +139,10 @@ export default function PortfolioClient() {
   const investedValue = holdings.reduce((s, h) => s + h.currentPrice * h.shares, 0);
   const totalValue = investedValue + cashBalance;
   const calculatedCost = holdings.reduce((s, h) => s + h.purchasePrice * h.shares, 0);
-  const totalCost = personalAmountInvested > 0 ? personalAmountInvested : calculatedCost;
+  // Use personalAmountInvested as invested amount; use calculatedCost for return calc
+  // so return is based on actual tracked holdings, not deposits that include unsynced holdings
+  const totalCost = calculatedCost;
+  const displayInvested = personalAmountInvested > 0 ? personalAmountInvested : calculatedCost;
   const totalGain = totalValue - totalCost;
   const totalGainPct = totalCost > 0 ? (totalGain / totalCost) * 100 : 0;
   const totalAnnualDividends = holdings.reduce((s, h) => s + h.dividendPerShare * h.shares, 0);
@@ -188,66 +154,6 @@ export default function PortfolioClient() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-16" suppressHydrationWarning>
-      {/* Activity Sheet */}
-      {showActivity && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center pt-16 px-4" onClick={() => setShowActivity(false)}>
-          <div className="w-full max-w-lg bg-[#0f0f0f] border border-gray-800 rounded-2xl overflow-hidden max-h-[70vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between p-5 border-b border-gray-800">
-              <h3 className="text-lg font-bold">Activity</h3>
-              <button onClick={() => setShowActivity(false)} className="text-gray-500 hover:text-white text-xl">&times;</button>
-            </div>
-            <div className="overflow-y-auto flex-1">
-              {transactions.length === 0 ? (
-                <div className="p-8 text-center text-gray-500 text-sm">No activity recorded yet. Future purchases in Cheese will appear here.</div>
-              ) : (
-                (() => {
-                  const grouped = transactions.reduce<Record<string, Transaction[]>>((acc, t) => {
-                    const label = t.date ? formatActivityDate(t.date) : "Unknown";
-                    if (!acc[label]) acc[label] = [];
-                    acc[label].push(t);
-                    return acc;
-                  }, {});
-                  return Object.entries(grouped).map(([dateLabel, items], gi) => (
-                    <div key={dateLabel}>
-                      {gi > 0 && <div className="h-px bg-gray-800" />}
-                      <div className="px-5 py-2.5 bg-gray-900/50">
-                        <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">{dateLabel}</span>
-                      </div>
-                      {items.map((t, i) => {
-                        const isBuy = t.type === "buy";
-                        const isDeposit = t.type === "deposit";
-                        return (
-                          <div key={`${t.ticker}-${i}`} className="flex items-center justify-between px-5 py-3.5 border-t border-gray-800/50">
-                            <div className="flex items-center gap-3">
-                              <div className={`w-7 h-7 rounded-full ${isBuy || isDeposit ? "bg-emerald-500/10" : "bg-red-500/10"} flex items-center justify-center`}>
-                                <span className={`text-xs font-bold ${isBuy || isDeposit ? "text-emerald-400" : "text-red-400"}`}>
-                                  {isBuy ? "+" : isDeposit ? "$" : "−"}
-                                </span>
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium text-white">
-                                  {isBuy && <>Bought <span className="text-emerald-400">{t.ticker}</span></>}
-                                  {isDeposit && <>Deposited cash</>}
-                                  {t.type === "sell" && <>Sold <span className="text-red-400">{t.ticker}</span></>}
-                                </p>
-                                {isBuy && t.shares > 0 && (
-                                  <p className="text-[11px] text-gray-500">{t.shares % 1 === 0 ? t.shares : t.shares.toFixed(4)} shares @ ${fmt(t.pricePerShare)}</p>
-                                )}
-                              </div>
-                            </div>
-                            <span className="text-sm font-mono text-gray-300">${fmt(t.amount)}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ));
-                })()
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* $1 to $1,000,000 Journey */}
       <div className="mb-16 p-8 rounded-xl bg-card-bg border border-card-border text-center">
         <p className="text-sm text-gray-500 uppercase tracking-widest mb-2">The Journey</p>
@@ -284,19 +190,10 @@ export default function PortfolioClient() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4">
         <h2 className="text-3xl md:text-4xl font-extrabold">
           My Public <span className="text-accent-green">Portfolio</span>
         </h2>
-        <button
-          onClick={() => setShowActivity(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-400 hover:text-white transition-all text-sm"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          Activity
-        </button>
       </div>
       <p className="text-gray-400 max-w-3xl mb-8 leading-relaxed">
         Full transparency. Every stock and ETF I own, what I paid, and how it is performing.
@@ -317,7 +214,7 @@ export default function PortfolioClient() {
             <div className="h-px bg-card-border" />
             <div className="flex justify-between">
               <span className="text-gray-400">Invested</span>
-              <span className="font-mono text-blue-400">${fmt(totalCost)}</span>
+              <span className="font-mono text-blue-400">${fmt(displayInvested)}</span>
             </div>
             {cashBalance > 0 && (
               <div className="flex justify-between">
@@ -351,12 +248,12 @@ export default function PortfolioClient() {
                 {/* Visual breakdown */}
                 <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
                   <div className="h-full flex">
-                    <div className="bg-blue-400 h-full" style={{ width: `${(totalCost / totalValue) * 100}%` }} />
+                    <div className="bg-blue-400 h-full" style={{ width: `${(displayInvested / totalValue) * 100}%` }} />
                     <div className="bg-accent-green h-full" style={{ width: `${(priceGrowth / totalValue) * 100}%` }} />
                   </div>
                 </div>
                 <div className="flex justify-between text-[10px] text-gray-500">
-                  <span>Invested {Math.round((totalCost / totalValue) * 100)}%</span>
+                  <span>Invested {Math.round((displayInvested / totalValue) * 100)}%</span>
                   <span>Growth {Math.round((priceGrowth / totalValue) * 100)}%</span>
                 </div>
               </>
@@ -415,60 +312,6 @@ export default function PortfolioClient() {
           </tbody>
         </table>
       </div>
-
-      {/* Recent Activity (from transaction log) */}
-      {transactions.length > 0 && (() => {
-        const grouped = transactions.reduce<Record<string, Transaction[]>>((acc, t) => {
-          const label = t.date ? formatActivityDate(t.date) : "Unknown";
-          if (!acc[label]) acc[label] = [];
-          acc[label].push(t);
-          return acc;
-        }, {});
-
-        return (
-          <div className="mt-12 mb-12">
-            <h2 className="text-2xl font-bold mb-6">Recent Activity</h2>
-            <div className="rounded-xl border border-card-border bg-card-bg overflow-hidden">
-              {Object.entries(grouped).map(([dateLabel, items], gi) => (
-                <div key={dateLabel}>
-                  {gi > 0 && <div className="h-px bg-card-border" />}
-                  <div className="px-5 py-3 bg-card-bg/80">
-                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{dateLabel}</span>
-                  </div>
-                  {items.map((t, i) => {
-                    const isBuy = t.type === "buy";
-                    const isDeposit = t.type === "deposit";
-                    const icon = isBuy ? "+" : isDeposit ? "$" : "−";
-                    const color = isBuy || isDeposit ? "text-accent-green" : "text-accent-red";
-                    const bgColor = isBuy || isDeposit ? "bg-accent-green/10" : "bg-red-500/10";
-                    return (
-                      <div key={`${t.ticker}-${i}`} className="flex items-center justify-between px-5 py-4 border-t border-card-border/50">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-full ${bgColor} flex items-center justify-center`}>
-                            <span className={`${color} text-xs font-bold`}>{icon}</span>
-                          </div>
-                          <div>
-                            <p className="text-sm font-semibold text-white">
-                              {isBuy && <>Bought {t.shares % 1 === 0 ? t.shares : t.shares.toFixed(4)} {t.shares === 1 ? "share" : "shares"} of <span className="text-accent-green">{t.ticker}</span></>}
-                              {isDeposit && <>Deposited cash</>}
-                              {t.type === "sell" && <>Sold {t.shares % 1 === 0 ? t.shares : t.shares.toFixed(4)} shares of <span className="text-accent-red">{t.ticker}</span></>}
-                              {t.type === "withdrawal" && <>Withdrew cash</>}
-                            </p>
-                            {isBuy && t.pricePerShare > 0 && (
-                              <p className="text-xs text-gray-500">@ ${fmt(t.pricePerShare)}/share</p>
-                            )}
-                          </div>
-                        </div>
-                        <span className="text-sm font-mono text-gray-300">${fmt(t.amount)}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      })()}
 
       {/* Current Positions */}
       {sortedHoldings.length > 0 && (
