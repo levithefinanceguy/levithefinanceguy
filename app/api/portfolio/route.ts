@@ -54,13 +54,18 @@ const DIVIDEND_FALLBACKS: Record<string, number> = {
 
 async function fetchFinnhubQuote(symbol: string): Promise<{ c: number; dp: number; pc: number } | null> {
   try {
-    const finnhubSymbol = symbol.replace("-", ".");
     const res = await fetch(
-      `https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(finnhubSymbol)}&token=${FINNHUB_KEY}`
+      `https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(symbol)}&token=${FINNHUB_KEY}`,
+      { signal: AbortSignal.timeout(8000) }
     );
-    if (!res.ok) return null;
-    return await res.json();
-  } catch {
+    if (!res.ok) {
+      console.error(`Finnhub quote ${symbol}: HTTP ${res.status}`);
+      return null;
+    }
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.error(`Finnhub quote ${symbol} error:`, e);
     return null;
   }
 }
@@ -93,30 +98,38 @@ export async function GET() {
     const tickers = [...new Set(rawHoldings.map((h: { ticker: string }) => h.ticker))] as string[];
     const priceMap = new Map<string, { price: number; dividendPerShare: number }>();
 
-    const quotePromises = tickers.map(async (ticker) => {
-      const finnhubSymbol = ticker.replace("-", ".");
-      const [quote, metrics] = await Promise.all([
-        fetchFinnhubQuote(finnhubSymbol),
-        fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${encodeURIComponent(finnhubSymbol)}&metric=all&token=${FINNHUB_KEY}`)
-          .then((r) => r.ok ? r.json() : null)
-          .catch(() => null),
-      ]);
-      if (quote && quote.c > 0) {
-        let dps = metrics?.metric?.dividendPerShareAnnual ?? 0;
-        // Fallback for ETFs where Finnhub returns 0
-        if (dps === 0 && DIVIDEND_FALLBACKS[ticker]) {
-          dps = DIVIDEND_FALLBACKS[ticker];
+    // Fetch in batches of 5 to avoid Finnhub rate limits (60 req/min free tier)
+    const BATCH_SIZE = 5;
+    for (let i = 0; i < tickers.length; i += BATCH_SIZE) {
+      const batch = tickers.slice(i, i + BATCH_SIZE);
+      await Promise.all(batch.map(async (ticker) => {
+        const finnhubSymbol = ticker.replace("-", ".");
+        const [quote, metrics] = await Promise.all([
+          fetchFinnhubQuote(finnhubSymbol),
+          fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${encodeURIComponent(finnhubSymbol)}&metric=all&token=${FINNHUB_KEY}`,
+            { signal: AbortSignal.timeout(8000) })
+            .then((r) => r.ok ? r.json() : null)
+            .catch((e) => { console.error(`Finnhub metrics ${ticker}:`, e); return null; }),
+        ]);
+        if (quote && quote.c > 0) {
+          let dps = metrics?.metric?.dividendPerShareAnnual ?? 0;
+          if (dps === 0 && DIVIDEND_FALLBACKS[ticker]) {
+            dps = DIVIDEND_FALLBACKS[ticker];
+          }
+          priceMap.set(ticker, {
+            price: quote.c,
+            dividendPerShare: dps,
+          });
         }
-        priceMap.set(ticker, {
-          price: quote.c,
-          dividendPerShare: dps,
-        });
+      }));
+      // Small delay between batches to stay under rate limit
+      if (i + BATCH_SIZE < tickers.length) {
+        await new Promise((r) => setTimeout(r, 200));
       }
-    });
-
-    await Promise.all(quotePromises);
+    }
 
     const livePrices = priceMap.size > 0;
+    console.log(`Portfolio: ${tickers.length} tickers, ${priceMap.size} live prices loaded. livePrices=${livePrices}`);
     const holdings = rawHoldings.map((h: { ticker: string; shares: number; purchasePrice: number; costBasis: number; datePurchased: string }) => {
       const live = priceMap.get(h.ticker);
       return {
