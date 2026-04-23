@@ -130,14 +130,17 @@ export async function GET() {
 
     const livePrices = priceMap.size > 0;
     console.log(`Portfolio: ${tickers.length} tickers, ${priceMap.size} live prices loaded. livePrices=${livePrices}`);
-    const holdings = rawHoldings.map((h: { ticker: string; shares: number; purchasePrice: number; costBasis: number; datePurchased: string }) => {
+    const holdings = rawHoldings.map((h: { ticker: string; shares: number; purchasePrice: number; costBasis: number; datePurchased: string; plaidCurrentValue?: number }) => {
       const live = priceMap.get(h.ticker);
+      // For options/tickers Finnhub can't price, use Plaid's current value
+      const plaidPerShare = h.plaidCurrentValue && h.shares > 0 ? h.plaidCurrentValue / h.shares : 0;
+      const currentPrice = live?.price ?? (plaidPerShare > 0 ? plaidPerShare : h.purchasePrice);
       return {
         ticker: h.ticker,
         name: STOCK_NAMES[h.ticker] || h.ticker,
         shares: h.shares,
         purchasePrice: Math.round(h.purchasePrice * 100) / 100,
-        currentPrice: live?.price ?? h.purchasePrice,
+        currentPrice,
         datePurchased: h.datePurchased,
         dividendPerShare: live?.dividendPerShare ?? (DIVIDEND_FALLBACKS[h.ticker] ?? 0),
       };
