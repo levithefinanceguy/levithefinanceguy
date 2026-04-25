@@ -26,10 +26,10 @@ export default function ContactPage() {
             Questions about personal finance, the Cheese app, the blog, or anything else.
           </p>
           <a
-            href="mailto:levi@levithefinanceguy.com"
+            href="mailto:levi@proctoradvisory.com"
             className="text-accent-green font-semibold hover:underline"
           >
-            levi@levithefinanceguy.com
+            levi@proctoradvisory.com
           </a>
         </div>
 
@@ -39,10 +39,10 @@ export default function ContactPage() {
             Bug reports, feature requests, or issues with the Cheese app.
           </p>
           <a
-            href="mailto:support@cheeselabs.com"
+            href="mailto:info@proctoradvisory.com"
             className="text-accent-green font-semibold hover:underline"
           >
-            support@cheeselabs.com
+            info@proctoradvisory.com
           </a>
         </div>
 
@@ -52,10 +52,10 @@ export default function ContactPage() {
             Sponsorships, partnerships, affiliate opportunities, or press inquiries.
           </p>
           <a
-            href="mailto:levi@levithefinanceguy.com"
+            href="mailto:levi@proctoradvisory.com"
             className="text-accent-green font-semibold hover:underline"
           >
-            levi@levithefinanceguy.com
+            levi@proctoradvisory.com
           </a>
         </div>
 
